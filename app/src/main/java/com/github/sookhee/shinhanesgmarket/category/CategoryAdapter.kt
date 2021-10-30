@@ -1,20 +1,20 @@
-package com.github.sookhee.shinhanesgmarket.home
+package com.github.sookhee.shinhanesgmarket.category
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.github.sookhee.domain.entity.Product
-import com.github.sookhee.shinhanesgmarket.databinding.ItemProductBinding
+import com.github.sookhee.domain.entity.Category
+import com.github.sookhee.shinhanesgmarket.databinding.ItemCategoryBinding
 
-class ProductAdapter :
-    RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
+class CategoryAdapter :
+    RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
 
-    var items: List<Product> = emptyList()
-    var onItemClick: ((selectedItem: Product) -> Unit)? = null
+    var items: List<Category> = emptyList()
+    var onItemClick: ((selectedItem: Category) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return ViewHolder(ItemProductBinding.inflate(inflater, parent, false), onItemClick)
+        return ViewHolder(ItemCategoryBinding.inflate(inflater, parent, false), onItemClick)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -26,8 +26,8 @@ class ProductAdapter :
     }
 
     class ViewHolder(
-        private val binding: ItemProductBinding,
-        onItemClick: ((selectedItem: Product) -> Unit)?,
+        private val binding: ItemCategoryBinding,
+        onItemClick: ((selectedItem: Category) -> Unit)?,
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -36,10 +36,9 @@ class ProductAdapter :
         }
 
         fun bind(
-            item: Product,
+            item: Category,
         ) {
             binding.item = item
-            binding.productPrice.text = "${item.price}"
         }
     }
 }

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="kotlin.jvm.functions.Function1" />
 
         <import type="kotlin.Unit" />
