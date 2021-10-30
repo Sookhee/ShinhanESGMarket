@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.github.sookhee.domain.entity.Product
+import com.github.sookhee.shinhanesgmarket.category.CategoryActivity
 import com.github.sookhee.shinhanesgmarket.databinding.FragmentHomeBinding
 import com.github.sookhee.shinhanesgmarket.product.ProductActivity
 
@@ -33,10 +34,19 @@ class HomeFragment : Fragment() {
     }
 
     private fun setOnClickListener() {
-        binding.btnSearch.setOnClickListener { Toast.makeText(context, "SEARCH", Toast.LENGTH_SHORT).show() }
-        binding.btnCategory.setOnClickListener { Toast.makeText(context, "CATEGORY", Toast.LENGTH_SHORT).show() }
-        binding.btnAlarm.setOnClickListener { Toast.makeText(context, "ALARM", Toast.LENGTH_SHORT).show() }
-        binding.homeFab.setOnClickListener { Toast.makeText(context, "FAB", Toast.LENGTH_SHORT).show() }
+        binding.btnSearch.setOnClickListener {
+            Toast.makeText(context, "SEARCH", Toast.LENGTH_SHORT).show()
+        }
+        binding.btnCategory.setOnClickListener {
+            val intent = Intent(context, CategoryActivity::class.java)
+            startActivity(intent)
+        }
+        binding.btnAlarm.setOnClickListener {
+            Toast.makeText(context, "ALARM", Toast.LENGTH_SHORT).show()
+        }
+        binding.homeFab.setOnClickListener {
+            Toast.makeText(context, "FAB", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun initRecyclerView() {
