@@ -23,7 +23,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="132dp">
+        android:layout_height="132dp"
+        android:onClick="@{() -> onItemClick.invoke(item)}">
 
         <ImageView
             android:id="@+id/productImage"
