@@ -34,6 +34,7 @@ class HomeFragment : Fragment() {
         binding.btnSearch.setOnClickListener { Toast.makeText(context, "SEARCH", Toast.LENGTH_SHORT).show() }
         binding.btnCategory.setOnClickListener { Toast.makeText(context, "CATEGORY", Toast.LENGTH_SHORT).show() }
         binding.btnAlarm.setOnClickListener { Toast.makeText(context, "ALARM", Toast.LENGTH_SHORT).show() }
+        binding.homeFab.setOnClickListener { Toast.makeText(context, "FAB", Toast.LENGTH_SHORT).show() }
     }
 
     private fun initRecyclerView() {
