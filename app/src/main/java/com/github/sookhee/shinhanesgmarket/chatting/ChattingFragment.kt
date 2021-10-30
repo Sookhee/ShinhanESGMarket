@@ -1,11 +1,11 @@
-package com.github.sookhee.solcarrot.chatting
+package com.github.sookhee.shinhanesgmarket.chatting
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.github.sookhee.solcarrot.R
+import com.github.sookhee.shinhanesgmarket.R
 
 class ChattingFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,13 +1,13 @@
-package com.github.sookhee.solcarrot
+package com.github.sookhee.shinhanesgmarket
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.github.sookhee.solcarrot.chatting.ChattingFragment
-import com.github.sookhee.solcarrot.databinding.ActivityMainBinding
-import com.github.sookhee.solcarrot.home.HomeFragment
-import com.github.sookhee.solcarrot.mypage.MypageFragment
+import com.github.sookhee.shinhanesgmarket.chatting.ChattingFragment
+import com.github.sookhee.shinhanesgmarket.databinding.ActivityMainBinding
+import com.github.sookhee.shinhanesgmarket.home.HomeFragment
+import com.github.sookhee.shinhanesgmarket.mypage.MypageFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

@@ -1,10 +1,10 @@
-package com.github.sookhee.solcarrot.home
+package com.github.sookhee.shinhanesgmarket.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.sookhee.domain.entity.Product
-import com.github.sookhee.solcarrot.databinding.ItemProductBinding
+import com.github.sookhee.shinhanesgmarket.databinding.ItemProductBinding
 
 class ProductAdapter :
     RecyclerView.Adapter<ProductAdapter.ViewHolder>() {

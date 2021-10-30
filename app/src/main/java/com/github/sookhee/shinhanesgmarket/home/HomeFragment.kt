@@ -1,4 +1,4 @@
-package com.github.sookhee.solcarrot.home
+package com.github.sookhee.shinhanesgmarket.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.github.sookhee.domain.entity.Product
-import com.github.sookhee.solcarrot.databinding.FragmentHomeBinding
+import com.github.sookhee.shinhanesgmarket.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
