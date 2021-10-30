@@ -7,10 +7,31 @@
     tools:context=".mypage.MypageFragment">
 
     <TextView
+        android:id="@+id/chattingTitle"
+        style="@style/ToolbarTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MYPAGE"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="16dp"
+        android:text="@string/navigation_mypage"
+        app:layout_constraintBottom_toTopOf="@id/toolbarGuideLine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/btnSetting"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/toolbarGuideLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/toolbarGuideLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="56dp"
+        android:background="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
