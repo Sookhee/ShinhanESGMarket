@@ -7,7 +7,7 @@ android {
     compileSdk 30
 
     defaultConfig {
-        applicationId "com.github.sookhee.solcarrot"
+        applicationId "com.github.sookhee.shinhanesgmarket"
         minSdk 21
         targetSdk 30
         versionCode 1

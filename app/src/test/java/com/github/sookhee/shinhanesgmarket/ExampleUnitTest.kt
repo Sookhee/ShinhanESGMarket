@@ -1,4 +1,4 @@
-package com.github.sookhee.solcarrot
+package com.github.sookhee.shinhanesgmarket
 
 import org.junit.Test
 

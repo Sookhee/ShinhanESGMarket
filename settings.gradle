@@ -6,7 +6,7 @@ dependencyResolutionManagement {
         jcenter() // Warning: this repository is going to shut down soon
     }
 }
-rootProject.name = "SolCarrot"
+rootProject.name = "ShinhanESGMarket"
 include ':app'
 include ':domain'
 include ':data'

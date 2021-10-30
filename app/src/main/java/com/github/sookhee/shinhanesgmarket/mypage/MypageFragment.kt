@@ -1,11 +1,11 @@
-package com.github.sookhee.solcarrot.mypage
+package com.github.sookhee.shinhanesgmarket.mypage
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.github.sookhee.solcarrot.R
+import com.github.sookhee.shinhanesgmarket.R
 
 class MypageFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
