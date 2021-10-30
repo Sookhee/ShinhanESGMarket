@@ -1,5 +1,6 @@
 package com.github.sookhee.shinhanesgmarket.home
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.github.sookhee.domain.entity.Product
 import com.github.sookhee.shinhanesgmarket.databinding.FragmentHomeBinding
+import com.github.sookhee.shinhanesgmarket.product.ProductActivity
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -41,7 +43,9 @@ class HomeFragment : Fragment() {
         binding.productRecyclerView.adapter = ProductAdapter().apply {
             items = PRODUCT_LIST
             onItemClick = {
+                val intent = Intent(context, ProductActivity::class.java)
 
+                startActivity(intent)
             }
         }
     }

@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ShinhanESGMarket">
         <activity
-            android:name="com.github.sookhee.shinhanesgmarket.MainActivity"
+            android:name=".product.ProductActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
