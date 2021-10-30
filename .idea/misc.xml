@@ -3,13 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.140625" />
         <entry key="app/src/main/res/layout/activity_category.xml" value="2.808893533393964" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.12124463519313304" />
+        <entry key="app/src/main/res/layout/activity_chat_list.xml" value="0.11145833333333334" />
+        <entry key="app/src/main/res/layout/activity_chat_room.xml" value="0.12552083333333333" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.7739112812688246" />
         <entry key="app/src/main/res/layout/activity_product.xml" value="0.29894179894179895" />
-        <entry key="app/src/main/res/layout/fragment_chatting.xml" value="0.30710659898477155" />
+        <entry key="app/src/main/res/layout/fragment_chatting.xml" value="0.13294906073437404" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_mypage.xml" value="0.1851542329857001" />
         <entry key="app/src/main/res/layout/item_category.xml" value="0.24145299145299146" />
+        <entry key="app/src/main/res/layout/item_chat_preview.xml" value="0.12552083333333333" />
+        <entry key="app/src/main/res/layout/item_chat_room.xml" value="0.5802944969542907" />
         <entry key="app/src/main/res/layout/item_product.xml" value="0.1768901569186876" />
       </map>
     </option>
