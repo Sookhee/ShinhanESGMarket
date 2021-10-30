@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="kotlin.jvm.functions.Function1" />
+
+        <import type="kotlin.Unit" />
+
+        <import type="com.github.sookhee.domain.entity.ChatPreview" />
+
+        <variable
+            name="item"
+            type="ChatPreview" />
+
+        <variable
+            name="onItemClick"
+            type="Function1&lt;ChatPreview, Unit>" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="87dp"
+        android:onClick="@{()->onItemClick.invoke(item)}">
+
+        <ImageView
+            android:id="@+id/traderImage"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/traderName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:text="@{item.traderName}"
+            app:layout_constraintStart_toEndOf="@id/traderImage"
+            app:layout_constraintTop_toTopOf="@id/traderImage"
+            tools:text="상대방 닉네임" />
+
+        <TextView
+            android:id="@+id/traderArea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@{item.traderArea}"
+            app:layout_constraintBottom_toBottomOf="@id/traderName"
+            app:layout_constraintStart_toEndOf="@id/traderName"
+            app:layout_constraintTop_toTopOf="@id/traderName"
+            tools:text="ㅇㅇ동" />
+
+        <TextView
+            android:id="@+id/traderInfoDivider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="."
+            app:layout_constraintBottom_toBottomOf="@id/traderArea"
+            app:layout_constraintStart_toEndOf="@id/traderArea"
+            app:layout_constraintTop_toTopOf="@id/traderArea" />
+
+        <TextView
+            android:id="@+id/lastChatTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@{item.lastChatTime}"
+            app:layout_constraintBottom_toBottomOf="@id/traderArea"
+            app:layout_constraintStart_toEndOf="@id/traderInfoDivider"
+            app:layout_constraintTop_toTopOf="@id/traderArea"
+            tools:text="10월 30일" />
+
+        <TextView
+            android:id="@+id/lastChatText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{item.lastChatText}"
+            app:layout_constraintBottom_toBottomOf="@id/traderImage"
+            app:layout_constraintEnd_toStartOf="@id/traderProduct"
+            app:layout_constraintStart_toEndOf="@id/traderImage"
+            tools:text="마지막으로 나눈 대화" />
+
+        <ImageView
+            android:id="@+id/traderProduct"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
