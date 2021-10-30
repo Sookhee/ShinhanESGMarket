@@ -15,6 +15,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <LinearLayout
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
@@ -38,7 +46,7 @@
                 android:id="@+id/chattingImage"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@color/black" />
+                android:src="@drawable/ic_chat_off" />
 
             <TextView
                 android:id="@+id/chattingTitle"
@@ -59,7 +67,7 @@
                 android:id="@+id/homeImage"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@color/black" />
+                android:src="@drawable/ic_home_on" />
 
             <TextView
                 android:id="@+id/homeTitle"
@@ -80,7 +88,7 @@
                 android:id="@+id/mypageImage"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@color/black" />
+                android:src="@drawable/ic_user_off" />
 
             <TextView
                 android:id="@+id/mypageTitle"

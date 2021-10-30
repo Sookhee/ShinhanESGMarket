@@ -30,14 +30,23 @@ class MainActivity : AppCompatActivity() {
     private fun setOnClickListener() {
         binding.home.setOnClickListener {
             setFragment(homeFragment)
+            binding.homeImage.setImageResource(R.drawable.ic_home_on)
+            binding.chattingImage.setImageResource(R.drawable.ic_chat_off)
+            binding.mypageImage.setImageResource(R.drawable.ic_user_off)
         }
 
         binding.chatting.setOnClickListener {
             setFragment(chattingFragment)
+            binding.homeImage.setImageResource(R.drawable.ic_home_off)
+            binding.chattingImage.setImageResource(R.drawable.ic_chat_on)
+            binding.mypageImage.setImageResource(R.drawable.ic_user_off)
         }
 
         binding.mypage.setOnClickListener {
             setFragment(mypageFragment)
+            binding.homeImage.setImageResource(R.drawable.ic_home_off)
+            binding.chattingImage.setImageResource(R.drawable.ic_chat_off)
+            binding.mypageImage.setImageResource(R.drawable.ic_user_on)
         }
     }
 

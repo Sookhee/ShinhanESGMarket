@@ -21,7 +21,8 @@
         android:id="@+id/btnSetting"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:src="@color/black"
+        android:padding="14dp"
+        android:src="@drawable/ic_setting"
         app:layout_constraintBottom_toTopOf="@id/toolbarGuideLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
