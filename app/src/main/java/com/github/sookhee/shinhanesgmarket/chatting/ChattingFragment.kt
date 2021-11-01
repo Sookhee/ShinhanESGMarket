@@ -1,5 +1,6 @@
 package com.github.sookhee.shinhanesgmarket.chatting
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -34,6 +35,8 @@ class ChattingFragment : Fragment() {
         binding.chatPreviewRecyclerView.adapter = ChatPreviewAdapter().apply {
             items = CHAT_PREVIEW_LIST
             onItemClick = {
+                val intent = Intent(context, ChatRoomActivity::class.java)
+                startActivity(intent)
             }
         }
 
