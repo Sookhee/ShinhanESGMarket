@@ -1,10 +1,12 @@
 package com.github.sookhee.shinhanesgmarket.home
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.sookhee.domain.entity.Product
 import com.github.sookhee.shinhanesgmarket.databinding.ItemProductBinding
+import java.text.DecimalFormat
 
 class ProductAdapter :
     RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
@@ -35,11 +37,14 @@ class ProductAdapter :
             binding.onItemClick = onItemClick
         }
 
+        @SuppressLint("SetTextI18n")
         fun bind(
             item: Product,
         ) {
+            val dec = DecimalFormat("#,###")
+
             binding.item = item
-            binding.productPrice.text = "${item.price}"
+            binding.productPrice.text = "${dec.format(item.price)}원"
         }
     }
 }
