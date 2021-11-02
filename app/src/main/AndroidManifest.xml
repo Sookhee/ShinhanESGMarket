@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ShinhanESGMarket">
         <activity
+            android:name=".search.SearchActivity"
+            android:exported="true" />
+        <activity
             android:name=".product.WriteActivity"
             android:exported="true" />
         <activity

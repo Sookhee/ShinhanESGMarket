@@ -13,6 +13,7 @@ import com.github.sookhee.shinhanesgmarket.category.CategoryActivity
 import com.github.sookhee.shinhanesgmarket.databinding.FragmentHomeBinding
 import com.github.sookhee.shinhanesgmarket.product.ProductActivity
 import com.github.sookhee.shinhanesgmarket.product.WriteActivity
+import com.github.sookhee.shinhanesgmarket.search.SearchActivity
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -37,7 +38,8 @@ class HomeFragment : Fragment() {
 
     private fun setOnClickListener() {
         binding.btnSearch.setOnClickListener {
-            Toast.makeText(context, "SEARCH", Toast.LENGTH_SHORT).show()
+            val intent = Intent(context, SearchActivity::class.java)
+            startActivity(intent)
         }
         binding.btnCategory.setOnClickListener {
             val intent = Intent(context, CategoryActivity::class.java)
