@@ -25,30 +25,43 @@
         android:layout_height="87dp"
         android:onClick="@{()->onItemClick.invoke(item)}">
 
-        <ImageView
-            android:id="@+id/traderImage"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:src="@color/gray100"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/traderImageCardView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="4dp"
+            app:cardBackgroundColor="@color/gray100"
+            app:cardCornerRadius="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/traderImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="6dp"
+                android:src="@drawable/default_profile" />
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/traderName"
+            style="@style/Gray900.16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:text="@{item.traderName}"
-            app:layout_constraintStart_toEndOf="@id/traderImage"
-            app:layout_constraintTop_toTopOf="@id/traderImage"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/traderImageCardView"
+            app:layout_constraintTop_toTopOf="@id/traderImageCardView"
             tools:text="상대방 닉네임" />
 
         <TextView
             android:id="@+id/traderArea"
+            style="@style/Gray600.13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="6dp"
             android:text="@{item.traderArea}"
             app:layout_constraintBottom_toBottomOf="@id/traderName"
             app:layout_constraintStart_toEndOf="@id/traderName"
@@ -57,16 +70,18 @@
 
         <TextView
             android:id="@+id/traderInfoDivider"
+            style="@style/Gray600.13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="."
+            android:text="@string/dot"
             app:layout_constraintBottom_toBottomOf="@id/traderArea"
             app:layout_constraintStart_toEndOf="@id/traderArea"
             app:layout_constraintTop_toTopOf="@id/traderArea" />
 
         <TextView
             android:id="@+id/lastChatTime"
+            style="@style/Gray600.13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -78,15 +93,17 @@
 
         <TextView
             android:id="@+id/lastChatText"
+            style="@style/Gray900.16"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@{item.lastChatText}"
-            app:layout_constraintBottom_toBottomOf="@id/traderImage"
+            app:layout_constraintBottom_toBottomOf="@id/traderImageCardView"
             app:layout_constraintEnd_toStartOf="@id/traderProduct"
-            app:layout_constraintStart_toEndOf="@id/traderImage"
+            app:layout_constraintStart_toEndOf="@id/traderImageCardView"
+            app:layout_constraintTop_toBottomOf="@id/traderName"
             tools:text="마지막으로 나눈 대화" />
 
         <ImageView
@@ -97,7 +114,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
