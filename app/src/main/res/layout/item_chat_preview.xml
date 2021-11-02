@@ -25,24 +25,14 @@
         android:layout_height="87dp"
         android:onClick="@{()->onItemClick.invoke(item)}">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/traderImageCardView"
+        <ImageView
+            android:id="@+id/traderImage"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="4dp"
-            app:cardBackgroundColor="@color/gray100"
-            app:cardCornerRadius="50dp"
+            android:background="@color/gray100"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/traderImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="6dp"
-                android:src="@drawable/default_profile" />
-        </androidx.cardview.widget.CardView>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/traderName"
@@ -52,8 +42,8 @@
             android:layout_marginHorizontal="16dp"
             android:text="@{item.traderName}"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/traderImageCardView"
-            app:layout_constraintTop_toTopOf="@id/traderImageCardView"
+            app:layout_constraintStart_toEndOf="@id/traderImage"
+            app:layout_constraintTop_toTopOf="@id/traderImage"
             tools:text="상대방 닉네임" />
 
         <TextView
@@ -100,9 +90,9 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@{item.lastChatText}"
-            app:layout_constraintBottom_toBottomOf="@id/traderImageCardView"
+            app:layout_constraintBottom_toBottomOf="@id/traderImage"
             app:layout_constraintEnd_toStartOf="@id/traderProduct"
-            app:layout_constraintStart_toEndOf="@id/traderImageCardView"
+            app:layout_constraintStart_toEndOf="@id/traderImage"
             app:layout_constraintTop_toBottomOf="@id/traderName"
             tools:text="마지막으로 나눈 대화" />
 
