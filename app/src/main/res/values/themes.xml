@@ -48,6 +48,10 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="Gray600.13">
+        <item name="android:textSize">13sp</item>
+    </style>
+
     <style name="BaseTextStyle">
         <item name="android:textColor">@color/gray900</item>
         <item name="android:textSize">17sp</item>
