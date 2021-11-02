@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="kotlin.jvm.functions.Function1" />
 
         <import type="kotlin.Unit" />
@@ -29,13 +30,14 @@
             android:id="@+id/productImage"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@color/black"
+            android:src="@color/gray100"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/productTitle"
+            style="@style/Gray900.16"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -47,33 +49,55 @@
 
         <TextView
             android:id="@+id/productArea"
+            style="@style/Gray600.12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:text="@{item.area}"
             app:layout_constraintStart_toStartOf="@id/productTitle"
             app:layout_constraintTop_toBottomOf="@id/productTitle"
             tools:text="호평동" />
 
         <TextView
-            android:id="@+id/productTime"
+            android:id="@+id/infoHolder"
+            style="@style/Gray600.12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="@{item.time}"
+            android:layout_marginStart="4dp"
+            android:text="@string/dot"
             app:layout_constraintStart_toEndOf="@id/productArea"
+            app:layout_constraintTop_toTopOf="@id/productArea" />
+
+        <TextView
+            android:id="@+id/productTime"
+            style="@style/Gray600.12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@{item.time}"
+            app:layout_constraintStart_toEndOf="@id/infoHolder"
             app:layout_constraintTop_toTopOf="@id/productArea"
             tools:text="6분 전" />
 
         <TextView
             android:id="@+id/productPrice"
+            style="@style/Gray900.14"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="6dp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/productArea"
             app:layout_constraintTop_toBottomOf="@id/productArea"
             tools:text="10,000원" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray100"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
