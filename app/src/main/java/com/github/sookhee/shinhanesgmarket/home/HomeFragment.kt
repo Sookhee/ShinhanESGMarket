@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.github.sookhee.domain.entity.Product
+import com.github.sookhee.shinhanesgmarket.alarm.AlarmActivity
 import com.github.sookhee.shinhanesgmarket.category.CategoryActivity
 import com.github.sookhee.shinhanesgmarket.databinding.FragmentHomeBinding
 import com.github.sookhee.shinhanesgmarket.product.ProductActivity
@@ -42,7 +43,8 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
         binding.btnAlarm.setOnClickListener {
-            Toast.makeText(context, "ALARM", Toast.LENGTH_SHORT).show()
+            val intent = Intent(context, AlarmActivity::class.java)
+            startActivity(intent)
         }
         binding.homeFab.setOnClickListener {
             Toast.makeText(context, "FAB", Toast.LENGTH_SHORT).show()
