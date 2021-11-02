@@ -12,6 +12,7 @@ import com.github.sookhee.shinhanesgmarket.alarm.AlarmActivity
 import com.github.sookhee.shinhanesgmarket.category.CategoryActivity
 import com.github.sookhee.shinhanesgmarket.databinding.FragmentHomeBinding
 import com.github.sookhee.shinhanesgmarket.product.ProductActivity
+import com.github.sookhee.shinhanesgmarket.product.WriteActivity
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -47,7 +48,8 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
         binding.homeFab.setOnClickListener {
-            Toast.makeText(context, "FAB", Toast.LENGTH_SHORT).show()
+            val intent = Intent(context, WriteActivity::class.java)
+            startActivity(intent)
         }
     }
 
