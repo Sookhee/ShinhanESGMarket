@@ -1,7 +1,28 @@
 <resources>
     <string name="app_name">신한마켓</string>
+
+    // navigation
     <string name="navigation_chatting">채팅</string>
     <string name="navigation_home">홈</string>
     <string name="navigation_mypage">마이페이지</string>
+
+    // toolbar title
+    <string name="title_write">중고거래 글쓰기</string>
+    <string name="title_alarm">알림</string>
+    <string name="title_category">카테고리</string>
+
+    // text holder
     <string name="dot">·</string>
+    <string name="won">₩</string>
+
+    // hint
+    <string name="hint_category">카테고리</string>
+    <string name="hint_title">제목</string>
+    <string name="hint_product_description">브랜드, 사이즈, 색상, 소재 등 물품에 대한 자세한 정보를 작성하면 판매확률이 올라가요!</string>
+    <string name="hint_price">가격</string>
+
+    // string
+    <string name="string_submit">완료</string>
+
+
 </resources>

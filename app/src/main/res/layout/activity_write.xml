@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:text="중고거래 글쓰기"
+        android:text="@string/title_write"
         app:layout_constraintBottom_toTopOf="@id/toolbarGuideLine"
         app:layout_constraintStart_toEndOf="@id/btnBack"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,8 +32,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:text="완료"
+        android:text="@string/string_submit"
         android:textColor="@color/blue"
+        android:textSize="17sp"
         app:layout_constraintBottom_toTopOf="@id/toolbarGuideLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -61,7 +62,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
@@ -112,10 +113,13 @@
 
             <EditText
                 android:id="@+id/titleEditText"
+                style="@style/Gray900"
                 android:layout_width="match_parent"
                 android:layout_height="66dp"
                 android:background="@null"
-                android:hint="제목" />
+                android:hint="@string/hint_title"
+                android:textColorHint="@color/gray300"
+                android:theme="@style/EditTextTheme" />
 
             <View
                 android:id="@+id/titleGuideLine"
@@ -131,10 +135,11 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    style="@style/Gray900.17"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="카테고리" />
+                    android:text="@string/hint_category" />
 
                 <ImageView
                     android:layout_width="20dp"
@@ -159,14 +164,20 @@
                     android:id="@+id/priceHolder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="₩" />
+                    android:text="@string/won"
+                    android:textColor="@color/gray300"
+                    android:textSize="17sp" />
 
                 <EditText
+                    style="@style/Gray900.17"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:background="@null"
-                    android:hint="가격" />
+                    android:hint="@string/hint_price"
+                    android:inputType="number"
+                    android:textColorHint="@color/gray300"
+                    android:theme="@style/EditTextTheme" />
             </LinearLayout>
 
             <View
@@ -177,11 +188,14 @@
 
             <EditText
                 android:id="@+id/mainEditText"
+                style="@style/BaseTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="16dp"
                 android:background="@null"
-                android:hint="브랜드, 사이즈, 색상, 소재 등 물품에 대한 자세한 정보를 작성하면 판매확률이 올라가요!" />
+                android:hint="@string/hint_product_description"
+                android:textColorHint="@color/gray300"
+                android:theme="@style/EditTextTheme" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
