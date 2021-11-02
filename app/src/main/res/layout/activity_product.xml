@@ -76,17 +76,19 @@
                     android:id="@+id/sellerImage"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@color/black"
+                    android:src="@color/gray100"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/sellerName"
+                    style="@style/Gray900.15"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="16dp"
                     android:text="닉네임"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@id/sellerArea"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/sellerImage"
@@ -94,9 +96,10 @@
 
                 <TextView
                     android:id="@+id/sellerArea"
+                    style="@style/Gray900.13"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="16dp"
                     android:text="사는 곳"
                     app:layout_constraintBottom_toBottomOf="@id/sellerImage"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -130,18 +133,21 @@
 
                 <TextView
                     android:id="@+id/productCategory"
+                    style="@style/Gray600.13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="카테고리" />
 
                 <TextView
+                    style="@style/Gray600.13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="4dp"
-                    android:text="." />
+                    android:text="@string/dot" />
 
                 <TextView
                     android:id="@+id/productTime"
+                    style="@style/Gray600.13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="타임" />
@@ -149,6 +155,7 @@
 
             <TextView
                 android:id="@+id/productDescription"
+                style="@style/BaseTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -191,12 +198,13 @@
 
         <TextView
             android:id="@+id/productPrice"
-            style="@style/ToolbarTitle"
+            style="@style/Gray900.17"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_weight="1"
-            android:text="27,000원" />
+            android:text="27,000원"
+            android:textStyle="bold" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/btnChat"
@@ -214,6 +222,7 @@
                 android:paddingVertical="8dp"
                 android:text="채팅으로 거래하기"
                 android:textColor="@color/white"
+                android:textSize="15sp"
                 android:textStyle="bold" />
         </androidx.cardview.widget.CardView>
 
