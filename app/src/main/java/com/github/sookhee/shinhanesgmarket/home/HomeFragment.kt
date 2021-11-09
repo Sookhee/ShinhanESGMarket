@@ -6,14 +6,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import android.widget.Toast
+import androidx.viewpager2.widget.ViewPager2
+import com.github.sookhee.domain.entity.Category
 import com.github.sookhee.domain.entity.Product
+import com.github.sookhee.shinhanesgmarket.R
 import com.github.sookhee.shinhanesgmarket.alarm.AlarmActivity
 import com.github.sookhee.shinhanesgmarket.category.CategoryActivity
+import com.github.sookhee.shinhanesgmarket.category.CategoryAdapter
 import com.github.sookhee.shinhanesgmarket.databinding.FragmentHomeBinding
 import com.github.sookhee.shinhanesgmarket.product.ProductActivity
 import com.github.sookhee.shinhanesgmarket.product.WriteActivity
 import com.github.sookhee.shinhanesgmarket.search.SearchActivity
+import com.github.sookhee.shinhanesgmarket.utils.heightAnimation
+import com.github.sookhee.shinhanesgmarket.utils.setGone
+import com.github.sookhee.shinhanesgmarket.utils.setVisible
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -26,7 +34,13 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         setOnClickListener()
-        initRecyclerView()
+
+        initBanner()
+        initBannerIndicator()
+
+        initProductRecyclerView()
+
+        initCategoryRecyclerView()
 
         return binding.root
     }
@@ -53,9 +67,54 @@ class HomeFragment : Fragment() {
             val intent = Intent(context, WriteActivity::class.java)
             startActivity(intent)
         }
+
+        binding.categoryCollapsed.setOnClickListener {
+            expandView()
+        }
+
+        binding.categoryExpanded.setOnClickListener {
+            collapseView()
+        }
     }
 
-    private fun initRecyclerView() {
+    private fun initBanner() {
+        binding.banner.apply {
+            adapter = ViewPagerAdapter().apply {
+                items = BANNER_LIST
+                onItemClick = {
+                    Toast.makeText(context, "banner: $it", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageScrolled(
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int
+                ) {
+                    super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+
+                    binding.bannerIndicator.x =
+                        (position + positionOffset) * binding.bannerIndicator.width
+                }
+            })
+        }
+    }
+
+    private fun initBannerIndicator() {
+        binding.bannerIndicator.viewTreeObserver.addOnGlobalLayoutListener(object :
+            ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                val layoutParams = binding.bannerIndicator.layoutParams
+                layoutParams.width = binding.bannerIndicatorBackground.width / BANNER_LIST.size
+                binding.bannerIndicator.layoutParams = layoutParams
+
+                binding.banner.viewTreeObserver.removeOnGlobalLayoutListener(this)
+            }
+        })
+    }
+
+    private fun initProductRecyclerView() {
         binding.productRecyclerView.adapter = ProductAdapter().apply {
             items = PRODUCT_LIST
             onItemClick = {
@@ -66,7 +125,38 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun initCategoryRecyclerView() {
+        binding.categoryRecyclerView.apply {
+            adapter = CategoryAdapter().apply {
+                items = CATEGORY_LIST
+                onItemClick = {
+                    Toast.makeText(context, "category: ${it.name}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun expandView() {
+        binding.categoryExpanded.setVisible()
+        binding.categoryCollapsed.setGone()
+        binding.categoryRecyclerView.heightAnimation(
+            1000,
+            resources.getDimensionPixelSize(R.dimen.category_item_height) * 5
+        )
+    }
+
+    private fun collapseView() {
+        binding.categoryExpanded.setGone()
+        binding.categoryCollapsed.setVisible()
+        binding.categoryRecyclerView.heightAnimation(
+            1000,
+            resources.getDimensionPixelSize(R.dimen.category_item_height) * 1
+        )
+    }
+
+
     companion object {
+        private val BANNER_LIST = mutableListOf("TEST1", "TEST2", "TEST3")
         private val PRODUCT_LIST = listOf(
             Product(0, "거실액자 팝니다", "오남읍", "12분 전", 30000),
             Product(1, "공주성 벙커침대", "호평동", "41분 전", 800000),
@@ -74,6 +164,26 @@ class HomeFragment : Fragment() {
             Product(3, "고양이 화장실", "화도읍", "31분 전", 34000),
             Product(4, "아이패드 미니 1세대", "오남읍", "56분 전", 30000),
             Product(5, "카카오프렌즈 인형(3개 일괄)", "진접읍", "55분 전", 18000),
+        )
+        private val CATEGORY_LIST = listOf(
+            Category("디지털기기"),
+            Category("인기매물"),
+            Category("생활가전"),
+            Category("가구/인테리어"),
+            Category("유아동"),
+            Category("생활/가공식품"),
+            Category("유아도서"),
+            Category("스포츠/레저"),
+            Category("여성잡화"),
+            Category("여성의류"),
+            Category("남성패션/잡화"),
+            Category("게임/취미"),
+            Category("뷰티/미용"),
+            Category("반려동물용품"),
+            Category("도서/티켓/음반"),
+            Category("식물"),
+            Category("기타 중고물품"),
+            Category("삽니다"),
         )
     }
 }
