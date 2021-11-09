@@ -8,13 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.github.sookhee.domain.entity.Category
 import com.github.sookhee.domain.entity.Product
 import com.github.sookhee.shinhanesgmarket.R
 import com.github.sookhee.shinhanesgmarket.alarm.AlarmActivity
-import com.github.sookhee.shinhanesgmarket.category.CategoryActivity
-import com.github.sookhee.shinhanesgmarket.category.CategoryAdapter
 import com.github.sookhee.shinhanesgmarket.databinding.FragmentHomeBinding
 import com.github.sookhee.shinhanesgmarket.product.ProductActivity
 import com.github.sookhee.shinhanesgmarket.search.SearchActivity
@@ -25,6 +24,8 @@ import com.github.sookhee.shinhanesgmarket.utils.setVisible
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private var gridLineCount = (CATEGORY_LIST.size + GRID_SPAN_COUNT - 1) / GRID_SPAN_COUNT
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,10 +53,6 @@ class HomeFragment : Fragment() {
     private fun setOnClickListener() {
         binding.btnSearch.setOnClickListener {
             val intent = Intent(context, SearchActivity::class.java)
-            startActivity(intent)
-        }
-        binding.btnCategory.setOnClickListener {
-            val intent = Intent(context, CategoryActivity::class.java)
             startActivity(intent)
         }
         binding.btnAlarm.setOnClickListener {
@@ -127,6 +124,12 @@ class HomeFragment : Fragment() {
                     Toast.makeText(context, "category: ${it.name}", Toast.LENGTH_SHORT).show()
                 }
             }
+
+            layoutManager = object : GridLayoutManager(requireContext(), 4) {
+                override fun canScrollVertically(): Boolean {
+                    return false
+                }
+            }
         }
     }
 
@@ -134,8 +137,7 @@ class HomeFragment : Fragment() {
         binding.categoryExpanded.setVisible()
         binding.categoryCollapsed.setGone()
         binding.categoryRecyclerView.heightAnimation(
-            1000,
-            resources.getDimensionPixelSize(R.dimen.category_item_height) * 5
+            resources.getDimensionPixelSize(R.dimen.category_item_height) * gridLineCount
         )
     }
 
@@ -143,8 +145,7 @@ class HomeFragment : Fragment() {
         binding.categoryExpanded.setGone()
         binding.categoryCollapsed.setVisible()
         binding.categoryRecyclerView.heightAnimation(
-            1000,
-            resources.getDimensionPixelSize(R.dimen.category_item_height) * 1
+            resources.getDimensionPixelSize(R.dimen.category_item_height)
         )
     }
 
@@ -159,6 +160,7 @@ class HomeFragment : Fragment() {
             Product(4, "아이패드 미니 1세대", "오남읍", "56분 전", 30000),
             Product(5, "카카오프렌즈 인형(3개 일괄)", "진접읍", "55분 전", 18000),
         )
+        private const val GRID_SPAN_COUNT = 4
         private val CATEGORY_LIST = listOf(
             Category("디지털기기"),
             Category("인기매물"),

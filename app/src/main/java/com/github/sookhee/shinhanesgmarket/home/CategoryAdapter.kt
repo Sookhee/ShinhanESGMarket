@@ -1,4 +1,4 @@
-package com.github.sookhee.shinhanesgmarket.category
+package com.github.sookhee.shinhanesgmarket.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
