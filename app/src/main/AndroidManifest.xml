@@ -13,9 +13,6 @@
             android:name=".search.SearchActivity"
             android:exported="true" />
         <activity
-            android:name=".product.WriteActivity"
-            android:exported="true" />
-        <activity
             android:name=".alarm.AlarmActivity"
             android:exported="true" />
         <activity

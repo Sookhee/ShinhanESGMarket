@@ -8,11 +8,13 @@ import com.github.sookhee.shinhanesgmarket.chatting.ChattingFragment
 import com.github.sookhee.shinhanesgmarket.databinding.ActivityMainBinding
 import com.github.sookhee.shinhanesgmarket.home.HomeFragment
 import com.github.sookhee.shinhanesgmarket.mypage.MypageFragment
+import com.github.sookhee.shinhanesgmarket.register.RegisterFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private val homeFragment by lazy { HomeFragment() }
+    private val registerFragment by lazy { RegisterFragment() }
     private val mypageFragment by lazy { MypageFragment() }
     private val chattingFragment by lazy { ChattingFragment() }
     private var activeFragment = homeFragment as Fragment
@@ -31,6 +33,15 @@ class MainActivity : AppCompatActivity() {
         binding.home.setOnClickListener {
             setFragment(homeFragment)
             binding.homeImage.setImageResource(R.drawable.ic_home_on)
+            binding.registerImage.setImageResource(R.drawable.ic_plus_off)
+            binding.chattingImage.setImageResource(R.drawable.ic_chat_off)
+            binding.mypageImage.setImageResource(R.drawable.ic_user_off)
+        }
+
+        binding.register.setOnClickListener {
+            setFragment(registerFragment)
+            binding.homeImage.setImageResource(R.drawable.ic_home_off)
+            binding.registerImage.setImageResource(R.drawable.ic_plus_on)
             binding.chattingImage.setImageResource(R.drawable.ic_chat_off)
             binding.mypageImage.setImageResource(R.drawable.ic_user_off)
         }
@@ -38,6 +49,7 @@ class MainActivity : AppCompatActivity() {
         binding.chatting.setOnClickListener {
             setFragment(chattingFragment)
             binding.homeImage.setImageResource(R.drawable.ic_home_off)
+            binding.registerImage.setImageResource(R.drawable.ic_plus_off)
             binding.chattingImage.setImageResource(R.drawable.ic_chat_on)
             binding.mypageImage.setImageResource(R.drawable.ic_user_off)
         }
@@ -45,6 +57,7 @@ class MainActivity : AppCompatActivity() {
         binding.mypage.setOnClickListener {
             setFragment(mypageFragment)
             binding.homeImage.setImageResource(R.drawable.ic_home_off)
+            binding.registerImage.setImageResource(R.drawable.ic_plus_off)
             binding.chattingImage.setImageResource(R.drawable.ic_chat_off)
             binding.mypageImage.setImageResource(R.drawable.ic_user_on)
         }

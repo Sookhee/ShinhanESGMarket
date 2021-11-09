@@ -1,22 +1,21 @@
-package com.github.sookhee.shinhanesgmarket.mypage
+package com.github.sookhee.shinhanesgmarket.register
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.github.sookhee.shinhanesgmarket.databinding.FragmentMypageBinding
+import com.github.sookhee.shinhanesgmarket.databinding.FragmentRegisterBinding
 
-class MypageFragment : Fragment() {
-    private var _binding: FragmentMypageBinding? = null
+class RegisterFragment : Fragment() {
+    private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMypageBinding.inflate(inflater, container, false)
+        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
         setOnClickListener()
 
@@ -29,6 +28,6 @@ class MypageFragment : Fragment() {
     }
 
     private fun setOnClickListener() {
-        binding.btnSetting.setOnClickListener { Toast.makeText(context, "SETTING", Toast.LENGTH_SHORT).show() }
+
     }
 }

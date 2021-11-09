@@ -17,7 +17,6 @@ import com.github.sookhee.shinhanesgmarket.category.CategoryActivity
 import com.github.sookhee.shinhanesgmarket.category.CategoryAdapter
 import com.github.sookhee.shinhanesgmarket.databinding.FragmentHomeBinding
 import com.github.sookhee.shinhanesgmarket.product.ProductActivity
-import com.github.sookhee.shinhanesgmarket.product.WriteActivity
 import com.github.sookhee.shinhanesgmarket.search.SearchActivity
 import com.github.sookhee.shinhanesgmarket.utils.heightAnimation
 import com.github.sookhee.shinhanesgmarket.utils.setGone
@@ -63,11 +62,6 @@ class HomeFragment : Fragment() {
             val intent = Intent(context, AlarmActivity::class.java)
             startActivity(intent)
         }
-        binding.homeFab.setOnClickListener {
-            val intent = Intent(context, WriteActivity::class.java)
-            startActivity(intent)
-        }
-
         binding.categoryCollapsed.setOnClickListener {
             expandView()
         }
