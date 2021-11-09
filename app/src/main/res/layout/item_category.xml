@@ -22,7 +22,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="@dimen/category_item_height"
         android:layout_marginBottom="32dp">
 
         <ImageView
@@ -36,7 +36,7 @@
 
         <TextView
             android:id="@+id/categoryName"
-            style="@style/Gray900.14"
+            style="@style/Gray900.13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{item.name}"
