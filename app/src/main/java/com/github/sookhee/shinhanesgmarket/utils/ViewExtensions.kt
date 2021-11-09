@@ -4,7 +4,7 @@ import android.animation.ValueAnimator
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 
-fun View.heightAnimation(duration: Int, targetHeight: Int) {
+fun View.heightAnimation(targetHeight: Int, duration: Long = 100L) {
     val prevHeight: Int = this.height
     val valueAnimator = ValueAnimator.ofInt(prevHeight, targetHeight)
     valueAnimator.addUpdateListener { animation ->
@@ -12,7 +12,7 @@ fun View.heightAnimation(duration: Int, targetHeight: Int) {
         this.requestLayout()
     }
     valueAnimator.interpolator = DecelerateInterpolator()
-    valueAnimator.duration = duration.toLong()
+    valueAnimator.duration = duration
     valueAnimator.start()
 }
 
