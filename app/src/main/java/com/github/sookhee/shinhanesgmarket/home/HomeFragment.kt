@@ -154,7 +154,7 @@ class HomeFragment : Fragment() {
         private val BANNER_LIST = mutableListOf("TEST1", "TEST2", "TEST3")
         private val PRODUCT_LIST = listOf(
             Product(
-                id = 0,
+                id = 1,
                 title = "맥북에어 m1 미개봉 상품 팔아여",
                 owner = "머드더스튜던트",
                 price = 950000,
@@ -165,7 +165,7 @@ class HomeFragment : Fragment() {
                 area = "왕십리"
             ),
             Product(
-                id = 0,
+                id = 2,
                 title = "도리벤 바지 아크릴 삽니당",
                 owner = "이수린",
                 price = 10000,
@@ -176,7 +176,7 @@ class HomeFragment : Fragment() {
                 area = "신도림"
             ),
             Product(
-                id = 0,
+                id = 3,
                 title = "쿠로미 인형",
                 owner = "신스",
                 price = 4000,
@@ -187,7 +187,7 @@ class HomeFragment : Fragment() {
                 area = "강남동"
             ),
             Product(
-                id = 0,
+                id = 4,
                 title = "졸려여",
                 owner = "정민지",
                 price = 0,
