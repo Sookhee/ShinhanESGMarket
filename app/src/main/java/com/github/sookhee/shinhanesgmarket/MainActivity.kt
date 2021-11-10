@@ -9,7 +9,9 @@ import com.github.sookhee.shinhanesgmarket.databinding.ActivityMainBinding
 import com.github.sookhee.shinhanesgmarket.home.HomeFragment
 import com.github.sookhee.shinhanesgmarket.mypage.MypageFragment
 import com.github.sookhee.shinhanesgmarket.register.RegisterFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 

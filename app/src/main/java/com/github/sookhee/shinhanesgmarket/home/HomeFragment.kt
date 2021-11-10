@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.github.sookhee.domain.entity.Category
@@ -20,10 +21,14 @@ import com.github.sookhee.shinhanesgmarket.search.SearchActivity
 import com.github.sookhee.shinhanesgmarket.utils.heightAnimation
 import com.github.sookhee.shinhanesgmarket.utils.setGone
 import com.github.sookhee.shinhanesgmarket.utils.setVisible
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var viewModel: HomeViewModel
 
     private var gridLineCount = (CATEGORY_LIST.size + GRID_SPAN_COUNT - 1) / GRID_SPAN_COUNT
 
@@ -32,7 +37,9 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
+        viewModel.getCategoryList()
         setOnClickListener()
 
         initBanner()
