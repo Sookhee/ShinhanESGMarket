@@ -4,8 +4,9 @@ import android.util.Log
 import com.github.sookhee.data.spec.CategoryResponse
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import javax.inject.Inject
 
-class CategoryDataSourceImpl: CategoryDataSource {
+class CategoryDataSourceImpl @Inject constructor(): CategoryDataSource {
     override fun getCategoryList(): List<CategoryResponse> {
         val db = Firebase.firestore
 
