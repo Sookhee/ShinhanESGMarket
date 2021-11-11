@@ -1,5 +1,6 @@
 package com.github.sookhee.shinhanesgmarket.register
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
@@ -7,8 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.github.sookhee.domain.entity.Product
 import com.github.sookhee.shinhanesgmarket.R
 import com.github.sookhee.shinhanesgmarket.databinding.FragmentRegisterBinding
+import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
+import java.util.*
 
 class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
@@ -30,12 +35,15 @@ class RegisterFragment : Fragment() {
         _binding = null
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun setOnClickListener() {
         binding.btnSubmit.setOnClickListener {
-            val title = binding.titleEditText.text
+            val title = binding.titleEditText.text.toString()
             val category: Int? = 0
-            val price = binding.priceEditText.text
-            val content = binding.mainEditText.text
+            val price = binding.priceEditText.text.toString()
+            val content = binding.mainEditText.text.toString()
+            val simpleDate = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
+            val dateTime = simpleDate.format(Date(System.currentTimeMillis()))
 
             val needItem = mutableListOf<String>()
             if (title.isEmpty()) {
@@ -52,11 +60,33 @@ class RegisterFragment : Fragment() {
             }
 
             if (needItem.size == 0) {
-                Toast.makeText(
-                    context,
-                    resources.getString(R.string.string_submit_success),
-                    Toast.LENGTH_SHORT
-                ).show()
+                val product = Product(
+                    id = 0,
+                    title = title,
+                    price = price.toInt(),
+                    owner = "정민지",
+                    category = 3,
+                    status = 0,
+                    createdAt = dateTime
+                )
+
+                val db = FirebaseFirestore.getInstance()
+                    .collection("product")
+                    .add(product)
+                    .addOnSuccessListener {
+                        Toast.makeText(
+                            context,
+                            resources.getString(R.string.string_submit_success),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    .addOnCanceledListener {
+                        Toast.makeText(
+                            context,
+                            "...실패",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
             } else {
                 Toast.makeText(
                     context,
