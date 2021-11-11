@@ -2,6 +2,7 @@ package com.github.sookhee.shinhanesgmarket.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.github.sookhee.domain.entity.Category
@@ -30,7 +32,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var viewModel: HomeViewModel
 
-    private var gridLineCount = (CATEGORY_LIST.size + GRID_SPAN_COUNT - 1) / GRID_SPAN_COUNT
+    private var gridLineCount = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +43,7 @@ class HomeFragment : Fragment() {
 
         viewModel.getCategoryList()
         setOnClickListener()
+        observeFlow()
 
         initBanner()
         initBannerIndicator()
@@ -55,6 +58,13 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun observeFlow() {
+        viewModel.categoryList.observe(viewLifecycleOwner) {
+            (binding.categoryRecyclerView.adapter as CategoryAdapter).setItem(it)
+            gridLineCount = (it.size + GRID_SPAN_COUNT - 1) / GRID_SPAN_COUNT
+        }
     }
 
     private fun setOnClickListener() {
@@ -126,7 +136,6 @@ class HomeFragment : Fragment() {
     private fun initCategoryRecyclerView() {
         binding.categoryRecyclerView.apply {
             adapter = CategoryAdapter().apply {
-                items = CATEGORY_LIST
                 onItemClick = {
                     Toast.makeText(context, "category: ${it.name}", Toast.LENGTH_SHORT).show()
                 }
@@ -159,6 +168,7 @@ class HomeFragment : Fragment() {
 
     companion object {
         private val BANNER_LIST = mutableListOf("TEST1", "TEST2", "TEST3")
+        private const val GRID_SPAN_COUNT = 4
         private val PRODUCT_LIST = listOf(
             Product(
                 id = 1,
@@ -204,27 +214,6 @@ class HomeFragment : Fragment() {
                 updatedAt = "",
                 area = "화도읍"
             ),
-        )
-        private const val GRID_SPAN_COUNT = 4
-        private val CATEGORY_LIST = listOf(
-            Category(0, "디지털기기", ""),
-            Category(1, "인기매물", ""),
-            Category(2, "생활가전", ""),
-            Category(3, "가구/인테리어", ""),
-            Category(4, "유아동", ""),
-            Category(5, "생활/가공식품", ""),
-            Category(6, "유아도서", ""),
-            Category(7, "스포츠/레저", ""),
-            Category(8, "여성잡화", ""),
-            Category(9, "여성의류", ""),
-            Category(10, "남성패션/잡화", ""),
-            Category(11, "게임/취미", ""),
-            Category(12, "뷰티/미용", ""),
-            Category(13, "반려동물용품", ""),
-            Category(14, "도서/티켓/음반", ""),
-            Category(15, "식물", ""),
-            Category(16, "기타 중고물품", ""),
-            Category(17, "삽니다", ""),
         )
     }
 }

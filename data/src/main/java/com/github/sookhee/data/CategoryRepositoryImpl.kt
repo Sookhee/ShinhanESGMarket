@@ -7,9 +7,20 @@ import javax.inject.Inject
 
 class CategoryRepositoryImpl @Inject constructor(private val dataSource: CategoryDataSource) :
     CategoryRepository {
-    override fun getCategoryList(): List<Category> {
+    override suspend fun getCategoryList(): List<Category> {
         val result = dataSource.getCategoryList()
+        val categoryList = mutableListOf<Category>()
 
-        return listOf()
+        result.forEach{
+            categoryList.add(
+                Category(
+                    it.id,
+                    it.name,
+                    it.iconUrl
+                )
+            )
+        }
+
+        return categoryList
     }
 }
