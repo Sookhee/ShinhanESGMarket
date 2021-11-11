@@ -156,6 +156,7 @@
                     android:textSize="17sp" />
 
                 <EditText
+                    android:id="@+id/priceEditText"
                     style="@style/Gray900.17"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
