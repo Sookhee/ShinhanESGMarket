@@ -23,10 +23,10 @@
     <string name="hint_price">가격</string>
     <string name="hint_chat">메시지를 입력하세요</string>
     <string name="hint_search">검색</string>
+    <string name="hint_need_input">%s를 입력해주세요</string>
 
     // string
     <string name="string_submit">완료</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="string_submit_success">등록 완료!</string>
 
 </resources>
