@@ -3,6 +3,9 @@ package com.github.sookhee.shinhanesgmarket.utils
 import android.animation.ValueAnimator
 import android.view.View
 import android.view.animation.DecelerateInterpolator
+import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.github.sookhee.shinhanesgmarket.R
 
 fun View.heightAnimation(targetHeight: Int, duration: Long = 100L) {
     val prevHeight: Int = this.height
@@ -22,4 +25,11 @@ fun View.setGone() {
 
 fun View.setVisible() {
     this.visibility = View.VISIBLE
+}
+
+fun ImageView.setImageWithUrl(url: String) {
+    Glide.with(context)
+        .load(url)
+        .error(R.drawable.gray_border_background)
+        .into(this)
 }
