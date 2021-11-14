@@ -42,6 +42,8 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         viewModel.getCategoryList()
+        viewModel.getProductList()
+
         setOnClickListener()
         observeFlow()
 
