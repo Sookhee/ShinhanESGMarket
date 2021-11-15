@@ -1,5 +1,6 @@
 package com.github.sookhee.data.datasource
 
+import com.github.sookhee.data.spec.ProductRequest
 import com.github.sookhee.data.spec.ProductResponse
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
@@ -24,20 +25,28 @@ class ProductDataSourceImpl @Inject constructor() : ProductDataSource {
             val updatedAt = document.getString(KEY_UPDATED_AT) ?: ""
             val area = document.getString(KEY_AREA) ?: ""
 
-            productList.add(ProductResponse(
-                id = id,
-                title = title,
-                owner = owner,
-                price = price.toInt(),
-                category = category.toInt(),
-                status = status.toInt(),
-                createdAt = createdAt,
-                updatedAt = updatedAt,
-                area = area
-            ))
+            productList.add(
+                ProductResponse(
+                    id = id,
+                    title = title,
+                    owner = owner,
+                    price = price.toInt(),
+                    category = category.toInt(),
+                    status = status.toInt(),
+                    createdAt = createdAt,
+                    updatedAt = updatedAt,
+                    area = area
+                )
+            )
         }
 
         return productList
+    }
+
+    override fun registerProduct(product: ProductRequest) {
+        FirebaseFirestore.getInstance()
+            .collection("product")
+            .add(product)
     }
 
     companion object {

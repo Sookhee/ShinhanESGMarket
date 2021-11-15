@@ -8,10 +8,7 @@ import com.github.sookhee.data.datasource.ProductDataSource
 import com.github.sookhee.data.datasource.ProductDataSourceImpl
 import com.github.sookhee.domain.CategoryRepository
 import com.github.sookhee.domain.ProductRepository
-import com.github.sookhee.domain.usecase.GetCategoryListUseCase
-import com.github.sookhee.domain.usecase.GetCategoryListUseCaseImpl
-import com.github.sookhee.domain.usecase.GetProductListUseCase
-import com.github.sookhee.domain.usecase.GetProductListUseCaseImpl
+import com.github.sookhee.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -50,4 +47,9 @@ object HiltProvider {
     @Provides
     fun provideGetProductListUseCase(repository: ProductRepository): GetProductListUseCase =
         GetProductListUseCaseImpl(repository)
+
+    @Singleton
+    @Provides
+    fun provideRegisterProductUseCase(repository: ProductRepository): RegisterProductUseCase =
+        RegisterProductUseCaseImpl(repository)
 }
