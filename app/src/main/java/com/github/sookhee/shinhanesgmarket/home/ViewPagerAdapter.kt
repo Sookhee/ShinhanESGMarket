@@ -1,30 +1,42 @@
 package com.github.sookhee.shinhanesgmarket.home
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.github.sookhee.shinhanesgmarket.R
+import com.github.sookhee.domain.entity.Banner
+import com.github.sookhee.shinhanesgmarket.databinding.ItemBannerBinding
+import com.github.sookhee.shinhanesgmarket.utils.fromHtml
+import java.lang.Exception
 
 class ViewPagerAdapter : RecyclerView.Adapter<ViewHolder>() {
-    var items = mutableListOf<String>()
-    var onItemClick: ((selectedItem: String) -> Unit)? = null
+    var items = mutableListOf<Banner>()
+    var onItemClick: ((selectedItem: Banner) -> Unit)? = null
+    val firstElementPosition = Int.MAX_VALUE / 2
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_banner, parent, false))
+        ViewHolder(ItemBannerBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position % items.size], position)
+        holder.bind(items[position.rem(items.size)])
     }
 
     override fun getItemCount(): Int = Int.MAX_VALUE
 }
 
-class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    private val textView: TextView = itemView.findViewById(R.id.itemTextView)
+class ViewHolder(private val binding: ItemBannerBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(text: String, position: Int) {
-        textView.text = text
+    @SuppressLint("Range")
+    fun bind(item: Banner) {
+        try {
+            binding.item = item
+            binding.message.text = item.message.fromHtml()
+            binding.emoji.text = item.emoji.fromHtml()
+            binding.bannerBackground.setBackgroundColor(Color.parseColor(item.backgroundColor))
+            binding.bottomBackground.setBackgroundColor(Color.parseColor(item.backgroundColor))
+        } catch (e: Exception) {
+
+        }
     }
 }
