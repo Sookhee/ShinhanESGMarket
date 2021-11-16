@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -96,30 +95,71 @@ class HomeFragment : Fragment() {
                 }
             }
 
-            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                override fun onPageScrolled(
-                    position: Int,
-                    positionOffset: Float,
-                    positionOffsetPixels: Int
-                ) {
-                    super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+            val runnable = Runnable {
+                currentItem += 1
+            }
 
-                    binding.bannerIndicator.x =
-                        (position + positionOffset) * binding.bannerIndicator.width
+            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position % ((this@apply).adapter as ViewPagerAdapter).itemCount)
+
+                    handler.removeCallbacks(runnable)
+                    handler.postDelayed(runnable, 3000)
+                }
+
+                override fun onPageScrollStateChanged(state: Int) {
+                    super.onPageScrollStateChanged(state)
+                    when (state) {
+                        ViewPager2.SCROLL_STATE_IDLE -> {
+                            handler.removeCallbacks(runnable)
+                            handler.postDelayed(runnable, 3000)
+                        }
+
+                        ViewPager2.SCROLL_STATE_DRAGGING -> {
+                            handler.removeCallbacks(runnable)
+                        }
+
+                        ViewPager2.SCROLL_STATE_SETTLING -> {
+                            // do nothing
+                        }
+                    }
                 }
             })
         }
     }
 
     private fun initBannerIndicator() {
-        binding.bannerIndicator.viewTreeObserver.addOnGlobalLayoutListener(object :
-            ViewTreeObserver.OnGlobalLayoutListener {
-            override fun onGlobalLayout() {
-                val layoutParams = binding.bannerIndicator.layoutParams
-                layoutParams.width = binding.bannerIndicatorBackground.width / BANNER_LIST.size
-                binding.bannerIndicator.layoutParams = layoutParams
+        binding.bannerIndicatorBackground.post {
+            val width = binding.bannerIndicatorBackground.measuredWidth
+            val barWidth = if (BANNER_LIST.size != 0) {
+                width / BANNER_LIST.size
+            } else {
+                width
+            }
 
-                binding.banner.viewTreeObserver.removeOnGlobalLayoutListener(this)
+            val indicatorBarLayoutParams = binding.bannerIndicator.layoutParams
+            indicatorBarLayoutParams.width = barWidth
+
+            val subIndicatorBarLayoutParams = binding.bannerSubIndicator.layoutParams
+            subIndicatorBarLayoutParams.width = barWidth
+
+            binding.bannerIndicator.layoutParams = indicatorBarLayoutParams
+            binding.bannerSubIndicator.layoutParams = subIndicatorBarLayoutParams
+        }
+
+        binding.banner.registerOnPageChangeCallback(object :
+            ViewPager2.OnPageChangeCallback() {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int,
+            ) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+                binding.bannerIndicator.translationX =
+                    ((position % BANNER_LIST.size) + positionOffset) * binding.bannerIndicator.width
+
+                binding.bannerSubIndicator.translationX =
+                    ((position % BANNER_LIST.size) + positionOffset) * binding.bannerIndicator.width - binding.bannerIndicatorBackground.width
             }
         })
     }
@@ -165,7 +205,6 @@ class HomeFragment : Fragment() {
             resources.getDimensionPixelSize(R.dimen.category_item_height)
         )
     }
-
 
     companion object {
         private val BANNER_LIST = mutableListOf("TEST1", "TEST2", "TEST3")
