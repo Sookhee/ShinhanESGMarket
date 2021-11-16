@@ -15,7 +15,7 @@ class ProductDataSourceImpl @Inject constructor() : ProductDataSource {
             .get().await()
 
         for (document in resultList) {
-            val id = document.getLong(KEY_ID)?.toInt() ?: 0
+            val id = document.id
             val title = document.getString(KEY_TITLE) ?: ""
             val owner = document.getString(KEY_OWNER) ?: ""
             val price = document.getLong(KEY_PRICE) ?: 0
@@ -35,7 +35,7 @@ class ProductDataSourceImpl @Inject constructor() : ProductDataSource {
                     status = status.toInt(),
                     createdAt = createdAt,
                     updatedAt = updatedAt,
-                    area = area
+                    area = area,
                 )
             )
         }
@@ -49,16 +49,36 @@ class ProductDataSourceImpl @Inject constructor() : ProductDataSource {
             .add(product)
     }
 
+    override suspend fun getProductDetail(productId: String): ProductResponse {
+        val resultList = FirebaseFirestore.getInstance()
+            .collection(COLLECTION)
+            .document("7Ex2dYumrVqjNVMTplCr")
+            .get().await()
+
+        return ProductResponse(
+            id = resultList.id,
+            title = resultList.getString(KEY_TITLE) ?: "",
+            owner = resultList.getString(KEY_OWNER) ?: "",
+            price = resultList.getLong(KEY_PRICE)?.toInt() ?: 0,
+            category = resultList.getLong(KEY_CATEGORY)?.toInt() ?: 0,
+            status = resultList.getLong(KEY_STATUS)?.toInt() ?: 0,
+            createdAt = resultList.getString(KEY_CREATED_AT) ?: "",
+            updatedAt = resultList.getString(KEY_UPDATED_AT) ?: "",
+            area = resultList.getString(KEY_AREA) ?: "",
+            content = resultList.getString(KEY_CONTENT) ?: ""
+        )
+    }
+
     companion object {
         private const val COLLECTION = "product"
-        private const val KEY_ID = "ID"
-        private const val KEY_TITLE = "FEED_TITLE"
-        private const val KEY_OWNER = "FEED_OWNER"
-        private const val KEY_PRICE = "PRICE"
-        private const val KEY_CATEGORY = "FEED_CATEGORY_ID"
-        private const val KEY_STATUS = "STATUS"
-        private const val KEY_CREATED_AT = "CREATED_AT"
-        private const val KEY_UPDATED_AT = "UPDATED_AT"
-        private const val KEY_AREA = "AREA"
+        private const val KEY_TITLE = "feed_title"
+        private const val KEY_OWNER = "feed_owner"
+        private const val KEY_PRICE = "price"
+        private const val KEY_CATEGORY = "feed_category_id"
+        private const val KEY_STATUS = "status"
+        private const val KEY_CREATED_AT = "created_at"
+        private const val KEY_UPDATED_AT = "updated_at"
+        private const val KEY_AREA = "area"
+        private const val KEY_CONTENT = "content"
     }
 }

@@ -1,6 +1,5 @@
 package com.github.sookhee.shinhanesgmarket.register
 
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,7 +20,6 @@ class RegisterViewModel @ViewModelInject constructor(
 
     fun registerProduct() {
         val product = Product(
-            id = 0,
             title = title.value ?: "",
             owner = "",
             price = price.value?.toInt() ?: 0,
@@ -29,7 +27,8 @@ class RegisterViewModel @ViewModelInject constructor(
             status = 0,
             createdAt = simpleDate.format(Date(System.currentTimeMillis())),
             updatedAt = simpleDate.format(Date(System.currentTimeMillis())),
-            area = ""
+            area = "",
+            content = content.value ?: ""
         )
 
         registerProductUseCase(product)

@@ -35,15 +35,32 @@ class ProductRepositoryImpl @Inject constructor(private val dataSource: ProductD
         val productRequest = ProductRequest(
             area = product.area,
             created_at = product.createdAt,
+            content = product.content,
             feed_category_id = product.category,
             feed_owner = product.owner,
             feed_title = product.title,
-            id = product.id,
             price = product.price,
             status = product.status,
             updated_at = product.updatedAt
         )
 
         dataSource.registerProduct(productRequest)
+    }
+
+    override suspend fun getProductDetail(productId: String): Product {
+        val result = dataSource.getProductDetail(productId)
+
+        return Product(
+            id = result.id,
+            title = result.title,
+            owner = result.owner,
+            price = result.price,
+            category = result.category,
+            status = result.status,
+            createdAt = result.createdAt,
+            updatedAt = result.updatedAt,
+            area = result.area,
+            content = result.content
+        )
     }
 }

@@ -14,6 +14,11 @@ class ProductAdapter :
     var items: List<Product> = emptyList()
     var onItemClick: ((selectedItem: Product) -> Unit)? = null
 
+    fun setItem(list: List<Product>) {
+        items = list
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return ViewHolder(ItemProductBinding.inflate(inflater, parent, false), onItemClick)
