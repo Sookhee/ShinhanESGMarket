@@ -1,6 +1,7 @@
 package com.github.sookhee.shinhanesgmarket.home
 
 import android.content.Intent
+import android.graphics.Rect
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,7 +10,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.github.sookhee.domain.entity.Banner
 import com.github.sookhee.shinhanesgmarket.R
 import com.github.sookhee.shinhanesgmarket.alarm.AlarmActivity
 import com.github.sookhee.shinhanesgmarket.databinding.FragmentHomeBinding
@@ -43,7 +46,7 @@ class HomeFragment : Fragment() {
         observeFlow()
 
         initBanner()
-        initBannerIndicator()
+        initBannerIndicator(BANNER_LIST.size)
 
         initProductRecyclerView()
 
@@ -88,11 +91,38 @@ class HomeFragment : Fragment() {
 
     private fun initBanner() {
         binding.banner.apply {
-            adapter = ViewPagerAdapter().apply {
-                items = BANNER_LIST
-                onItemClick = {
-                    Toast.makeText(context, "banner: $it", Toast.LENGTH_SHORT).show()
+            adapter = ViewPagerAdapter()
+                .apply {
+                    items = BANNER_LIST
+                    onItemClick = {
+                        Toast.makeText(context, "click: $it", Toast.LENGTH_SHORT).show()
+                    }
                 }
+            orientation = ViewPager2.ORIENTATION_HORIZONTAL
+            clipToPadding = false
+            offscreenPageLimit = 1
+            (getChildAt(0) as RecyclerView).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+
+            val cardOffset = resources.getDimension(R.dimen.sol_main_card_offset)
+            val nextItemVisiblePx = resources.getDimension(R.dimen.sol_main_card_margin)
+            val pageTranslationX = (cardOffset * VIEWPAGER_PRE_VIEW) + nextItemVisiblePx
+
+            setCurrentItem((adapter as ViewPagerAdapter).firstElementPosition, false)
+
+            addItemDecoration(object : RecyclerView.ItemDecoration() {
+                override fun getItemOffsets(
+                    outRect: Rect,
+                    view: View,
+                    parent: RecyclerView,
+                    state: RecyclerView.State,
+                ) {
+                    outRect.right = cardOffset.toInt() + nextItemVisiblePx.toInt()
+                    outRect.left = cardOffset.toInt() + nextItemVisiblePx.toInt()
+                }
+            })
+
+            setPageTransformer { page, position ->
+                page.translationX = -pageTranslationX * (position)
             }
 
             val runnable = Runnable {
@@ -128,11 +158,11 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun initBannerIndicator() {
+    private fun initBannerIndicator(bannerSize: Int) {
         binding.bannerIndicatorBackground.post {
             val width = binding.bannerIndicatorBackground.measuredWidth
-            val barWidth = if (BANNER_LIST.size != 0) {
-                width / BANNER_LIST.size
+            val barWidth = if (bannerSize != 0) {
+                width / bannerSize
             } else {
                 width
             }
@@ -156,10 +186,10 @@ class HomeFragment : Fragment() {
             ) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels)
                 binding.bannerIndicator.translationX =
-                    ((position % BANNER_LIST.size) + positionOffset) * binding.bannerIndicator.width
+                    ((position % bannerSize) + positionOffset) * binding.bannerIndicator.width
 
                 binding.bannerSubIndicator.translationX =
-                    ((position % BANNER_LIST.size) + positionOffset) * binding.bannerIndicator.width - binding.bannerIndicatorBackground.width
+                    ((position % bannerSize) + positionOffset) * binding.bannerIndicator.width - binding.bannerIndicatorBackground.width
             }
         })
     }
@@ -207,7 +237,33 @@ class HomeFragment : Fragment() {
     }
 
     companion object {
-        private val BANNER_LIST = mutableListOf("TEST1", "TEST2", "TEST3")
+        private val BANNER_LIST = mutableListOf(
+            Banner(
+                title = "타이틀1",
+                message = "메시지<br/>두번째 줄<br/>세번째 줄",
+                imageUrl = "",
+                hookMessage = "후킹메시지",
+                emoji = "&#x23F1",
+                backgroundColor = "#ae81e8"
+            ),
+            Banner(
+                title = "타이틀2",
+                message = "메시지<br/>두번째 줄<br/>세번째 줄",
+                imageUrl = "",
+                hookMessage = "후킹메시지",
+                emoji = "&#x1F338",
+                backgroundColor = "#f07e7e"
+            ),
+            Banner(
+                title = "타이틀3",
+                message = "메시지<br/>두번째 줄<br/>세번째 줄",
+                imageUrl = "",
+                hookMessage = "후킹메시지",
+                emoji = "&#x2728",
+                backgroundColor = "#eb9d41"
+            )
+        )
         private const val GRID_SPAN_COUNT = 4
+        private const val VIEWPAGER_PRE_VIEW = 3
     }
 }
