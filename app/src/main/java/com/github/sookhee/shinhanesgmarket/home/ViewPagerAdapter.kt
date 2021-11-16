@@ -15,10 +15,10 @@ class ViewPagerAdapter : RecyclerView.Adapter<ViewHolder>() {
         ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_banner, parent, false))
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position], position)
+        holder.bind(items[position % items.size], position)
     }
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount(): Int = Int.MAX_VALUE
 }
 
 class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

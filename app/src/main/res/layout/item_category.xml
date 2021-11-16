@@ -31,6 +31,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@color/gray100"
+            android:padding="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
