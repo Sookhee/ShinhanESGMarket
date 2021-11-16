@@ -52,4 +52,9 @@ object HiltProvider {
     @Provides
     fun provideRegisterProductUseCase(repository: ProductRepository): RegisterProductUseCase =
         RegisterProductUseCaseImpl(repository)
+
+    @Singleton
+    @Provides
+    fun provideGetProductDetailUseCase(repository: ProductRepository): GetProductDetailUseCase =
+        GetProductDetailUseCaseImpl(repository)
 }

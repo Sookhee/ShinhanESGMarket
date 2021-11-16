@@ -1,7 +1,7 @@
 package com.github.sookhee.domain.entity
 
 data class Product(
-    val id: Int,
+    val id: String = "",
     val title: String = "",
     val owner: String = "",
     val price: Int = 0,
@@ -10,4 +10,5 @@ data class Product(
     val createdAt: String = "",
     val updatedAt: String = "",
     val area: String = "",
+    val content: String = ""
 )

@@ -1,7 +1,7 @@
 package com.github.sookhee.data.spec
 
 data class ProductResponse(
-    val id: Int,
+    val id: String,
     val title: String = "",
     val owner: String = "",
     val price: Int = 0,
@@ -10,4 +10,5 @@ data class ProductResponse(
     val createdAt: String = "",
     val updatedAt: String = "",
     val area: String = "",
+    val content: String = "",
 )

@@ -6,8 +6,8 @@ data class ProductRequest(
     val feed_category_id: Int,
     val feed_owner: String,
     val feed_title: String,
-    val id: Int,
     val price: Int,
     val status: Int,
     val updated_at: String,
+    val content: String
 )

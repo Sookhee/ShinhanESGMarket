@@ -7,4 +7,6 @@ interface ProductDataSource {
     suspend fun getProductList(): List<ProductResponse>
 
     fun registerProduct(product: ProductRequest)
+
+    suspend fun getProductDetail(productId: String): ProductResponse
 }

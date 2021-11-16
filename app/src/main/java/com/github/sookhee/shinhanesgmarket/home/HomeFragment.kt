@@ -2,7 +2,6 @@ package com.github.sookhee.shinhanesgmarket.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +9,8 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
-import com.github.sookhee.domain.entity.Category
-import com.github.sookhee.domain.entity.Product
 import com.github.sookhee.shinhanesgmarket.R
 import com.github.sookhee.shinhanesgmarket.alarm.AlarmActivity
 import com.github.sookhee.shinhanesgmarket.databinding.FragmentHomeBinding
@@ -66,6 +62,10 @@ class HomeFragment : Fragment() {
         viewModel.categoryList.observe(viewLifecycleOwner) {
             (binding.categoryRecyclerView.adapter as CategoryAdapter).setItem(it)
             gridLineCount = (it.size + GRID_SPAN_COUNT - 1) / GRID_SPAN_COUNT
+        }
+
+        viewModel.productList.observe(viewLifecycleOwner) {
+            (binding.productRecyclerView.adapter as ProductAdapter).setItem(it)
         }
     }
 
@@ -126,10 +126,9 @@ class HomeFragment : Fragment() {
 
     private fun initProductRecyclerView() {
         binding.productRecyclerView.adapter = ProductAdapter().apply {
-            items = PRODUCT_LIST
             onItemClick = {
                 val intent = Intent(context, ProductActivity::class.java)
-
+                intent.putExtra("PRODUCT_ID", it.id)
                 startActivity(intent)
             }
         }
@@ -171,51 +170,5 @@ class HomeFragment : Fragment() {
     companion object {
         private val BANNER_LIST = mutableListOf("TEST1", "TEST2", "TEST3")
         private const val GRID_SPAN_COUNT = 4
-        private val PRODUCT_LIST = listOf(
-            Product(
-                id = 1,
-                title = "맥북에어 m1 미개봉 상품 팔아여",
-                owner = "머드더스튜던트",
-                price = 950000,
-                category = 0,
-                status = 0,
-                createdAt = "20211110",
-                updatedAt = "",
-                area = "왕십리"
-            ),
-            Product(
-                id = 2,
-                title = "도리벤 바지 아크릴 삽니당",
-                owner = "이수린",
-                price = 10000,
-                category = 0,
-                status = 0,
-                createdAt = "20211110",
-                updatedAt = "",
-                area = "신도림"
-            ),
-            Product(
-                id = 3,
-                title = "쿠로미 인형",
-                owner = "신스",
-                price = 4000,
-                category = 0,
-                status = 0,
-                createdAt = "20211110",
-                updatedAt = "",
-                area = "강남동"
-            ),
-            Product(
-                id = 4,
-                title = "졸려여",
-                owner = "정민지",
-                price = 0,
-                category = 0,
-                status = 0,
-                createdAt = "20211110",
-                updatedAt = "",
-                area = "화도읍"
-            ),
-        )
     }
 }
