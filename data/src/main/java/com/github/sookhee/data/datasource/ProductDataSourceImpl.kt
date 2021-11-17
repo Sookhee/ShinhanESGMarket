@@ -52,7 +52,7 @@ class ProductDataSourceImpl @Inject constructor() : ProductDataSource {
     override suspend fun getProductDetail(productId: String): ProductResponse {
         val resultList = FirebaseFirestore.getInstance()
             .collection(COLLECTION)
-            .document("7Ex2dYumrVqjNVMTplCr")
+            .document(productId)
             .get().await()
 
         return ProductResponse(
