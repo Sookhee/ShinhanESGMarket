@@ -86,7 +86,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="닉네임"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@id/sellerArea"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -99,7 +98,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="사는 곳"
                     app:layout_constraintBottom_toBottomOf="@id/sellerImage"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/sellerImage"
@@ -118,8 +116,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
-                android:text="제목" />
+                android:layout_marginTop="16dp" />
 
             <LinearLayout
                 android:id="@+id/productInfo"
@@ -134,8 +131,7 @@
                     android:id="@+id/productCategory"
                     style="@style/Gray600.13"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="카테고리" />
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     style="@style/Gray600.13"
@@ -148,8 +144,7 @@
                     android:id="@+id/productTime"
                     style="@style/Gray600.13"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="타임" />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <TextView
@@ -158,8 +153,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginVertical="16dp"
-                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." />
+                android:layout_marginVertical="16dp" />
         </LinearLayout>
     </ScrollView>
 
