@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.sookhee.domain.entity.Banner
 import com.github.sookhee.shinhanesgmarket.databinding.ItemBannerBinding
 import com.github.sookhee.shinhanesgmarket.utils.fromHtml
+import com.github.sookhee.shinhanesgmarket.utils.setImageWithUrl
 import java.lang.Exception
 
 class ViewPagerAdapter : RecyclerView.Adapter<ViewHolder>() {
@@ -35,6 +36,7 @@ class ViewHolder(private val binding: ItemBannerBinding) : RecyclerView.ViewHold
             binding.emoji.text = item.emoji.fromHtml()
             binding.bannerBackground.setBackgroundColor(Color.parseColor(item.backgroundColor))
             binding.bottomBackground.setBackgroundColor(Color.parseColor(item.backgroundColor))
+            binding.imageView.setImageWithUrl(item.imageUrl)
         } catch (e: Exception) {
 
         }
