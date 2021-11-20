@@ -4,9 +4,9 @@ import com.github.sookhee.domain.ProductRepository
 import com.github.sookhee.domain.entity.Product
 import javax.inject.Inject
 
-class GetMyProductListUseCaseImpl @Inject constructor(
+class GetProductListWithQueryUseCaseImpl @Inject constructor(
     private val repository: ProductRepository
-): GetMyProductListUseCase {
+): GetProductListWithQueryUseCase {
     override suspend fun invoke(key: String, value: String): List<Product> {
         return repository.getProductListWithQuery(key, value)
     }

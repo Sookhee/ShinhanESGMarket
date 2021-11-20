@@ -34,6 +34,7 @@ class MypageFragment : Fragment() {
         initTabLayout()
 
         viewModel.getMyProductList()
+        viewModel.getLikeProductList()
 
         return binding.root
     }

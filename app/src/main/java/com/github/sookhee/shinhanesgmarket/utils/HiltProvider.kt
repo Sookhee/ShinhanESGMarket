@@ -60,6 +60,6 @@ object HiltProvider {
 
     @Singleton
     @Provides
-    fun provideGetMyProductListUseCase(repository: ProductRepository): GetMyProductListUseCase =
-        GetMyProductListUseCaseImpl(repository)
+    fun provideGetProductListWithQueryUseCase(repository: ProductRepository): GetProductListWithQueryUseCase =
+        GetProductListWithQueryUseCaseImpl(repository)
 }

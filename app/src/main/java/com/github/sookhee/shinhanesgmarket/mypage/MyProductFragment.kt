@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.github.sookhee.shinhanesgmarket.databinding.FragmentMyProductBinding
+import com.github.sookhee.shinhanesgmarket.databinding.LayoutMypageBottomRecyclerviewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MyProductFragment: Fragment() {
-    private var _binding: FragmentMyProductBinding? = null
+    private var _binding: LayoutMypageBottomRecyclerviewBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: MyPageViewModel by viewModels({ requireParentFragment() })
@@ -20,7 +20,7 @@ class MyProductFragment: Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMyProductBinding.inflate(inflater, container, false)
+        _binding = LayoutMypageBottomRecyclerviewBinding.inflate(inflater, container, false)
 
         initRecyclerView()
         setObserver()
