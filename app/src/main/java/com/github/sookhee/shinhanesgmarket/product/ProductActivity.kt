@@ -1,10 +1,11 @@
 package com.github.sookhee.shinhanesgmarket.product
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.github.sookhee.shinhanesgmarket.databinding.ActivityProductBinding
+import com.github.sookhee.shinhanesgmarket.utils.calcTime
+import com.github.sookhee.shinhanesgmarket.utils.parseCategory
 import com.github.sookhee.shinhanesgmarket.utils.withComma
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,8 +33,9 @@ class ProductActivity : AppCompatActivity() {
             binding.sellerName.text = it.owner
             binding.sellerArea.text = it.area
             binding.productTitle.text = it.title
-            binding.productPrice.text = "${it.price.withComma()}원"
-            binding.productTime.text = it.updatedAt
+            binding.productPrice.text = if(it.price == 0) "무료나눔" else "${it.price.withComma()}원"
+            binding.productCategory.text = it.category.parseCategory()
+            binding.productTime.text = it.updatedAt.calcTime()
             binding.productDescription.text = it.content
         }
     }

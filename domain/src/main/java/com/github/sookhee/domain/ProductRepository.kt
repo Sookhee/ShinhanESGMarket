@@ -8,4 +8,6 @@ interface ProductRepository {
     fun registerProduct(product: Product)
 
     suspend fun getProductDetail(productId: String): Product
+
+    suspend fun getProductListWithQuery(key: String, value: String): List<Product>
 }

@@ -1,20 +1,20 @@
-package com.github.sookhee.shinhanesgmarket.home
+package com.github.sookhee.shinhanesgmarket.mypage
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.sookhee.domain.entity.Product
-import com.github.sookhee.shinhanesgmarket.databinding.ItemProductBinding
-import com.github.sookhee.shinhanesgmarket.utils.calcTime
-import com.github.sookhee.shinhanesgmarket.utils.withComma
+import com.github.sookhee.shinhanesgmarket.databinding.ItemProductGridBinding
+import com.github.sookhee.shinhanesgmarket.utils.setImageWithUrl
 
-class ProductAdapter :
-    RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
+class GridProductAdapter :
+    RecyclerView.Adapter<GridProductAdapter.ViewHolder>() {
 
     var items: List<Product> = emptyList()
     var onItemClick: ((selectedItem: Product) -> Unit)? = null
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setItem(list: List<Product>) {
         items = list
         notifyDataSetChanged()
@@ -22,7 +22,7 @@ class ProductAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return ViewHolder(ItemProductBinding.inflate(inflater, parent, false), onItemClick)
+        return ViewHolder(ItemProductGridBinding.inflate(inflater, parent, false), onItemClick)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -34,7 +34,7 @@ class ProductAdapter :
     }
 
     class ViewHolder(
-        private val binding: ItemProductBinding,
+        private val binding: ItemProductGridBinding,
         onItemClick: ((selectedItem: Product) -> Unit)?,
     ) :
         RecyclerView.ViewHolder(binding.root) {
@@ -48,8 +48,8 @@ class ProductAdapter :
             item: Product,
         ) {
             binding.item = item
-            binding.productTime.text = item.updatedAt.calcTime()
-            binding.productPrice.text = if (item.price == 0) "무료나눔" else "${item.price.withComma()}원"
+
+            binding.productImage.setImageWithUrl("https://firebasestorage.googleapis.com/v0/b/doremi-market.appspot.com/o/banner%2Fbanner_character_2.png?alt=media&token=829f89e5-0974-46c5-b247-e65655dcf8a7")
         }
     }
 }
