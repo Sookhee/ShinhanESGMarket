@@ -11,7 +11,7 @@ import java.util.*
 class RegisterViewModel @ViewModelInject constructor(
     private val registerProductUseCase: RegisterProductUseCase
 ): ViewModel() {
-    private val simpleDate = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
+    private val simpleDate = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault())
 
     val title = MutableLiveData<String>()
     val price = MutableLiveData<String>()
