@@ -5,19 +5,37 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.github.sookhee.shinhanesgmarket.databinding.FragmentLikeProductBinding
+import androidx.fragment.app.viewModels
+import com.github.sookhee.shinhanesgmarket.databinding.LayoutMypageBottomRecyclerviewBinding
 
-class LikeProductFragment: Fragment() {
-    private var _binding: FragmentLikeProductBinding? = null
+class LikeProductFragment : Fragment() {
+    private var _binding: LayoutMypageBottomRecyclerviewBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: MyPageViewModel by viewModels({ requireParentFragment() })
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentLikeProductBinding.inflate(inflater, container, false)
+        _binding = LayoutMypageBottomRecyclerviewBinding.inflate(inflater, container, false)
+
+        initRecyclerView()
+        setObserver()
 
         return binding.root
+    }
+
+    private fun setObserver() {
+        viewModel.likeProductList.observe(viewLifecycleOwner) {
+            (binding.productRecyclerView.adapter as GridProductAdapter).setItem(it)
+        }
+    }
+
+    private fun initRecyclerView() {
+        binding.productRecyclerView.apply {
+            adapter = GridProductAdapter()
+        }
     }
 
     override fun onDestroyView() {
