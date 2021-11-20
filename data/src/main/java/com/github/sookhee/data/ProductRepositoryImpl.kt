@@ -63,4 +63,27 @@ class ProductRepositoryImpl @Inject constructor(private val dataSource: ProductD
             content = result.content
         )
     }
+
+    override suspend fun getProductListWithQuery(key: String, value: String): List<Product> {
+        val result = dataSource.getProductListWithQuery(key, value)
+        val productList = mutableListOf<Product>()
+
+        result.forEach {
+            productList.add(
+                Product(
+                    id = it.id,
+                    title = it.title,
+                    owner = it.owner,
+                    price = it.price,
+                    category = it.category,
+                    status = it.status,
+                    createdAt = it.createdAt,
+                    updatedAt = it.updatedAt,
+                    area = it.area
+                )
+            )
+        }
+
+        return productList
+    }
 }

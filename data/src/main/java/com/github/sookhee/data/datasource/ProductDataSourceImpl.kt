@@ -1,5 +1,6 @@
 package com.github.sookhee.data.datasource
 
+import android.util.Log
 import com.github.sookhee.data.spec.ProductRequest
 import com.github.sookhee.data.spec.ProductResponse
 import com.google.firebase.firestore.FirebaseFirestore
@@ -67,6 +68,45 @@ class ProductDataSourceImpl @Inject constructor() : ProductDataSource {
             area = resultList.getString(KEY_AREA) ?: "",
             content = resultList.getString(KEY_CONTENT) ?: ""
         )
+    }
+
+    override suspend fun getProductListWithQuery(
+        key: String,
+        value: String
+    ): List<ProductResponse> {
+        val productList = mutableListOf<ProductResponse>()
+        val resultList = FirebaseFirestore.getInstance()
+            .collection(COLLECTION)
+            .whereEqualTo(key, value)
+            .get().await()
+
+        for (document in resultList) {
+            val id = document.id
+            val title = document.getString(KEY_TITLE) ?: ""
+            val owner = document.getString(KEY_OWNER) ?: ""
+            val price = document.getLong(KEY_PRICE) ?: 0
+            val category = document.getLong(KEY_CATEGORY) ?: 0
+            val status = document.getLong(KEY_STATUS) ?: 0
+            val createdAt = document.getString(KEY_CREATED_AT) ?: ""
+            val updatedAt = document.getString(KEY_UPDATED_AT) ?: ""
+            val area = document.getString(KEY_AREA) ?: ""
+
+            productList.add(
+                ProductResponse(
+                    id = id,
+                    title = title,
+                    owner = owner,
+                    price = price.toInt(),
+                    category = category.toInt(),
+                    status = status.toInt(),
+                    createdAt = createdAt,
+                    updatedAt = updatedAt,
+                    area = area,
+                )
+            )
+        }
+
+        return productList
     }
 
     companion object {
