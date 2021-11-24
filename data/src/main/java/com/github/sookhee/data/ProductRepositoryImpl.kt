@@ -86,4 +86,8 @@ class ProductRepositoryImpl @Inject constructor(private val dataSource: ProductD
 
         return productList
     }
+
+    override suspend fun getLikeProductList(userId: String): List<Product> {
+         return dataSource.getLikeProductList(userId)
+    }
 }

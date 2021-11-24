@@ -1,9 +1,12 @@
 package com.github.sookhee.shinhanesgmarket.utils
 
+import android.annotation.SuppressLint
 import android.text.Html
 import android.text.Spanned
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 fun Int.withComma(): String {
@@ -18,10 +21,13 @@ fun String.fromHtml(): Spanned {
     }
 }
 
+@SuppressLint("NewApi")
 fun String.calcTime(): String {
     val dateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault())
     val postDate = dateFormat.parse(this) as Date
     val diff = (Date().time - postDate.time) / 1000
+
+    val temp = LocalDate.parse(this, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
 
     return when (diff) {
         in 0 until 10 -> "방금 전"
@@ -30,7 +36,7 @@ fun String.calcTime(): String {
         in 60 * 60 until 60 * 60 * 24 -> "${diff/(60 * 60)}시간 전"
         in 60 * 60 * 24 until 60 * 60 * 48 -> "어제"
         in 60 * 60 * 48 until 60 * 60 * 24 * 7 -> "${diff/(60 * 60 * 24)}일 전"
-        else -> SimpleDateFormat("yyyy.MM.dd", Locale.getDefault()).format(this)
+        else -> "${temp.monthValue}월 ${temp.dayOfMonth}일"
     }
 }
 
