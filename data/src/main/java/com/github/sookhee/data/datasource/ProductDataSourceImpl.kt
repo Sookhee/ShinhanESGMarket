@@ -3,11 +3,14 @@ package com.github.sookhee.data.datasource
 import android.util.Log
 import com.github.sookhee.data.spec.ProductRequest
 import com.github.sookhee.data.spec.ProductResponse
+import com.github.sookhee.domain.entity.Product
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
-class ProductDataSourceImpl @Inject constructor() : ProductDataSource {
+class ProductDataSourceImpl @Inject constructor(
+    private val likeDataSource: LikeDataSource
+) : ProductDataSource {
     override suspend fun getProductList(): List<ProductResponse> {
         val productList = mutableListOf<ProductResponse>()
         val resultList = FirebaseFirestore.getInstance()
@@ -51,22 +54,22 @@ class ProductDataSourceImpl @Inject constructor() : ProductDataSource {
     }
 
     override suspend fun getProductDetail(productId: String): ProductResponse {
-        val resultList = FirebaseFirestore.getInstance()
+        val result = FirebaseFirestore.getInstance()
             .collection(COLLECTION)
             .document(productId)
             .get().await()
 
         return ProductResponse(
-            id = resultList.id,
-            title = resultList.getString(KEY_TITLE) ?: "",
-            owner = resultList.getString(KEY_OWNER) ?: "",
-            price = resultList.getLong(KEY_PRICE)?.toInt() ?: 0,
-            category = resultList.getLong(KEY_CATEGORY)?.toInt() ?: 0,
-            status = resultList.getLong(KEY_STATUS)?.toInt() ?: 0,
-            createdAt = resultList.getString(KEY_CREATED_AT) ?: "",
-            updatedAt = resultList.getString(KEY_UPDATED_AT) ?: "",
-            area = resultList.getString(KEY_AREA) ?: "",
-            content = resultList.getString(KEY_CONTENT) ?: ""
+            id = result.id,
+            title = result.getString(KEY_TITLE) ?: "",
+            owner = result.getString(KEY_OWNER) ?: "",
+            price = result.getLong(KEY_PRICE)?.toInt() ?: 0,
+            category = result.getLong(KEY_CATEGORY)?.toInt() ?: 0,
+            status = result.getLong(KEY_STATUS)?.toInt() ?: 0,
+            createdAt = result.getString(KEY_CREATED_AT) ?: "",
+            updatedAt = result.getString(KEY_UPDATED_AT) ?: "",
+            area = result.getString(KEY_AREA) ?: "",
+            content = result.getString(KEY_CONTENT) ?: ""
         )
     }
 
@@ -107,6 +110,35 @@ class ProductDataSourceImpl @Inject constructor() : ProductDataSource {
         }
 
         return productList
+    }
+
+    override suspend fun getLikeProductList(userId: String): List<Product> {
+        val likeProductList = mutableListOf<Product>()
+
+        val likeList = likeDataSource.getUserLike(userId)
+        likeList.forEach {
+            val document = FirebaseFirestore.getInstance()
+                .collection(COLLECTION)
+                .document(it.productId)
+                .get().await()
+
+            likeProductList.add(
+                Product(
+                    id = document.id,
+                    title = document.getString(KEY_TITLE) ?: "",
+                    owner = document.getString(KEY_OWNER) ?: "",
+                    price = document.getLong(KEY_PRICE)?.toInt() ?: 0,
+                    category = document.getLong(KEY_CATEGORY)?.toInt() ?: 0,
+                    status = document.getLong(KEY_STATUS)?.toInt() ?: 0,
+                    createdAt = document.getString(KEY_CREATED_AT) ?: "",
+                    updatedAt = document.getString(KEY_UPDATED_AT) ?: "",
+                    area = document.getString(KEY_AREA) ?: "",
+                    content = document.getString(KEY_CONTENT) ?: ""
+                )
+            )
+        }
+
+        return likeProductList
     }
 
     companion object {

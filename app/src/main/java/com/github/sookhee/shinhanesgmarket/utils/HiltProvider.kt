@@ -2,10 +2,7 @@ package com.github.sookhee.shinhanesgmarket.utils
 
 import com.github.sookhee.data.CategoryRepositoryImpl
 import com.github.sookhee.data.ProductRepositoryImpl
-import com.github.sookhee.data.datasource.CategoryDataSource
-import com.github.sookhee.data.datasource.CategoryDataSourceImpl
-import com.github.sookhee.data.datasource.ProductDataSource
-import com.github.sookhee.data.datasource.ProductDataSourceImpl
+import com.github.sookhee.data.datasource.*
 import com.github.sookhee.domain.CategoryRepository
 import com.github.sookhee.domain.ProductRepository
 import com.github.sookhee.domain.usecase.*
@@ -35,8 +32,8 @@ object HiltProvider {
 
     @Singleton
     @Provides
-    fun provideProductDataSource(): ProductDataSource =
-        ProductDataSourceImpl()
+    fun provideProductDataSource(likeDataSource: LikeDataSource): ProductDataSource =
+        ProductDataSourceImpl(likeDataSource)
 
     @Singleton
     @Provides
@@ -62,4 +59,13 @@ object HiltProvider {
     @Provides
     fun provideGetProductListWithQueryUseCase(repository: ProductRepository): GetProductListWithQueryUseCase =
         GetProductListWithQueryUseCaseImpl(repository)
+
+    @Singleton
+    @Provides
+    fun provideGetLikeDataSource(): LikeDataSource = LikeDataSourceImpl()
+
+    @Singleton
+    @Provides
+    fun provideGetLikeProductListUseCase(repository: ProductRepository): GetLikeProductListUseCase =
+        GetLikeProductListUseCaseImpl(repository)
 }

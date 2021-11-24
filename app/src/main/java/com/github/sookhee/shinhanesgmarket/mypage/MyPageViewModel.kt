@@ -7,12 +7,14 @@ import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.Dispatchers
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.github.sookhee.data.datasource.GetLikeProductListUseCase
 import com.github.sookhee.domain.entity.Product
 import com.github.sookhee.domain.usecase.GetProductListWithQueryUseCase
 import kotlinx.coroutines.launch
 
 class MyPageViewModel @ViewModelInject constructor(
-    private val getProductListWithQueryUseCase: GetProductListWithQueryUseCase
+    private val getProductListWithQueryUseCase: GetProductListWithQueryUseCase,
+    private val getLikeProductListUseCase: GetLikeProductListUseCase
 ): ViewModel() {
     private val _myProductList = MutableLiveData<List<Product>>()
     val myProductList: LiveData<List<Product>>
@@ -37,7 +39,7 @@ class MyPageViewModel @ViewModelInject constructor(
     fun getLikeProductList() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val result = getProductListWithQueryUseCase("feed_owner_id", "21200204")
+                val result = getLikeProductListUseCase("21200203")
                 _likeProductList.postValue(result)
 
             } catch (e: Exception) {
