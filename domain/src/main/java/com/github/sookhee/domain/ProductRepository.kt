@@ -10,4 +10,6 @@ interface ProductRepository {
     suspend fun getProductDetail(productId: String): Product
 
     suspend fun getProductListWithQuery(key: String, value: String): List<Product>
+
+    suspend fun getLikeProductList(userId: String): List<Product>
 }
