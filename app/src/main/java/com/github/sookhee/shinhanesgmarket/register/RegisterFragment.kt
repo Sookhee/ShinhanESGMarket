@@ -3,22 +3,18 @@ package com.github.sookhee.shinhanesgmarket.register
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.TextUtils
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
 import com.github.sookhee.shinhanesgmarket.R
 import com.github.sookhee.shinhanesgmarket.adapter.PhotoAdapter
 import com.github.sookhee.shinhanesgmarket.databinding.FragmentRegisterBinding
-import com.google.firebase.storage.FirebaseStorage
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,7 +24,7 @@ class RegisterFragment : Fragment() {
 
     private lateinit var viewModel: RegisterViewModel
 
-    private val photoList = hashMapOf<String, Uri?>()
+    private val photoList = hashMapOf<String, String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,9 +50,10 @@ class RegisterFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (resultCode == Activity.RESULT_OK && requestCode == CODE_SELECT_IMAGE) {
+            photoList.clear()
             for (i in 0 until data?.clipData?.itemCount!!) {
                 photoList["21200203_${System.currentTimeMillis()}_$i.png"] =
-                    data.clipData!!.getItemAt(i).uri
+                    data.clipData!!.getItemAt(i).uri.toString()
             }
 
             (binding.photoRecyclerView.adapter as PhotoAdapter).setItem(photoList.values.toList())
@@ -86,7 +83,7 @@ class RegisterFragment : Fragment() {
             }
 
             if (needItem.size == 0) {
-                viewModel.registerProduct()
+                viewModel.registerProduct(photoList)
 
                 Toast.makeText(
                     context,
@@ -110,30 +107,6 @@ class RegisterFragment : Fragment() {
             }
 
             startActivityForResult(galleryIntent, CODE_SELECT_IMAGE)
-        }
-    }
-
-    private fun uploadImage() {
-        val storage = FirebaseStorage.getInstance()
-
-        photoList.forEach { photo ->
-            val riverRef = storage.reference.child("/product_image/${photo.key}")
-
-            photo.value?.let {
-                riverRef.putFile(it)
-                    .addOnFailureListener { Log.i("민지", "FAIL: $it") }
-                    .addOnSuccessListener {
-                        Log.i("민지", "SUCCESS : ${photo.key}")
-
-                        storage.getReference(photo.key).downloadUrl.addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                Glide.with(this)
-                                    .load(task.result)
-                                    .into(binding.photoIcon)
-                            }
-                        }
-                    }
-            }
         }
     }
 

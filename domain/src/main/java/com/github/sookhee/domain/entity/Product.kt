@@ -10,5 +10,6 @@ data class Product(
     val createdAt: String = "",
     val updatedAt: String = "",
     val area: String = "",
-    val content: String = ""
+    val content: String = "",
+    val photoList: HashMap<String, String> = hashMapOf()
 )
