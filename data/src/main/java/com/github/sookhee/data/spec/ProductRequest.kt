@@ -9,5 +9,6 @@ data class ProductRequest(
     val price: Int,
     val status: Int,
     val updated_at: String,
-    val content: String
+    val content: String,
+    val photoList: List<String>
 )

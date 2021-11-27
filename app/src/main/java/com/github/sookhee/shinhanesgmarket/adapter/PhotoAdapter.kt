@@ -4,17 +4,18 @@ import android.annotation.SuppressLint
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.github.sookhee.shinhanesgmarket.databinding.ItemPhotoSmallBinding
 
 class PhotoAdapter:
     RecyclerView.Adapter<PhotoAdapter.ViewHolder>() {
 
-    var items: List<Uri?> = listOf()
+    var items: List<String> = listOf()
     var onItemClick: ((selectedItem: String) -> Unit)? = null
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setItem(list: List<Uri?>) {
+    fun setItem(list: List<String>) {
         items = list
         notifyDataSetChanged()
     }
@@ -43,9 +44,9 @@ class PhotoAdapter:
         }
 
         fun bind(
-            uri: Uri?
+            uri: String
         ) {
-            binding.productImage.setImageURI(uri)
+            binding.productImage.setImageURI(uri.toUri())
         }
     }
 }

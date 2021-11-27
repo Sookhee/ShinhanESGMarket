@@ -1,10 +1,12 @@
 package com.github.sookhee.data.datasource
 
 import android.util.Log
+import androidx.core.net.toUri
 import com.github.sookhee.data.spec.ProductRequest
 import com.github.sookhee.data.spec.ProductResponse
 import com.github.sookhee.domain.entity.Product
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
@@ -47,9 +49,9 @@ class ProductDataSourceImpl @Inject constructor(
         return productList
     }
 
-    override fun registerProduct(product: ProductRequest) {
+    override suspend fun registerProduct(product: ProductRequest) {
         FirebaseFirestore.getInstance()
-            .collection("product")
+            .collection(COLLECTION)
             .add(product)
     }
 
@@ -133,7 +135,7 @@ class ProductDataSourceImpl @Inject constructor(
                     createdAt = document.getString(KEY_CREATED_AT) ?: "",
                     updatedAt = document.getString(KEY_UPDATED_AT) ?: "",
                     area = document.getString(KEY_AREA) ?: "",
-                    content = document.getString(KEY_CONTENT) ?: ""
+                    content = document.getString(KEY_CONTENT) ?: "",
                 )
             )
         }
@@ -141,8 +143,19 @@ class ProductDataSourceImpl @Inject constructor(
         return likeProductList
     }
 
+    override suspend fun uploadProductImage(photoList: HashMap<String, String>) {
+        val storage = FirebaseStorage.getInstance().reference.child(STORAGE_PATH)
+
+        photoList.forEach { photo ->
+            storage.child("/${photo.key}").putFile(photo.value.toUri())
+                .addOnFailureListener { Log.i("민지", "") }
+                .addOnSuccessListener { }
+        }
+    }
+
     companion object {
         private const val COLLECTION = "product"
+
         private const val KEY_TITLE = "feed_title"
         private const val KEY_OWNER = "feed_owner"
         private const val KEY_PRICE = "price"
@@ -152,5 +165,7 @@ class ProductDataSourceImpl @Inject constructor(
         private const val KEY_UPDATED_AT = "updated_at"
         private const val KEY_AREA = "area"
         private const val KEY_CONTENT = "content"
+
+        private const val STORAGE_PATH = "/product_image"
     }
 }
