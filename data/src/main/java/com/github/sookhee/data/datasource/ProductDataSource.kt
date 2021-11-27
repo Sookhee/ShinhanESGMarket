@@ -15,5 +15,5 @@ interface ProductDataSource {
 
     suspend fun registerProduct(product: ProductRequest)
 
-    suspend fun uploadProductImage(photoList: HashMap<String, String>)
+    suspend fun uploadProductImage(photoList: HashMap<String, String>): List<String>
 }
