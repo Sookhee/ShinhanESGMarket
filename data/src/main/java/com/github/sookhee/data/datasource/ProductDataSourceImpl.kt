@@ -148,7 +148,7 @@ class ProductDataSourceImpl @Inject constructor(
 
         photoList.forEach { photo ->
             storage.child("/${photo.key}").putFile(photo.value.toUri())
-                .addOnFailureListener { Log.i("민지", "") }
+                .addOnFailureListener { }
                 .addOnSuccessListener { }
         }
     }
@@ -165,6 +165,7 @@ class ProductDataSourceImpl @Inject constructor(
         private const val KEY_UPDATED_AT = "updated_at"
         private const val KEY_AREA = "area"
         private const val KEY_CONTENT = "content"
+        private const val KEY_PHOTO_LIST = "photo_list"
 
         private const val STORAGE_PATH = "/product_image"
     }
