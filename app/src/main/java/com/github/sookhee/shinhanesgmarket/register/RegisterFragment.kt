@@ -3,6 +3,7 @@ package com.github.sookhee.shinhanesgmarket.register
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.TextUtils
@@ -12,10 +13,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.github.sookhee.shinhanesgmarket.R
+import com.github.sookhee.shinhanesgmarket.adapter.PhotoAdapter
 import com.github.sookhee.shinhanesgmarket.databinding.FragmentRegisterBinding
 import com.google.firebase.storage.FirebaseStorage
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,7 +28,7 @@ class RegisterFragment : Fragment() {
 
     private lateinit var viewModel: RegisterViewModel
 
-    private val photoList = hashMapOf<String, String>()
+    private val photoList = hashMapOf<String, Uri?>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +40,7 @@ class RegisterFragment : Fragment() {
         binding.vm = viewModel
 
         setOnClickListener()
+        initPhotoRecyclerView()
 
         return binding.root
     }
@@ -53,10 +55,11 @@ class RegisterFragment : Fragment() {
 
         if (resultCode == Activity.RESULT_OK && requestCode == CODE_SELECT_IMAGE) {
             for (i in 0 until data?.clipData?.itemCount!!) {
-                photoList["fileName_$i.png"] = "${data.clipData?.getItemAt(i)?.uri}"
+                photoList["21200203_${System.currentTimeMillis()}_$i.png"] =
+                    data.clipData!!.getItemAt(i).uri
             }
 
-            uploadImage()
+            (binding.photoRecyclerView.adapter as PhotoAdapter).setItem(photoList.values.toList())
         }
     }
 
@@ -116,19 +119,29 @@ class RegisterFragment : Fragment() {
         photoList.forEach { photo ->
             val riverRef = storage.reference.child("/product_image/${photo.key}")
 
-            riverRef.putFile(photo.value.toUri())
-                .addOnFailureListener { Log.i("민지", "FAIL: $it") }
-                .addOnSuccessListener {
-                    Log.i("민지", "SUCCESS : ${photo.key}")
+            photo.value?.let {
+                riverRef.putFile(it)
+                    .addOnFailureListener { Log.i("민지", "FAIL: $it") }
+                    .addOnSuccessListener {
+                        Log.i("민지", "SUCCESS : ${photo.key}")
 
-                    storage.getReference(photo.key).downloadUrl.addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            Glide.with(this)
-                                .load(task.result)
-                                .into(binding.photoIcon)
+                        storage.getReference(photo.key).downloadUrl.addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                Glide.with(this)
+                                    .load(task.result)
+                                    .into(binding.photoIcon)
+                            }
                         }
                     }
-                }
+            }
+        }
+    }
+
+    private fun initPhotoRecyclerView() {
+        val photoAdapter = PhotoAdapter()
+
+        binding.photoRecyclerView.apply {
+            adapter = photoAdapter
         }
     }
 
