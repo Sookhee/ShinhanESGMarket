@@ -1,6 +1,5 @@
 package com.github.sookhee.data.datasource
 
-import android.util.Log
 import androidx.core.net.toUri
 import com.github.sookhee.data.spec.ProductRequest
 import com.github.sookhee.data.spec.ProductResponse
@@ -143,14 +142,26 @@ class ProductDataSourceImpl @Inject constructor(
         return likeProductList
     }
 
-    override suspend fun uploadProductImage(photoList: HashMap<String, String>) {
-        val storage = FirebaseStorage.getInstance().reference.child(STORAGE_PATH)
+    override suspend fun uploadProductImage(photoList: HashMap<String, String>): List<String> {
+        val storage = FirebaseStorage.getInstance().reference
 
         photoList.forEach { photo ->
-            storage.child("/${photo.key}").putFile(photo.value.toUri())
+            storage.child(STORAGE_PATH).child("/${photo.key}").putFile(photo.value.toUri())
                 .addOnFailureListener { }
                 .addOnSuccessListener { }
+                .await()
         }
+
+        val photoUriList = mutableListOf<String>()
+        photoList.forEach { photo ->
+            storage.child("/$STORAGE_PATH/${photo.key}").downloadUrl.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    photoUriList.add(task.result.toString())
+                }
+            }.await()
+        }
+
+        return photoUriList
     }
 
     companion object {
