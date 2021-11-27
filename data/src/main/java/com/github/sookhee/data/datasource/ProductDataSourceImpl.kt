@@ -5,6 +5,7 @@ import com.github.sookhee.data.spec.ProductRequest
 import com.github.sookhee.data.spec.ProductResponse
 import com.github.sookhee.domain.entity.Product
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -16,7 +17,7 @@ class ProductDataSourceImpl @Inject constructor(
         val productList = mutableListOf<ProductResponse>()
         val resultList = FirebaseFirestore.getInstance()
             .collection(COLLECTION)
-            .orderBy(KEY_UPDATED_AT)
+            .orderBy(KEY_UPDATED_AT, Query.Direction.DESCENDING)
             .get().await()
 
         for (document in resultList) {
