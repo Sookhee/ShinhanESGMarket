@@ -42,7 +42,7 @@ class ProductRepositoryImpl @Inject constructor(private val dataSource: ProductD
             price = product.price,
             status = product.status,
             updated_at = product.updatedAt,
-            photoList = product.photoList.keys.toList()
+            photo_list = product.photoList.keys.toList()
         )
 
         dataSource.registerProduct(productRequest)

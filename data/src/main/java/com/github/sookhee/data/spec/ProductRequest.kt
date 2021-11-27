@@ -10,5 +10,5 @@ data class ProductRequest(
     val status: Int,
     val updated_at: String,
     val content: String,
-    val photoList: List<String>
+    val photo_list: List<String>
 )
