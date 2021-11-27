@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.Dispatchers
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.github.sookhee.data.datasource.GetLikeProductListUseCase
+import com.github.sookhee.domain.usecase.GetLikeProductListUseCase
 import com.github.sookhee.domain.entity.Product
 import com.github.sookhee.domain.usecase.GetProductListWithQueryUseCase
 import kotlinx.coroutines.launch
