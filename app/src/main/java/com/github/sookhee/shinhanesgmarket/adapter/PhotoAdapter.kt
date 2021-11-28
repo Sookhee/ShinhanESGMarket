@@ -1,16 +1,16 @@
 package com.github.sookhee.shinhanesgmarket.adapter
 
 import android.annotation.SuppressLint
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.github.sookhee.shinhanesgmarket.databinding.ItemPhotoSmallBinding
+import com.github.sookhee.shinhanesgmarket.utils.setImageWithUrl
 
-class PhotoAdapter:
+class PhotoAdapter :
     RecyclerView.Adapter<PhotoAdapter.ViewHolder>() {
 
+    var viewType: PhotoViewType = PhotoViewType.WRAP_CONTENT
     var items: List<String> = listOf()
     var onItemClick: ((selectedItem: String) -> Unit)? = null
 
@@ -26,7 +26,7 @@ class PhotoAdapter:
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(viewType, items[position])
     }
 
     override fun getItemCount(): Int {
@@ -40,13 +40,26 @@ class PhotoAdapter:
         RecyclerView.ViewHolder(binding.root) {
 
         init {
-//            binding.onItemClick = onItemClick
+            binding.onItemClick = onItemClick
         }
 
         fun bind(
-            uri: String
+            viewType: PhotoViewType,
+            uri: String,
         ) {
-            binding.productImage.setImageURI(uri.toUri())
+            if (viewType == PhotoViewType.MATCH_PARENT) {
+                binding.itemLayout.layoutParams.apply {
+                    width = ViewGroup.LayoutParams.MATCH_PARENT
+                    height = ViewGroup.LayoutParams.MATCH_PARENT
+                }
+            }
+
+            binding.photoUri = uri
+            binding.productImage.setImageWithUrl(uri)
         }
+    }
+
+    companion object {
+        enum class PhotoViewType { MATCH_PARENT, WRAP_CONTENT }
     }
 }

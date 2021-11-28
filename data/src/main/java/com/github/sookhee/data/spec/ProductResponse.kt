@@ -11,5 +11,5 @@ data class ProductResponse(
     val updatedAt: String = "",
     val area: String = "",
     val content: String = "",
-    val photoList: HashMap<String, String> = hashMapOf(),
+    val photoList: List<String> = emptyList()
 )

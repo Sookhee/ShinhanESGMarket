@@ -60,10 +60,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/photoRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="360dp"
-                android:src="@color/gray100" />
+                android:orientation="horizontal"
+                android:src="@color/gray100"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/sellerProfile"

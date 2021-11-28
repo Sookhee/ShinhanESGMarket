@@ -5,6 +5,9 @@ import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.Priority
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.github.sookhee.shinhanesgmarket.R
 
 fun View.heightAnimation(targetHeight: Int, duration: Long = 100L) {
@@ -28,8 +31,15 @@ fun View.setVisible() {
 }
 
 fun ImageView.setImageWithUrl(url: String) {
+    val options = RequestOptions()
+        .diskCacheStrategy(DiskCacheStrategy.RESOURCE) // 디스크 캐시 리소스
+        .skipMemoryCache(true) // 메모리 캐시 사용안함.
+        .priority(Priority.HIGH) // 처리순서
+        .centerCrop()
+
     Glide.with(context)
         .load(url)
+        .apply(options)
         .error(R.drawable.gray_border_background)
         .into(this)
 }

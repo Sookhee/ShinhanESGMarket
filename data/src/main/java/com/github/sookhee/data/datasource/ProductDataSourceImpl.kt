@@ -71,7 +71,8 @@ class ProductDataSourceImpl @Inject constructor(
             createdAt = result.getString(KEY_CREATED_AT) ?: "",
             updatedAt = result.getString(KEY_UPDATED_AT) ?: "",
             area = result.getString(KEY_AREA) ?: "",
-            content = result.getString(KEY_CONTENT) ?: ""
+            content = result.getString(KEY_CONTENT) ?: "",
+            photoList = result.data?.get(KEY_PHOTO_LIST) as? List<String> ?: emptyList()
         )
     }
 
