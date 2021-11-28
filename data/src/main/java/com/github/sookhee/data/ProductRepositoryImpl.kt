@@ -63,7 +63,8 @@ class ProductRepositoryImpl @Inject constructor(private val dataSource: ProductD
             createdAt = result.createdAt,
             updatedAt = result.updatedAt,
             area = result.area,
-            content = result.content
+            content = result.content,
+            photoList = listToHash(result.photoList)
         )
     }
 
@@ -83,12 +84,21 @@ class ProductRepositoryImpl @Inject constructor(private val dataSource: ProductD
                     createdAt = it.createdAt,
                     updatedAt = it.updatedAt,
                     area = it.area,
-                    photoList = it.photoList
+                    photoList = listToHash(it.photoList)
                 )
             )
         }
 
         return productList
+    }
+
+    private fun listToHash(list: List<String>): HashMap<String, String> {
+        val hashMap = hashMapOf<String, String>()
+        for (i in 0 until list.size) {
+            hashMap["$i"] = list[i]
+        }
+
+        return hashMap
     }
 
     override suspend fun getLikeProductList(userId: String): List<Product> {

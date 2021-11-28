@@ -2,7 +2,9 @@ package com.github.sookhee.shinhanesgmarket.product
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.github.sookhee.shinhanesgmarket.adapter.PhotoAdapter
 import com.github.sookhee.shinhanesgmarket.databinding.ActivityProductBinding
 import com.github.sookhee.shinhanesgmarket.utils.calcTime
 import com.github.sookhee.shinhanesgmarket.utils.parseCategory
@@ -37,6 +39,16 @@ class ProductActivity : AppCompatActivity() {
             binding.productCategory.text = it.category.parseCategory()
             binding.productTime.text = it.updatedAt.calcTime()
             binding.productDescription.text = it.content
+
+            binding.photoRecyclerView.apply {
+                adapter = PhotoAdapter().apply {
+                    viewType = PhotoAdapter.Companion.PhotoViewType.MATCH_PARENT
+                    items = it.photoList.values.toList()
+                    onItemClick = {
+                        Toast.makeText(context, "click: $it", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
     }
 }
