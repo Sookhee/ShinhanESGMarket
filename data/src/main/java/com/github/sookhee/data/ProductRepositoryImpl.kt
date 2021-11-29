@@ -1,12 +1,16 @@
 package com.github.sookhee.data
 
+import com.github.sookhee.data.datasource.LikeDataSource
 import com.github.sookhee.data.datasource.ProductDataSource
 import com.github.sookhee.data.spec.ProductRequest
 import com.github.sookhee.domain.ProductRepository
 import com.github.sookhee.domain.entity.Product
 import javax.inject.Inject
 
-class ProductRepositoryImpl @Inject constructor(private val dataSource: ProductDataSource) :
+class ProductRepositoryImpl @Inject constructor(
+    private val dataSource: ProductDataSource,
+    private val likeDataSource: LikeDataSource
+) :
     ProductRepository {
     override suspend fun getProductList(): List<Product> {
         val result = dataSource.getProductList()
@@ -125,5 +129,9 @@ class ProductRepositoryImpl @Inject constructor(private val dataSource: ProductD
         }
 
         return productList
+    }
+
+    override suspend fun getIsLikeProduct(userId: String, productId: String): Boolean {
+        return likeDataSource.getIsUserLikeProduct(userId, productId)
     }
 }
