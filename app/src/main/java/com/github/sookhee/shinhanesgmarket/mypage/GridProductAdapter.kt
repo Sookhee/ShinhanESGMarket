@@ -48,8 +48,7 @@ class GridProductAdapter :
             item: Product,
         ) {
             binding.item = item
-
-            binding.productImage.setImageWithUrl("https://firebasestorage.googleapis.com/v0/b/doremi-market.appspot.com/o/banner%2Fbanner_character_2.png?alt=media&token=829f89e5-0974-46c5-b247-e65655dcf8a7")
+            binding.productImage.setImageWithUrl(item.photoList["0"] ?: "")
         }
     }
 }

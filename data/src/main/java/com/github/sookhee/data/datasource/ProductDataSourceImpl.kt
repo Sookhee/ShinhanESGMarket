@@ -98,6 +98,7 @@ class ProductDataSourceImpl @Inject constructor(
             val createdAt = document.getString(KEY_CREATED_AT) ?: ""
             val updatedAt = document.getString(KEY_UPDATED_AT) ?: ""
             val area = document.getString(KEY_AREA) ?: ""
+            val photoList = document.data.get(KEY_PHOTO_LIST)
 
             productList.add(
                 ProductResponse(
@@ -110,6 +111,7 @@ class ProductDataSourceImpl @Inject constructor(
                     createdAt = createdAt,
                     updatedAt = updatedAt,
                     area = area,
+                    photoList = photoList as? List<String> ?: emptyList()
                 )
             )
         }
@@ -117,8 +119,8 @@ class ProductDataSourceImpl @Inject constructor(
         return productList
     }
 
-    override suspend fun getLikeProductList(userId: String): List<Product> {
-        val likeProductList = mutableListOf<Product>()
+    override suspend fun getLikeProductList(userId: String): List<ProductResponse> {
+        val likeProductList = mutableListOf<ProductResponse>()
 
         val likeList = likeDataSource.getUserLike(userId)
         likeList.forEach {
@@ -128,7 +130,7 @@ class ProductDataSourceImpl @Inject constructor(
                 .get().await()
 
             likeProductList.add(
-                Product(
+                ProductResponse(
                     id = document.id,
                     title = document.getString(KEY_TITLE) ?: "",
                     owner = document.getString(KEY_OWNER) ?: "",
@@ -139,6 +141,7 @@ class ProductDataSourceImpl @Inject constructor(
                     updatedAt = document.getString(KEY_UPDATED_AT) ?: "",
                     area = document.getString(KEY_AREA) ?: "",
                     content = document.getString(KEY_CONTENT) ?: "",
+                    photoList = document.data?.get(KEY_PHOTO_LIST) as? List<String> ?: emptyList()
                 )
             )
         }
