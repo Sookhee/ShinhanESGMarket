@@ -37,8 +37,11 @@ object HiltProvider {
 
     @Singleton
     @Provides
-    fun provideProductRepository(dataSource: ProductDataSource): ProductRepository =
-        ProductRepositoryImpl(dataSource)
+    fun provideProductRepository(
+        dataSource: ProductDataSource,
+        likeDataSource: LikeDataSource
+    ): ProductRepository =
+        ProductRepositoryImpl(dataSource, likeDataSource)
 
     @Singleton
     @Provides
@@ -68,4 +71,9 @@ object HiltProvider {
     @Provides
     fun provideGetLikeProductListUseCase(repository: ProductRepository): GetLikeProductListUseCase =
         GetLikeProductListUseCaseImpl(repository)
+
+    @Singleton
+    @Provides
+    fun provideIsLikeProductUseCase(repository: ProductRepository): IsLikeProductUseCase =
+        IsLikeProductUseCaseImpl(repository)
 }

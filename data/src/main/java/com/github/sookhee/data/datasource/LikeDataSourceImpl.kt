@@ -10,7 +10,7 @@ class LikeDataSourceImpl @Inject constructor(): LikeDataSource {
         val likeList = mutableListOf<Like>()
         val resultList = FirebaseFirestore.getInstance()
             .collection(COLLECTION)
-            .whereEqualTo("user_id", userId)
+            .whereEqualTo(KEY_USER_ID, userId)
             .get().await()
 
         resultList.forEach { document ->
@@ -23,6 +23,16 @@ class LikeDataSourceImpl @Inject constructor(): LikeDataSource {
         }
 
         return likeList
+    }
+
+    override suspend fun getIsUserLikeProduct(userId: String, productId: String): Boolean {
+        val resultList = FirebaseFirestore.getInstance()
+            .collection(COLLECTION)
+            .whereEqualTo(KEY_USER_ID, userId)
+            .whereEqualTo(KEY_PRODUCT_ID, productId)
+            .get().await()
+
+        return resultList.size() > 0
     }
 
     companion object {

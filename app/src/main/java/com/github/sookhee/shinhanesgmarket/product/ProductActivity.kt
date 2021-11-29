@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.github.sookhee.shinhanesgmarket.R
 import com.github.sookhee.shinhanesgmarket.adapter.PhotoAdapter
 import com.github.sookhee.shinhanesgmarket.databinding.ActivityProductBinding
 import com.github.sookhee.shinhanesgmarket.utils.calcTime
@@ -24,7 +25,11 @@ class ProductActivity : AppCompatActivity() {
         val intent = getIntent()
         val productId = intent.getStringExtra("PRODUCT_ID")
 
-        productId?.let { viewModel.getProductDetail(productId) }
+        productId?.let {
+            viewModel.getProductDetail(productId)
+            viewModel.isLikeProduct("21200203", it)
+        }
+
         observeFlow()
 
         setContentView(binding.root)
@@ -35,7 +40,7 @@ class ProductActivity : AppCompatActivity() {
             binding.sellerName.text = it.owner
             binding.sellerArea.text = it.area
             binding.productTitle.text = it.title
-            binding.productPrice.text = if(it.price == 0) "무료나눔" else "${it.price.withComma()}원"
+            binding.productPrice.text = if (it.price == 0) "무료나눔" else "${it.price.withComma()}원"
             binding.productCategory.text = it.category.parseCategory()
             binding.productTime.text = it.updatedAt.calcTime()
             binding.productDescription.text = it.content
@@ -48,6 +53,12 @@ class ProductActivity : AppCompatActivity() {
                         Toast.makeText(context, "click: $it", Toast.LENGTH_SHORT).show()
                     }
                 }
+            }
+        }
+
+        viewModel.isLikeProduct.observe(this) {
+            if (it) {
+                binding.productHeart.setImageResource(R.drawable.ic_heart_on)
             }
         }
     }
