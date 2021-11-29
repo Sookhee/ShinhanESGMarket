@@ -23,7 +23,8 @@ class ProductRepositoryImpl @Inject constructor(private val dataSource: ProductD
                     status = it.status,
                     createdAt = it.createdAt,
                     updatedAt = it.updatedAt,
-                    area = it.area
+                    area = it.area,
+                    photoList = listToHash(it.photoList)
                 )
             )
         }

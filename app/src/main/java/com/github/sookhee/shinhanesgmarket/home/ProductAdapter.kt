@@ -4,10 +4,10 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.github.sookhee.domain.entity.Product
 import com.github.sookhee.shinhanesgmarket.databinding.ItemProductBinding
 import com.github.sookhee.shinhanesgmarket.utils.calcTime
+import com.github.sookhee.shinhanesgmarket.utils.setImageWithUrl
 import com.github.sookhee.shinhanesgmarket.utils.withComma
 
 class ProductAdapter :
@@ -52,9 +52,7 @@ class ProductAdapter :
             binding.productTime.text = item.updatedAt.calcTime()
             binding.productPrice.text = if (item.price == 0) "무료나눔" else "${item.price.withComma()}원"
 
-            Glide.with(binding.root)
-                .load(item.photoList.get(0))
-                .into(binding.productImage)
+            binding.productImage.setImageWithUrl(item.photoList["0"] ?: "")
         }
     }
 }
