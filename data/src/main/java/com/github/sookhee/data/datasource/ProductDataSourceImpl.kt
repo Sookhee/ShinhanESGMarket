@@ -30,6 +30,7 @@ class ProductDataSourceImpl @Inject constructor(
             val createdAt = document.getString(KEY_CREATED_AT) ?: ""
             val updatedAt = document.getString(KEY_UPDATED_AT) ?: ""
             val area = document.getString(KEY_AREA) ?: ""
+            val photoList = document.data.get(KEY_PHOTO_LIST) as? List<String> ?: emptyList()
 
             productList.add(
                 ProductResponse(
@@ -42,6 +43,7 @@ class ProductDataSourceImpl @Inject constructor(
                     createdAt = createdAt,
                     updatedAt = updatedAt,
                     area = area,
+                    photoList = photoList
                 )
             )
         }
