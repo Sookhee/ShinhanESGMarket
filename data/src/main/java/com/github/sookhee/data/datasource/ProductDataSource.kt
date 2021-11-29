@@ -11,7 +11,7 @@ interface ProductDataSource {
 
     suspend fun getProductListWithQuery(key: String, value: String): List<ProductResponse>
 
-    suspend fun getLikeProductList(userId: String): List<Product>
+    suspend fun getLikeProductList(userId: String): List<ProductResponse>
 
     suspend fun registerProduct(product: ProductRequest)
 

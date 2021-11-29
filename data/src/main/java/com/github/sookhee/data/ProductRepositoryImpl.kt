@@ -41,6 +41,7 @@ class ProductRepositoryImpl @Inject constructor(private val dataSource: ProductD
             content = product.content,
             feed_category_id = product.category,
             feed_owner = product.owner,
+            feed_owner_id = product.owner_id,
             feed_title = product.title,
             price = product.price,
             status = product.status,
@@ -103,6 +104,26 @@ class ProductRepositoryImpl @Inject constructor(private val dataSource: ProductD
     }
 
     override suspend fun getLikeProductList(userId: String): List<Product> {
-         return dataSource.getLikeProductList(userId)
+        val result = dataSource.getLikeProductList(userId)
+        val productList = mutableListOf<Product>()
+
+        result.forEach {
+            productList.add(
+                Product(
+                    id = it.id,
+                    title = it.title,
+                    owner = it.owner,
+                    price = it.price,
+                    category = it.category,
+                    status = it.status,
+                    createdAt = it.createdAt,
+                    updatedAt = it.updatedAt,
+                    area = it.area,
+                    photoList = listToHash(it.photoList)
+                )
+            )
+        }
+
+        return productList
     }
 }
