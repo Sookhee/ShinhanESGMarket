@@ -25,14 +25,14 @@ class LikeDataSourceImpl @Inject constructor(): LikeDataSource {
         return likeList
     }
 
-    override suspend fun getIsUserLikeProduct(userId: String, productId: String): Boolean {
+    override suspend fun getIsUserLikeProduct(userId: String, productId: String): String {
         val resultList = FirebaseFirestore.getInstance()
             .collection(COLLECTION)
             .whereEqualTo(KEY_USER_ID, userId)
             .whereEqualTo(KEY_PRODUCT_ID, productId)
             .get().await()
 
-        return resultList.size() > 0
+        return if (resultList.size() > 0) resultList.documents[0].id else ""
     }
 
     companion object {

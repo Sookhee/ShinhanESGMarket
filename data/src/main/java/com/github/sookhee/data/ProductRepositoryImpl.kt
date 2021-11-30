@@ -131,7 +131,7 @@ class ProductRepositoryImpl @Inject constructor(
         return productList
     }
 
-    override suspend fun getIsLikeProduct(userId: String, productId: String): Boolean {
+    override suspend fun getIsLikeProduct(userId: String, productId: String): String {
         return likeDataSource.getIsUserLikeProduct(userId, productId)
     }
 }
