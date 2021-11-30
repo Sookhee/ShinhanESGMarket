@@ -2,9 +2,11 @@ package com.github.sookhee.shinhanesgmarket.utils
 
 import com.github.sookhee.data.CategoryRepositoryImpl
 import com.github.sookhee.data.ProductRepositoryImpl
+import com.github.sookhee.data.UserRepositoryImpl
 import com.github.sookhee.data.datasource.*
 import com.github.sookhee.domain.CategoryRepository
 import com.github.sookhee.domain.ProductRepository
+import com.github.sookhee.domain.UserRepository
 import com.github.sookhee.domain.usecase.*
 import dagger.Module
 import dagger.Provides
@@ -76,4 +78,20 @@ object HiltProvider {
     @Provides
     fun provideIsLikeProductUseCase(repository: ProductRepository): IsLikeProductUseCase =
         IsLikeProductUseCaseImpl(repository)
+
+    // USER
+    @Singleton
+    @Provides
+    fun provideUserDataSource(): UserDataSource =
+        UserDataSourceImpl()
+
+    @Singleton
+    @Provides
+    fun provideUserRepository(dataSource: UserDataSource): UserRepository =
+        UserRepositoryImpl(dataSource)
+
+    @Singleton
+    @Provides
+    fun provideGetUserInfoUseCase(repository: UserRepository): GetUserInfoUseCase =
+        GetUserInfoUseCaseImpl(repository)
 }

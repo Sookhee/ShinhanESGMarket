@@ -29,4 +29,9 @@
     <string name="string_submit">완료</string>
     <string name="string_submit_success">등록 완료!</string>
 
+    // join
+    <string name="join_title">로그인/회원가입</string>
+    <string name="join_welcome">도레미 마켓에 오신 것을\n환영합니다!</string>
+    <string name="join_input_info">기본 정보를 확인하고\n잘못된 정보는 수정해주세요</string>
+
 </resources>

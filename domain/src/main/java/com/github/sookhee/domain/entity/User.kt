@@ -1,10 +1,11 @@
 package com.github.sookhee.domain.entity
 
 data class User(
-    val employeeNo: Int,
+    val employee_no: String = "",
     val nickname: String = "",
     val name: String = "",
-    val userId: String = "",
-    val userPw: String = "",
-    val branchNo: String = "",
+    val user_id: String = "",
+    val user_pw: String = "",
+    val branch_no: String = "",
+    val branch_nm: String = "",
 )
