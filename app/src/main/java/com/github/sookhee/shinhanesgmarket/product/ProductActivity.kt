@@ -31,6 +31,7 @@ class ProductActivity : AppCompatActivity() {
         }
 
         observeFlow()
+        setOnClickListener()
 
         setContentView(binding.root)
     }
@@ -57,9 +58,17 @@ class ProductActivity : AppCompatActivity() {
         }
 
         viewModel.isLikeProduct.observe(this) {
-            if (it) {
+            if (it.isEmpty()) {
+                binding.productHeart.setImageResource(R.drawable.ic_heart_off)
+            } else {
                 binding.productHeart.setImageResource(R.drawable.ic_heart_on)
             }
+        }
+    }
+
+    private fun setOnClickListener() {
+        binding.productHeart.setOnClickListener {
+            viewModel.toggleProductHeart()
         }
     }
 }

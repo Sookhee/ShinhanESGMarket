@@ -13,5 +13,5 @@ interface ProductRepository {
 
     suspend fun getLikeProductList(userId: String): List<Product>
 
-    suspend fun getIsLikeProduct(userId: String, productId: String): Boolean
+    suspend fun getIsLikeProduct(userId: String, productId: String): String
 }

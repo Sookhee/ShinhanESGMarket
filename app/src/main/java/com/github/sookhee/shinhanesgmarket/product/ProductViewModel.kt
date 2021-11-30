@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.github.sookhee.domain.entity.Product
 import com.github.sookhee.domain.usecase.GetProductDetailUseCase
 import com.github.sookhee.domain.usecase.IsLikeProductUseCase
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -21,8 +22,8 @@ class ProductViewModel @ViewModelInject constructor(
     val product: LiveData<Product>
         get() = _product
 
-    private val _isLikeProduct = MutableLiveData<Boolean>()
-    val isLikeProduct: LiveData<Boolean>
+    private val _isLikeProduct = MutableLiveData<String>()
+    val isLikeProduct: LiveData<String>
         get() = _isLikeProduct
 
     fun getProductDetail(productId: String) {
@@ -45,6 +46,26 @@ class ProductViewModel @ViewModelInject constructor(
             } catch (e: Exception) {
                 Log.i(TAG, "isLikeProduct Exception: $e")
             }
+        }
+    }
+
+    fun toggleProductHeart() {
+        val db = FirebaseFirestore.getInstance()
+
+        if (_isLikeProduct.value?.isNotBlank() == true) {
+            db.collection("user_like")
+                .document(_isLikeProduct.value ?: "")
+                .delete()
+                .addOnSuccessListener { _isLikeProduct.value = "" }
+
+        } else {
+            val data = hashMapOf<String, String>()
+            data["user_id"] = "21200203"
+            data["product_id"] = _product.value?.id ?: ""
+
+            db.collection("user_like")
+                .add(data)
+                .addOnSuccessListener { _isLikeProduct.value = it.id }
         }
     }
 
