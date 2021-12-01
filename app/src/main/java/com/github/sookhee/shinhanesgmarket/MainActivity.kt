@@ -2,6 +2,7 @@ package com.github.sookhee.shinhanesgmarket
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.github.sookhee.shinhanesgmarket.chatting.ChattingFragment
@@ -20,6 +21,13 @@ class MainActivity : AppCompatActivity() {
     private val mypageFragment by lazy { MypageFragment() }
     private val chattingFragment by lazy { ChattingFragment() }
     private var activeFragment = homeFragment as Fragment
+
+    override fun onStart() {
+        super.onStart()
+
+        val app = AppApplication.getInstance()
+        Log.i("민지", "MainActivity: ${app.getLoginInfo()}")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

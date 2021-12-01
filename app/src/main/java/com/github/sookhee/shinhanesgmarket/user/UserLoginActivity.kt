@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.github.sookhee.shinhanesgmarket.AppApplication
 import com.github.sookhee.shinhanesgmarket.MainActivity
 import com.github.sookhee.shinhanesgmarket.databinding.ActivityUserLoginBinding
 import com.google.firebase.auth.ktx.auth
@@ -17,12 +18,15 @@ class UserLoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserLoginBinding
     private lateinit var viewModel: UserViewModel
 
+    private lateinit var loginIntent: Intent
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUserLoginBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
         setOnClickListener()
+        setObserver()
 
         setContentView(binding.root)
     }
@@ -32,9 +36,12 @@ class UserLoginActivity : AppCompatActivity() {
 
         val currentUser = Firebase.auth.currentUser
         if (currentUser != null) {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+            val employeeNo = currentUser.email.toString().replace("@doremi.com", "")
+
+            loginIntent = Intent(this, MainActivity::class.java)
+            loginIntent.putExtra("employeeNo", employeeNo)
+
+            viewModel.getUserInfo(employeeNo)
         }
     }
 
@@ -53,6 +60,17 @@ class UserLoginActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "로그인 정보를 정확히 입력해주세요", Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    private fun setObserver() {
+        viewModel.userInfo.observe(this) {
+            val app = AppApplication.getInstance()
+            app.setLoginInfo(it)
+
+            startActivity(loginIntent)
+
+            finish()
         }
     }
 
