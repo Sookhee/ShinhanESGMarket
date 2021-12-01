@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.github.sookhee.shinhanesgmarket.AppApplication
 import com.github.sookhee.shinhanesgmarket.R
 import com.github.sookhee.shinhanesgmarket.adapter.PhotoAdapter
 import com.github.sookhee.shinhanesgmarket.databinding.ActivityProductBinding
@@ -17,6 +18,9 @@ class ProductActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProductBinding
     private lateinit var viewModel: ProductViewModel
 
+    private val app = AppApplication.getInstance()
+    private val loginInfo = app.getLoginInfo()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProductBinding.inflate(layoutInflater)
@@ -27,7 +31,7 @@ class ProductActivity : AppCompatActivity() {
 
         productId?.let {
             viewModel.getProductDetail(productId)
-            viewModel.isLikeProduct("21200203", it)
+            viewModel.isLikeProduct(loginInfo.employee_no, it)
         }
 
         observeFlow()
@@ -68,7 +72,7 @@ class ProductActivity : AppCompatActivity() {
 
     private fun setOnClickListener() {
         binding.productHeart.setOnClickListener {
-            viewModel.toggleProductHeart()
+            viewModel.toggleProductHeart(loginInfo.employee_no)
         }
     }
 }

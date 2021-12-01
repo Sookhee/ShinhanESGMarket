@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.github.sookhee.shinhanesgmarket.AppApplication
 import com.github.sookhee.shinhanesgmarket.R
 import com.github.sookhee.shinhanesgmarket.adapter.PhotoAdapter
 import com.github.sookhee.shinhanesgmarket.databinding.FragmentRegisterBinding
@@ -23,6 +24,9 @@ class RegisterFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var viewModel: RegisterViewModel
+
+    private val app = AppApplication.getInstance()
+    private val loginInfo = app.getLoginInfo()
 
     private val photoList = hashMapOf<String, String>()
 
@@ -52,7 +56,7 @@ class RegisterFragment : Fragment() {
         if (resultCode == Activity.RESULT_OK && requestCode == CODE_SELECT_IMAGE) {
             photoList.clear()
             for (i in 0 until data?.clipData?.itemCount!!) {
-                photoList["21200203_${System.currentTimeMillis()}_$i.png"] =
+                photoList["${loginInfo.employee_no}_${System.currentTimeMillis()}_$i.png"] =
                     data.clipData!!.getItemAt(i).uri.toString()
             }
 
@@ -83,7 +87,7 @@ class RegisterFragment : Fragment() {
             }
 
             if (needItem.size == 0) {
-                viewModel.registerProduct(photoList)
+                viewModel.registerProduct(loginInfo, photoList)
 
                 Toast.makeText(
                     context,
