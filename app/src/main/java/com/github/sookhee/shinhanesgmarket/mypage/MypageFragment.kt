@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
+import com.github.sookhee.shinhanesgmarket.AppApplication
 import com.github.sookhee.shinhanesgmarket.R
 import com.github.sookhee.shinhanesgmarket.databinding.FragmentMypageBinding
 import com.google.android.material.tabs.TabLayout
@@ -24,6 +25,9 @@ class MypageFragment : Fragment() {
     private val likeProductFragment by lazy { LikeProductFragment() }
     private var activeFragment: Fragment = myProductFragment
 
+    private val app = AppApplication.getInstance()
+    private val loginInfo = app.getLoginInfo()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,8 +37,8 @@ class MypageFragment : Fragment() {
         setOnClickListener()
         initTabLayout()
 
-        viewModel.getMyProductList()
-        viewModel.getLikeProductList()
+        viewModel.getMyProductList(loginInfo.employee_no)
+        viewModel.getLikeProductList(loginInfo.employee_no)
 
         return binding.root
     }

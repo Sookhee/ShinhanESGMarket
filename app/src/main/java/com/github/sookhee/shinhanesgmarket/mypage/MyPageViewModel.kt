@@ -24,10 +24,10 @@ class MyPageViewModel @ViewModelInject constructor(
     val likeProductList: LiveData<List<Product>>
         get() = _likeProductList
 
-    fun getMyProductList() {
+    fun getMyProductList(employeeNo: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val result = getProductListWithQueryUseCase("feed_owner_id", "21200203")
+                val result = getProductListWithQueryUseCase("feed_owner_id", employeeNo)
                 _myProductList.postValue(result)
 
             } catch (e: Exception) {
@@ -36,10 +36,10 @@ class MyPageViewModel @ViewModelInject constructor(
         }
     }
 
-    fun getLikeProductList() {
+    fun getLikeProductList(employeeNo: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val result = getLikeProductListUseCase("21200203")
+                val result = getLikeProductListUseCase(employeeNo)
                 _likeProductList.postValue(result)
 
             } catch (e: Exception) {

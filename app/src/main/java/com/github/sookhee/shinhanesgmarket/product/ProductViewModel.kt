@@ -49,7 +49,7 @@ class ProductViewModel @ViewModelInject constructor(
         }
     }
 
-    fun toggleProductHeart() {
+    fun toggleProductHeart(userId: String) {
         val db = FirebaseFirestore.getInstance()
 
         if (_isLikeProduct.value?.isNotBlank() == true) {
@@ -60,7 +60,7 @@ class ProductViewModel @ViewModelInject constructor(
 
         } else {
             val data = hashMapOf<String, String>()
-            data["user_id"] = "21200203"
+            data["user_id"] = userId
             data["product_id"] = _product.value?.id ?: ""
 
             db.collection("user_like")

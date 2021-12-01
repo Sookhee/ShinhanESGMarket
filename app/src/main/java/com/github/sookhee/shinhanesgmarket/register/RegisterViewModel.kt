@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.sookhee.domain.entity.Product
+import com.github.sookhee.domain.entity.User
 import com.github.sookhee.domain.usecase.RegisterProductUseCase
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -22,16 +23,16 @@ class RegisterViewModel @ViewModelInject constructor(
     val content = MutableLiveData<String>()
     val category = MutableLiveData<Int>()
 
-    fun registerProduct(photoList: HashMap<String, String>) {
+    fun registerProduct(loginInfo: User, photoList: HashMap<String, String>) {
         val product = Product(
             title = title.value ?: "",
-            owner = "",
+            owner = loginInfo.employee_no,
             price = price.value?.toInt() ?: 0,
             category = category.value ?: 0,
             status = 0,
             createdAt = simpleDate.format(Date(System.currentTimeMillis())),
             updatedAt = simpleDate.format(Date(System.currentTimeMillis())),
-            area = "",
+            area = loginInfo.branch_nm,
             content = content.value ?: "",
             photoList = photoList
         )
