@@ -45,25 +45,37 @@ class UserLoginActivity : AppCompatActivity() {
         }
 
         binding.btnLogin.setOnClickListener {
-            val employeeNo = binding.inputEmployeeNo.text
+            val employeeNo = binding.inputEmployeeNo.text.toString()
             val password = binding.inputPassword.text.toString()
 
-            // 로그인 로직
-            val db = Firebase.auth
-            db.signInWithEmailAndPassword("$employeeNo@doremi.com", password)
-                .addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        Toast.makeText(this, "로그인 성공!", Toast.LENGTH_SHORT).show()
-
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-
-                        finish()
-                    } else {
-                        Log.w("민지", "signInWithEmailAndPassword: failure", it.exception)
-                        Toast.makeText(this, "로그인 실패ㅠㅠ 다시 시도해주세요", Toast.LENGTH_SHORT).show()
-                    }
-                }
+            if (employeeNo.isNotBlank() && password.isNotBlank()) {
+                startLogin(employeeNo, password)
+            } else {
+                Toast.makeText(this, "로그인 정보를 정확히 입력해주세요", Toast.LENGTH_SHORT).show()
+            }
         }
+    }
+
+    private fun startLogin(employeeNo: String, password: String) {
+        // 로그인 로직
+        val db = Firebase.auth
+        db.signInWithEmailAndPassword("$employeeNo@doremi.com", password)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    Toast.makeText(this, "로그인 성공!", Toast.LENGTH_SHORT).show()
+
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+
+                    finish()
+                } else {
+                    Log.e(TAG, "signInWithEmailAndPassword: failure", it.exception)
+                    Toast.makeText(this, "로그인 실패ㅠㅠ 다시 시도해주세요", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    companion object {
+        private val TAG = UserLoginActivity::class.simpleName
     }
 }

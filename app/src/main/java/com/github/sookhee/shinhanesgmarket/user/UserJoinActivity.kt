@@ -58,15 +58,23 @@ class UserJoinActivity : AppCompatActivity() {
         }
 
         viewModel.userInfo.observe(this) {
-            val intent = Intent(this, UserRegisterInfoActivity::class.java)
+            if (it.nickname == "") {
+                val intent = Intent(this, UserRegisterInfoActivity::class.java)
 
-            intent.putExtra("employeeNo", viewModel.userInfo.value?.employee_no)
-            intent.putExtra("name", viewModel.userInfo.value?.name)
-            intent.putExtra("userId", viewModel.userInfo.value?.user_id)
-            intent.putExtra("branchNm", viewModel.userInfo.value?.branch_nm)
-            intent.putExtra("branchNo", viewModel.userInfo.value?.branch_no)
+                intent.putExtra("employeeNo", viewModel.userInfo.value?.employee_no)
+                intent.putExtra("name", viewModel.userInfo.value?.name)
+                intent.putExtra("userId", viewModel.userInfo.value?.user_id)
+                intent.putExtra("branchNm", viewModel.userInfo.value?.branch_nm)
+                intent.putExtra("branchNo", viewModel.userInfo.value?.branch_no)
 
-            startActivity(intent)
+                startActivity(intent)
+            } else {
+                toast?.cancel()
+
+                toast = Toast.makeText(this, "이미 가입된 회원입니다", Toast.LENGTH_SHORT)
+                toast?.show()
+            }
+
             finish()
         }
     }
