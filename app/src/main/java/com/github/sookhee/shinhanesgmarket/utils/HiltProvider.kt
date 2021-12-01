@@ -94,4 +94,9 @@ object HiltProvider {
     @Provides
     fun provideGetUserInfoUseCase(repository: UserRepository): GetUserInfoUseCase =
         GetUserInfoUseCaseImpl(repository)
+
+    @Singleton
+    @Provides
+    fun provideRegisterUserUseCase(repository: UserRepository): RegisterUserUseCase =
+        RegisterUserUseCaseImpl(repository)
 }

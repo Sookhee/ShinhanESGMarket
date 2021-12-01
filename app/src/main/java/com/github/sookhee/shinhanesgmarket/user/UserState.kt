@@ -1,6 +1,6 @@
 package com.github.sookhee.shinhanesgmarket.user
 
-enum class SearchUserState {
+enum class UserState {
     LOADING,
     SUCCESS,
     FAIL

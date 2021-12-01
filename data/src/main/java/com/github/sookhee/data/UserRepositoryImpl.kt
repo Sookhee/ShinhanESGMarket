@@ -5,9 +5,14 @@ import com.github.sookhee.domain.UserRepository
 import com.github.sookhee.domain.entity.User
 import javax.inject.Inject
 
-class UserRepositoryImpl @Inject constructor(private val userDataSource: UserDataSource) :
-    UserRepository {
+class UserRepositoryImpl @Inject constructor(
+    private val userDataSource: UserDataSource
+) : UserRepository {
     override suspend fun getUserInfo(employeeNo: String): User {
         return userDataSource.getUserInfo(employeeNo)
+    }
+
+    override suspend fun registerUser(user: User): Boolean {
+        return userDataSource.registerUser(user)
     }
 }
