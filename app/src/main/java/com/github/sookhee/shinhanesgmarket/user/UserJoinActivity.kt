@@ -3,7 +3,6 @@ package com.github.sookhee.shinhanesgmarket.user
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.github.sookhee.shinhanesgmarket.databinding.ActivityUserJoinBinding
@@ -42,14 +41,14 @@ class UserJoinActivity : AppCompatActivity() {
     private fun setObserver() {
         viewModel.searchUseState.observe(this) { status ->
             when (status) {
-                SearchUserState.LOADING -> {
+                UserState.LOADING -> {
                     toast = Toast.makeText(this, "직원 조회 중...", Toast.LENGTH_SHORT)
                     toast?.show()
                 }
-                SearchUserState.SUCCESS -> {
+                UserState.SUCCESS -> {
                     toast?.cancel()
                 }
-                SearchUserState.FAIL -> {
+                UserState.FAIL -> {
                     toast?.cancel()
 
                     toast = Toast.makeText(this, "직원 조회 실패. 다시 시도해주세요", Toast.LENGTH_SHORT)
@@ -63,7 +62,9 @@ class UserJoinActivity : AppCompatActivity() {
 
             intent.putExtra("employeeNo", viewModel.userInfo.value?.employee_no)
             intent.putExtra("name", viewModel.userInfo.value?.name)
+            intent.putExtra("userId", viewModel.userInfo.value?.user_id)
             intent.putExtra("branchNm", viewModel.userInfo.value?.branch_nm)
+            intent.putExtra("branchNo", viewModel.userInfo.value?.branch_no)
 
             startActivity(intent)
             finish()
