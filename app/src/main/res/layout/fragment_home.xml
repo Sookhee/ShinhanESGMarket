@@ -33,6 +33,58 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/spinnerExpanded"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/gray_border_background"
+            android:backgroundTint="@color/white"
+            android:elevation="10dp"
+            android:orientation="vertical"
+            android:paddingVertical="8dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@id/spinner"
+            app:layout_constraintTop_toBottomOf="@id/spinner">
+
+            <TextView
+                android:id="@+id/search5km"
+                style="@style/Gray900.15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:text="5km 이내" />
+
+            <TextView
+                android:id="@+id/search10km"
+                style="@style/Gray900.15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:text="10km 이내" />
+
+            <TextView
+                android:id="@+id/search15km"
+                style="@style/Gray900.15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:text="15km 이내" />
+
+            <TextView
+                android:id="@+id/searchAll"
+                style="@style/Gray900.15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:text="전체" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/toolbar"
             android:layout_width="wrap_content"
             android:layout_height="56dp"
