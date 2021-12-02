@@ -26,7 +26,8 @@ class RegisterViewModel @ViewModelInject constructor(
     fun registerProduct(loginInfo: User, photoList: HashMap<String, String>) {
         val product = Product(
             title = title.value ?: "",
-            owner = loginInfo.employee_no,
+            owner = loginInfo.nickname,
+            owner_id = loginInfo.employee_no,
             price = price.value?.toInt() ?: 0,
             category = category.value ?: 0,
             status = 0,

@@ -1,12 +1,15 @@
 package com.github.sookhee.shinhanesgmarket.product
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.github.sookhee.shinhanesgmarket.AppApplication
 import com.github.sookhee.shinhanesgmarket.R
 import com.github.sookhee.shinhanesgmarket.adapter.PhotoAdapter
+import com.github.sookhee.shinhanesgmarket.chatting.ChatRoomActivity
 import com.github.sookhee.shinhanesgmarket.databinding.ActivityProductBinding
 import com.github.sookhee.shinhanesgmarket.utils.calcTime
 import com.github.sookhee.shinhanesgmarket.utils.parseCategory
@@ -73,6 +76,22 @@ class ProductActivity : AppCompatActivity() {
     private fun setOnClickListener() {
         binding.productHeart.setOnClickListener {
             viewModel.toggleProductHeart(loginInfo.employee_no)
+        }
+
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
+
+        binding.btnChat.setOnClickListener {
+            val intent = Intent(this, ChatRoomActivity::class.java)
+
+            intent.putExtra("title", viewModel.product.value?.title)
+            intent.putExtra("price", viewModel.product.value?.price)
+            intent.putExtra("owner", viewModel.product.value?.owner)
+            intent.putExtra("owner_id", viewModel.product.value?.owner_id)
+            intent.putExtra("photo", viewModel.product.value!!.photoList["0"])
+
+            startActivity(intent)
         }
     }
 }
