@@ -19,7 +19,7 @@
         <entry key="app/src/main/res/layout/activity_user_register_info.xml" value="0.3293658695921618" />
         <entry key="app/src/main/res/layout/activity_write.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_chatting.xml" value="0.13294906073437404" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2143474503025065" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.23425986661297468" />
         <entry key="app/src/main/res/layout/fragment_like_product.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_my_product.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_mypage.xml" value="0.17757144899944494" />
@@ -33,6 +33,7 @@
         <entry key="app/src/main/res/layout/item_photo_small.xml" value="0.13632246376811594" />
         <entry key="app/src/main/res/layout/item_product.xml" value="0.17847549456362957" />
         <entry key="app/src/main/res/layout/item_product_grid.xml" value="0.14010416666666667" />
+        <entry key="app/src/main/res/layout/layout_home_spinner_expand.xml" value="0.5" />
       </map>
     </option>
   </component>
