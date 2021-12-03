@@ -20,18 +20,18 @@
             type="Function1&lt;Category, Unit>" />
     </data>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/category_item_height"
+        android:layout_marginHorizontal="16dp"
         android:onClick="@{()->onItemClick.invoke(item)}">
 
         <ImageView
             android:id="@+id/categoryImage"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@color/gray100"
             android:padding="4dp"
+            android:src="@color/gray100"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
