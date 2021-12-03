@@ -1,7 +1,6 @@
 package com.github.sookhee.shinhanesgmarket.home
 
 import android.content.Intent
-import android.graphics.Rect
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -40,14 +39,12 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
+        viewModel.getBannerList()
         viewModel.getCategoryList()
         viewModel.getProductList()
 
         setOnClickListener()
         observeFlow()
-
-        initBanner()
-        initBannerIndicator(BANNER_LIST.size)
 
         initProductRecyclerView()
 
@@ -69,6 +66,13 @@ class HomeFragment : Fragment() {
 
         viewModel.productList.observe(viewLifecycleOwner) {
             (binding.productRecyclerView.adapter as ProductAdapter).setItem(it)
+        }
+
+        viewModel.bannerList.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
+                initBanner(it)
+                initBannerIndicator(it.size)
+            }
         }
     }
 
@@ -98,11 +102,11 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun initBanner() {
+    private fun initBanner(list: List<Banner>) {
         binding.banner.apply {
             adapter = ViewPagerAdapter()
                 .apply {
-                    items = BANNER_LIST
+                    setItem(list)
                     onItemClick = {
                         Toast.makeText(context, "click: $it", Toast.LENGTH_SHORT).show()
                     }
@@ -112,27 +116,7 @@ class HomeFragment : Fragment() {
             offscreenPageLimit = 1
             (getChildAt(0) as RecyclerView).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
 
-            val cardOffset = resources.getDimension(R.dimen.sol_main_card_offset)
-            val nextItemVisiblePx = resources.getDimension(R.dimen.sol_main_card_margin)
-            val pageTranslationX = (cardOffset * VIEWPAGER_PRE_VIEW) + nextItemVisiblePx
-
             setCurrentItem((adapter as ViewPagerAdapter).firstElementPosition, false)
-
-            addItemDecoration(object : RecyclerView.ItemDecoration() {
-                override fun getItemOffsets(
-                    outRect: Rect,
-                    view: View,
-                    parent: RecyclerView,
-                    state: RecyclerView.State,
-                ) {
-                    outRect.right = cardOffset.toInt() + nextItemVisiblePx.toInt()
-                    outRect.left = cardOffset.toInt() + nextItemVisiblePx.toInt()
-                }
-            })
-
-            setPageTransformer { page, position ->
-                page.translationX = -pageTranslationX * (position)
-            }
 
             val runnable = Runnable {
                 currentItem += 1
@@ -246,32 +230,6 @@ class HomeFragment : Fragment() {
     }
 
     companion object {
-        private val BANNER_LIST = mutableListOf(
-            Banner(
-                title = "겉옷 기부 캠페인",
-                message = "추운 겨울<br/>따뜻한 마음모아<br/>함께 이겨내요",
-                imageUrl = "https://firebasestorage.googleapis.com/v0/b/doremi-market.appspot.com/o/banner%2Fbanner_character_1.png?alt=media&token=b4c1e3e2-35f8-4b17-a1d2-648e5c3aa844",
-                hookMessage = "자세한 내용은 골드윙 게시판 참고",
-                emoji = "&#x26C4",
-                backgroundColor = "#4ea1ee"
-            ),
-            Banner(
-                title = "학용품 기부 함께해요",
-                message = "안쓰는 학용품<br/>하나 둘 모아<br/>큰 힘 만들어요",
-                imageUrl = "https://firebasestorage.googleapis.com/v0/b/doremi-market.appspot.com/o/banner%2Fbanner_character_2.png?alt=media&token=829f89e5-0974-46c5-b247-e65655dcf8a7",
-                hookMessage = "자세한 내용은 골드윙 게시판 참고",
-                emoji = "&#x270D",
-                backgroundColor = "#8084f1"
-            ),
-            Banner(
-                title = "타이틀3",
-                message = "메시지<br/>두번째 줄<br/>세번째 줄",
-                imageUrl = "",
-                hookMessage = "자세한 내용은 골드윙 게시판 참고",
-                emoji = "&#x2728",
-                backgroundColor = "#2fb3dd"
-            )
-        )
         private const val GRID_SPAN_COUNT = 4
         private const val VIEWPAGER_PRE_VIEW = 3
     }

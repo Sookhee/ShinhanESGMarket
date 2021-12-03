@@ -52,7 +52,7 @@ class ProductAdapter :
             binding.productTime.text = item.updatedAt.calcTime()
             binding.productPrice.text = if (item.price == 0) "무료나눔" else "${item.price.withComma()}원"
 
-            binding.productImage.setImageWithUrl(item.photoList["0"] ?: "")
+            binding.productImage.setImageWithUrl(item.photoList["0"] ?: "", 16)
         }
     }
 }

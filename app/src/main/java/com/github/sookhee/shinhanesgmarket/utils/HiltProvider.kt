@@ -1,9 +1,11 @@
 package com.github.sookhee.shinhanesgmarket.utils
 
+import com.github.sookhee.data.BannerRepositoryImpl
 import com.github.sookhee.data.CategoryRepositoryImpl
 import com.github.sookhee.data.ProductRepositoryImpl
 import com.github.sookhee.data.UserRepositoryImpl
 import com.github.sookhee.data.datasource.*
+import com.github.sookhee.domain.BannerRepository
 import com.github.sookhee.domain.CategoryRepository
 import com.github.sookhee.domain.ProductRepository
 import com.github.sookhee.domain.UserRepository
@@ -99,4 +101,19 @@ object HiltProvider {
     @Provides
     fun provideRegisterUserUseCase(repository: UserRepository): RegisterUserUseCase =
         RegisterUserUseCaseImpl(repository)
+
+    // BANNER
+    @Singleton
+    @Provides
+    fun provideBannerDataSource(): BannerDataSource = BannerDataSourceImpl()
+
+    @Singleton
+    @Provides
+    fun provideBannerRepository(dataSource: BannerDataSource): BannerRepository =
+        BannerRepositoryImpl(dataSource)
+
+    @Singleton
+    @Provides
+    fun provideGetBannerRepository(repository: BannerRepository): GetBannerListUseCase =
+        GetBannerListUseCaseImpl(repository)
 }
