@@ -9,16 +9,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.github.sookhee.domain.entity.Banner
-import com.github.sookhee.shinhanesgmarket.R
 import com.github.sookhee.shinhanesgmarket.alarm.AlarmActivity
 import com.github.sookhee.shinhanesgmarket.databinding.FragmentHomeBinding
 import com.github.sookhee.shinhanesgmarket.product.ProductActivity
 import com.github.sookhee.shinhanesgmarket.search.SearchActivity
-import com.github.sookhee.shinhanesgmarket.utils.heightAnimation
 import com.github.sookhee.shinhanesgmarket.utils.setGone
 import com.github.sookhee.shinhanesgmarket.utils.setVisible
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,8 +26,6 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var viewModel: HomeViewModel
-
-    private var gridLineCount = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,7 +56,6 @@ class HomeFragment : Fragment() {
     private fun observeFlow() {
         viewModel.categoryList.observe(viewLifecycleOwner) {
             (binding.categoryRecyclerView.adapter as CategoryAdapter).setItem(it)
-            gridLineCount = (it.size + GRID_SPAN_COUNT - 1) / GRID_SPAN_COUNT
         }
 
         viewModel.productList.observe(viewLifecycleOwner) {
@@ -84,13 +78,6 @@ class HomeFragment : Fragment() {
         binding.btnAlarm.setOnClickListener {
             val intent = Intent(context, AlarmActivity::class.java)
             startActivity(intent)
-        }
-        binding.categoryCollapsed.setOnClickListener {
-            expandView()
-        }
-
-        binding.categoryExpanded.setOnClickListener {
-            collapseView()
         }
 
         binding.spinner.setOnClickListener {
@@ -204,33 +191,6 @@ class HomeFragment : Fragment() {
                     Toast.makeText(context, "category: ${it.name}", Toast.LENGTH_SHORT).show()
                 }
             }
-
-            layoutManager = object : GridLayoutManager(requireContext(), 4) {
-                override fun canScrollVertically(): Boolean {
-                    return false
-                }
-            }
         }
-    }
-
-    private fun expandView() {
-        binding.categoryExpanded.setVisible()
-        binding.categoryCollapsed.setGone()
-        binding.categoryRecyclerView.heightAnimation(
-            resources.getDimensionPixelSize(R.dimen.category_item_height) * gridLineCount
-        )
-    }
-
-    private fun collapseView() {
-        binding.categoryExpanded.setGone()
-        binding.categoryCollapsed.setVisible()
-        binding.categoryRecyclerView.heightAnimation(
-            resources.getDimensionPixelSize(R.dimen.category_item_height)
-        )
-    }
-
-    companion object {
-        private const val GRID_SPAN_COUNT = 4
-        private const val VIEWPAGER_PRE_VIEW = 3
     }
 }

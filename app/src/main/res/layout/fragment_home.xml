@@ -164,7 +164,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -173,39 +172,15 @@
                     android:layout_height="@dimen/category_item_height"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="8dp"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:spanCount="4"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/item_category" />
-
-                <ImageView
-                    android:id="@+id/categoryExpanded"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:scaleY="-1"
-                    android:src="@drawable/ic_btn_open"
-                    android:visibility="gone" />
-
-                <View
-                    android:id="@+id/divider"
-                    android:layout_width="match_parent"
-                    android:layout_height="4dp"
-                    android:alpha="0.5"
-                    android:background="#D6DBE1" />
-
-                <ImageView
-                    android:id="@+id/categoryCollapsed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_btn_open" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/productRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="16dp"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/item_product" />
