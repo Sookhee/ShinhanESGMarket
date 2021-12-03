@@ -5,7 +5,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
-class LikeDataSourceImpl @Inject constructor(): LikeDataSource {
+class LikeDataSourceImpl @Inject constructor() : LikeDataSource {
     override suspend fun getUserLike(userId: String): List<Like> {
         val likeList = mutableListOf<Like>()
         val resultList = FirebaseFirestore.getInstance()
@@ -14,11 +14,12 @@ class LikeDataSourceImpl @Inject constructor(): LikeDataSource {
             .get().await()
 
         resultList.forEach { document ->
+            val id = document.id
             val userId = document.getString(KEY_USER_ID) ?: ""
             val productId = document.getString(KEY_PRODUCT_ID) ?: ""
 
             likeList.add(
-                Like(userId, productId)
+                Like(id, userId, productId)
             )
         }
 

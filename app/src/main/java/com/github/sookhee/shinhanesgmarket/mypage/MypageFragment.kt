@@ -36,6 +36,7 @@ class MypageFragment : Fragment() {
 
         setOnClickListener()
         initTabLayout()
+        initView()
 
         viewModel.getMyProductList(loginInfo.employee_no)
         viewModel.getLikeProductList(loginInfo.employee_no)
@@ -95,5 +96,12 @@ class MypageFragment : Fragment() {
         }
 
         activeFragment = currentFragment
+    }
+
+    private fun initView() {
+        val loginInfo = AppApplication.getInstance().getLoginInfo()
+
+        binding.profileName.text = loginInfo.nickname
+        binding.profileArea.text = loginInfo.branch_nm
     }
 }

@@ -15,21 +15,18 @@ import kotlinx.coroutines.launch
 class MyPageViewModel @ViewModelInject constructor(
     private val getProductListWithQueryUseCase: GetProductListWithQueryUseCase,
     private val getLikeProductListUseCase: GetLikeProductListUseCase
-): ViewModel() {
+) : ViewModel() {
     private val _myProductList = MutableLiveData<List<Product>>()
-    val myProductList: LiveData<List<Product>>
-        get() = _myProductList
+    val myProductList: LiveData<List<Product>> = _myProductList
 
     private val _likeProductList = MutableLiveData<List<Product>>()
-    val likeProductList: LiveData<List<Product>>
-        get() = _likeProductList
+    val likeProductList: LiveData<List<Product>> = _likeProductList
 
     fun getMyProductList(employeeNo: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val result = getProductListWithQueryUseCase("feed_owner_id", employeeNo)
                 _myProductList.postValue(result)
-
             } catch (e: Exception) {
                 Log.i(TAG, "getMyProductList Exception: $e")
             }
