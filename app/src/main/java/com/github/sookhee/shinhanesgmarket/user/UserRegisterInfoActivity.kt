@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.github.sookhee.domain.entity.User
 import com.github.sookhee.shinhanesgmarket.databinding.ActivityUserRegisterInfoBinding
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -46,6 +47,8 @@ class UserRegisterInfoActivity : AppCompatActivity() {
 
                     toast = Toast.makeText(this, "회원가입 성공!", Toast.LENGTH_SHORT)
                     toast?.show()
+
+                    FirebaseAuth.getInstance().signOut()
 
                     finish()
                 }
