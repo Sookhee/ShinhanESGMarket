@@ -97,6 +97,8 @@ class ChatRoomActivity : AppCompatActivity() {
     }
 
     private fun sendMessage(roomId: String) {
+        val time = System.currentTimeMillis().toString()
+        val message = binding.chatEditText.text.toString()
         Firebase.database.getReference("log")
             .push()
             .setValue(
@@ -104,12 +106,20 @@ class ChatRoomActivity : AppCompatActivity() {
                     id = "",
                     room_id = roomId,
                     sender_id = userLoginInfo.employee_no,
-                    time = System.currentTimeMillis().toString(),
-                    message = binding.chatEditText.text.toString(),
+                    time = time,
+                    message = message,
                     message_type = "MESSAGE"
                 )
             ).addOnSuccessListener {
                 binding.chatEditText.text = null
+
+                val map = mutableMapOf<String, Any>()
+                map["last_time"] = time
+                map["last_message"] = message
+
+                Firebase.database.getReference("room")
+                    .child(roomId)
+                    .updateChildren(map)
             }
     }
 
