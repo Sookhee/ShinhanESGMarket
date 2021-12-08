@@ -78,7 +78,7 @@ class ChatRoomActivity : AppCompatActivity() {
                         photoList = hashMapOf(
                             Pair(
                                 "0",
-                                intent.getStringExtra("product_photo") ?: ""
+                                intent.getStringExtra("product_image") ?: ""
                             )
                         ),
                     ),
@@ -157,6 +157,8 @@ class ChatRoomActivity : AppCompatActivity() {
     }
 
     private fun initChatRecyclerView() {
-        binding.logRecyclerView.adapter = ChatLogAdapter()
+        binding.logRecyclerView.adapter = ChatLogAdapter().apply {
+            employeeId = userLoginInfo.employee_no
+        }
     }
 }
