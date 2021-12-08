@@ -1,5 +1,6 @@
 package com.github.sookhee.shinhanesgmarket.chatting
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +12,12 @@ class ChatPreviewAdapter :
 
     var items: List<ChatPreview> = emptyList()
     var onItemClick: ((selectedItem: ChatPreview) -> Unit)? = null
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setItem(list: List<ChatPreview>) {
+        items = list
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)

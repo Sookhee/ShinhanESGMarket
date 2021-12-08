@@ -85,11 +85,13 @@ class ProductActivity : AppCompatActivity() {
         binding.btnChat.setOnClickListener {
             val intent = Intent(this, ChatRoomActivity::class.java)
 
-            intent.putExtra("title", viewModel.product.value?.title)
-            intent.putExtra("price", viewModel.product.value?.price)
-            intent.putExtra("owner", viewModel.product.value?.owner)
-            intent.putExtra("owner_id", viewModel.product.value?.owner_id)
-            intent.putExtra("photo", viewModel.product.value!!.photoList["0"])
+            intent.putExtra("product_id", viewModel.product.value?.id)
+            intent.putExtra("product_title", viewModel.product.value?.title)
+            intent.putExtra("product_price", viewModel.product.value?.price)
+            intent.putExtra("product_owner", viewModel.product.value?.owner)
+            intent.putExtra("product_owner_id", viewModel.product.value?.owner_id)
+            intent.putExtra("product_photo", viewModel.product.value!!.photoList["0"])
+            intent.putExtra("product_area", viewModel.product.value!!.area)
 
             startActivity(intent)
         }
