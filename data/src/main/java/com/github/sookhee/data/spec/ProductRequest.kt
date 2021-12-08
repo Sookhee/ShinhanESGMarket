@@ -1,12 +1,12 @@
 package com.github.sookhee.data.spec
 
 data class ProductRequest(
-    val area: String,
+    val area_name: String,
     val created_at: String,
-    val feed_category_id: Int,
-    val feed_owner: String,
-    val feed_owner_id: String,
-    val feed_title: String,
+    val category_id: Int,
+    val owner: String,
+    val owner_id: String,
+    val title: String,
     val price: Int,
     val status: Int,
     val updated_at: String,
