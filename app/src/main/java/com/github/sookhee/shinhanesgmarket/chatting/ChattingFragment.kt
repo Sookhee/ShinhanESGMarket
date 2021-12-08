@@ -46,6 +46,10 @@ class ChattingFragment : Fragment() {
             onItemClick = {
                 val intent = Intent(context, ChatRoomActivity::class.java)
                 intent.putExtra("room_id", it.id)
+                intent.putExtra("product_id", it.product_id)
+                intent.putExtra("product_image", it.product_image)
+                intent.putExtra("product_title", it.product_title)
+                intent.putExtra("product_price", it.product_price.toInt())
                 startActivity(intent)
             }
         }

@@ -90,7 +90,7 @@ class ProductActivity : AppCompatActivity() {
             intent.putExtra("product_price", viewModel.product.value?.price)
             intent.putExtra("product_owner", viewModel.product.value?.owner)
             intent.putExtra("product_owner_id", viewModel.product.value?.owner_id)
-            intent.putExtra("product_photo", viewModel.product.value!!.photoList["0"])
+            intent.putExtra("product_image", viewModel.product.value!!.photoList["0"])
             intent.putExtra("product_area", viewModel.product.value!!.area)
 
             startActivity(intent)

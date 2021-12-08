@@ -5,6 +5,8 @@ data class ChatPreview(
 
     val product_id: String,
     val product_image: String,
+    val product_title: String,
+    val product_price: String,
 
     val seller_id: String,
     val seller_name: String,
