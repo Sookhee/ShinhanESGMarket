@@ -36,7 +36,7 @@ class ChatViewModel @ViewModelInject constructor(
         }
     }
 
-    fun createRoom(product: Product, buyer: User): String {
+    fun createRoom(product: Product, buyer: User, lastMessage: String = ""): String {
         val database = Firebase.database.getReference("room")
         val key = database.push().key
 
@@ -53,7 +53,7 @@ class ChatViewModel @ViewModelInject constructor(
                     buyer_id = buyer.employee_no,
                     buyer_name = buyer.nickname,
                     buyer_image = "",
-                    last_message = "",
+                    last_message = lastMessage,
                     last_time = System.currentTimeMillis().toString()
                 )
             )

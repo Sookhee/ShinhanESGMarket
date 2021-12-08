@@ -6,6 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.sookhee.domain.entity.ChatPreview
 import com.github.sookhee.shinhanesgmarket.databinding.ItemChatPreviewBinding
+import com.github.sookhee.shinhanesgmarket.utils.calcTime
+import com.github.sookhee.shinhanesgmarket.utils.setImageWithUrl
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ChatPreviewAdapter :
     RecyclerView.Adapter<ChatPreviewAdapter.ViewHolder>() {
@@ -46,6 +50,12 @@ class ChatPreviewAdapter :
             item: ChatPreview,
         ) {
             binding.item = item
+            binding.traderProduct.setImageWithUrl(item.product_image)
+
+            val simpleDate = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault())
+            val lastTime = simpleDate.format(Date(item.last_time.toLong()))
+            binding.lastChatTime.text = lastTime.calcTime()
+            binding.traderName.text = item.seller_name
         }
     }
 }

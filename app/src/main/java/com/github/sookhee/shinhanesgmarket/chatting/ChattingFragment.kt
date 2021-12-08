@@ -45,6 +45,7 @@ class ChattingFragment : Fragment() {
         binding.chatPreviewRecyclerView.adapter = ChatPreviewAdapter().apply {
             onItemClick = {
                 val intent = Intent(context, ChatRoomActivity::class.java)
+                intent.putExtra("room_id", it.id)
                 startActivity(intent)
             }
         }

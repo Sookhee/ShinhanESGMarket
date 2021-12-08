@@ -30,15 +30,20 @@ class ChatRoomActivity : AppCompatActivity() {
         binding = ActivityChatRoomBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this).get(ChatViewModel::class.java)
 
+        roomId = intent.getStringExtra("room_id") ?: ""
+        if (roomId.isNotBlank()) {
+            setChatListener()
+        } else {
+            viewModel.checkIsHaveRoom(
+                intent.getStringExtra("product_id") ?: "",
+                userLoginInfo.employee_no
+            )
+        }
+
         initChatPreviewActivity()
         setObserver()
         initChatRecyclerView()
         setOnClickListener()
-
-        viewModel.checkIsHaveRoom(
-            intent.getStringExtra("product_id") ?: "",
-            userLoginInfo.employee_no
-        )
 
         setContentView(binding.root)
     }
@@ -75,7 +80,8 @@ class ChatRoomActivity : AppCompatActivity() {
                             )
                         ),
                     ),
-                    userLoginInfo
+                    userLoginInfo,
+                    binding.chatEditText.text.toString()
                 )
 
                 roomId = roomKey

@@ -37,6 +37,7 @@
         <TextView
             android:id="@+id/traderName"
             style="@style/Gray900.16"
+            android:text="@{item.seller_name}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -74,7 +75,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="@{item.last_time}"
             app:layout_constraintBottom_toBottomOf="@id/traderArea"
             app:layout_constraintStart_toEndOf="@id/traderInfoDivider"
             app:layout_constraintTop_toTopOf="@id/traderArea"
