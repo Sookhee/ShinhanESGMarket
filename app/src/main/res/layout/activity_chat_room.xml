@@ -9,6 +9,7 @@
         tools:context=".chatting.ChatRoomActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/productInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -101,7 +102,20 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/logRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/inputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/productInfo"
+            tools:listitem="@layout/item_chat_log" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/inputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/gray100"

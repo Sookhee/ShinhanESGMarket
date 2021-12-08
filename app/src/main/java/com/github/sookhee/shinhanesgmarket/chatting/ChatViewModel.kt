@@ -25,6 +25,9 @@ class ChatViewModel @ViewModelInject constructor(
     private val _chatPreviewList = MutableLiveData<ChatPreview>()
     val chatPreviewList: LiveData<ChatPreview> = _chatPreviewList
 
+    private val _isHaveRoom = MutableLiveData<Pair<Boolean, String>>()
+    val isHaveRoom: LiveData<Pair<Boolean, String>> = _isHaveRoom
+
     fun getChatRoomPreviewList() {
         viewModelScope.launch {
             try {
@@ -34,16 +37,6 @@ class ChatViewModel @ViewModelInject constructor(
                 Log.i("민지", "result: $result")
             } catch (e: Exception) {
                 Log.i("민지", "getChatRoomPreviewList EXCEPTION: $e")
-            }
-        }
-    }
-
-    fun getChatLogList(roomId: String) {
-        viewModelScope.launch {
-            try {
-                val result = getChatLogUseCase(roomId)
-            } catch (e: Exception) {
-                Log.i("민지", "getChatLogList EXCEPTION: $e")
             }
         }
     }
@@ -71,7 +64,29 @@ class ChatViewModel @ViewModelInject constructor(
             )
         }
 
+        _isHaveRoom.postValue(Pair(true, key ?: ""))
+
         return key ?: ""
     }
 
+    fun checkIsHaveRoom(productId: String, userId: String) {
+        viewModelScope.launch {
+            try {
+                Firebase.database.getReference("room").orderByChild("product_id").equalTo(productId)
+                    .get()
+                    .addOnSuccessListener {
+                        if (it.value != null) {
+                            (it.value as HashMap<String, HashMap<String, String>>).forEach { (key, room) ->
+                                if (room["seller_id"] == userId || room["buyer_id"] == userId) {
+                                    _isHaveRoom.postValue(Pair(true, room["id"] ?: ""))
+                                }
+                            }
+                        }
+                    }.addOnFailureListener {
+                        Log.i("민지", "checkIsHaveRoom addOnFailureListener: $it")
+                    }
+            } catch (e: Exception) {
+            }
+        }
+    }
 }
