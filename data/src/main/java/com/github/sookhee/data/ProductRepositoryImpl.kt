@@ -63,6 +63,7 @@ class ProductRepositoryImpl @Inject constructor(
             id = result.id,
             title = result.title,
             owner = result.owner,
+            owner_id = result.ownerId,
             price = result.price,
             category = result.category,
             status = result.status,

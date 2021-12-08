@@ -66,6 +66,7 @@ class ProductDataSourceImpl @Inject constructor(
             id = result.id,
             title = result.getString(KEY_TITLE) ?: "",
             owner = result.getString(KEY_OWNER) ?: "",
+            ownerId = result.getString(KEY_OWNER_ID) ?: "",
             price = result.getLong(KEY_PRICE)?.toInt() ?: 0,
             category = result.getLong(KEY_CATEGORY)?.toInt() ?: 0,
             status = result.getLong(KEY_STATUS)?.toInt() ?: 0,
@@ -183,6 +184,7 @@ class ProductDataSourceImpl @Inject constructor(
         private const val KEY_AREA = "area"
         private const val KEY_CONTENT = "content"
         private const val KEY_PHOTO_LIST = "photo_list"
+        private const val KEY_OWNER_ID = "feed_owner_id"
 
         private const val STORAGE_PATH = "/product_image"
     }

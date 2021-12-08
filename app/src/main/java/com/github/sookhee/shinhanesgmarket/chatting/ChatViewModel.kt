@@ -9,32 +9,27 @@ import androidx.lifecycle.viewModelScope
 import com.github.sookhee.domain.entity.ChatPreview
 import com.github.sookhee.domain.entity.Product
 import com.github.sookhee.domain.entity.User
-import com.github.sookhee.domain.usecase.GetChatLogUseCase
 import com.github.sookhee.domain.usecase.GetChatPreviewUseCase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 import java.lang.Exception
 
 class ChatViewModel @ViewModelInject constructor(
     private val getChatPreviewUseCase: GetChatPreviewUseCase,
-    private val getChatLogUseCase: GetChatLogUseCase,
 ) : ViewModel() {
 
-    private val _chatPreviewList = MutableLiveData<ChatPreview>()
-    val chatPreviewList: LiveData<ChatPreview> = _chatPreviewList
+    private val _chatPreviewList = MutableLiveData<List<ChatPreview>>()
+    val chatPreviewList: LiveData<List<ChatPreview>> = _chatPreviewList
 
     private val _isHaveRoom = MutableLiveData<Pair<Boolean, String>>()
     val isHaveRoom: LiveData<Pair<Boolean, String>> = _isHaveRoom
 
-    fun getChatRoomPreviewList() {
+    fun getChatRoomPreviewList(employeeId: String) {
         viewModelScope.launch {
             try {
-                val result = getChatPreviewUseCase("21200203")
-                result.map { it.seller_id == "21200203" || it.buyer_id == "21200203" }
-
-                Log.i("민지", "result: $result")
+                val result = getChatPreviewUseCase(employeeId)
+                _chatPreviewList.postValue(result)
             } catch (e: Exception) {
                 Log.i("민지", "getChatRoomPreviewList EXCEPTION: $e")
             }
@@ -59,7 +54,7 @@ class ChatViewModel @ViewModelInject constructor(
                     buyer_name = buyer.nickname,
                     buyer_image = "",
                     last_message = "",
-                    last_time = ""
+                    last_time = System.currentTimeMillis().toString()
                 )
             )
         }
