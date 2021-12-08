@@ -40,13 +40,13 @@ class ProductRepositoryImpl @Inject constructor(
         val photoList = dataSource.uploadProductImage(product.photoList)
 
         val productRequest = ProductRequest(
-            area = product.area,
+            area_name = product.area,
             created_at = product.createdAt,
             content = product.content,
-            feed_category_id = product.category,
-            feed_owner = product.owner,
-            feed_owner_id = product.owner_id,
-            feed_title = product.title,
+            category_id = product.category,
+            owner = product.owner,
+            owner_id = product.owner_id,
+            title = product.title,
             price = product.price,
             status = product.status,
             updated_at = product.updatedAt,

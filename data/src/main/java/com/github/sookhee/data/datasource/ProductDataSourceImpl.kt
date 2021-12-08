@@ -23,6 +23,7 @@ class ProductDataSourceImpl @Inject constructor(
             val id = document.id
             val title = document.getString(KEY_TITLE) ?: ""
             val owner = document.getString(KEY_OWNER) ?: ""
+            val ownerId = document.getString(KEY_OWNER_ID) ?: ""
             val price = document.getLong(KEY_PRICE) ?: 0
             val category = document.getLong(KEY_CATEGORY) ?: 0
             val status = document.getLong(KEY_STATUS) ?: 0
@@ -36,6 +37,7 @@ class ProductDataSourceImpl @Inject constructor(
                     id = id,
                     title = title,
                     owner = owner,
+                    ownerId = ownerId,
                     price = price.toInt(),
                     category = category.toInt(),
                     status = status.toInt(),
@@ -174,17 +176,17 @@ class ProductDataSourceImpl @Inject constructor(
     companion object {
         private const val COLLECTION = "product"
 
-        private const val KEY_TITLE = "feed_title"
-        private const val KEY_OWNER = "feed_owner"
+        private const val KEY_TITLE = "title"
+        private const val KEY_OWNER = "owner_name"
         private const val KEY_PRICE = "price"
         private const val KEY_CATEGORY = "feed_category_id"
         private const val KEY_STATUS = "status"
         private const val KEY_CREATED_AT = "created_at"
         private const val KEY_UPDATED_AT = "updated_at"
-        private const val KEY_AREA = "area"
+        private const val KEY_AREA = "area_name"
         private const val KEY_CONTENT = "content"
         private const val KEY_PHOTO_LIST = "photo_list"
-        private const val KEY_OWNER_ID = "feed_owner_id"
+        private const val KEY_OWNER_ID = "owner_id"
 
         private const val STORAGE_PATH = "/product_image"
     }
