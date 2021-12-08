@@ -1,6 +1,8 @@
 package com.github.sookhee.data.datasource
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import com.github.sookhee.domain.entity.ChatLog
 import com.github.sookhee.domain.entity.ChatPreview
 import com.google.firebase.database.ktx.database
@@ -24,13 +26,34 @@ class ChatDataSourceImpl @Inject constructor() : ChatDataSource {
         return chatPreviewList
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override suspend fun getChatLog(roomId: String): List<ChatLog> {
+        val chatList = mutableListOf<ChatLog>()
+
         val database = Firebase.database.getReference(COLLECTION_LOG)
-        val result = database.get().await()
+        val result = database.orderByChild("room_id").equalTo(roomId)
+            .get()
+            .await()
 
-        Log.i("민지", "datasource get chat log: $result")
+        if (result.value != null) {
+            (result.value as HashMap<String, HashMap<String, String>>).forEach { (key, log) ->
+                chatList.add(
+                    ChatLog(
+                        id = key,
+                        room_id = log.getOrDefault("room_id", ""),
+                        sender_id = log.getOrDefault("sender_id", ""),
+                        time = log.getOrDefault("time", ""),
+                        message = log.getOrDefault("message", ""),
+                        message_type = log.getOrDefault("message_type", "")
+                    )
+                )
+            }
 
-        return emptyList()
+            // 정렬
+            chatList.sortBy { it.time }
+        }
+
+        return chatList
     }
 
     suspend fun createChatRoom(): String {
@@ -52,8 +75,6 @@ class ChatDataSourceImpl @Inject constructor() : ChatDataSource {
                     last_time = ""
                 )
             ).await()
-
-        Log.i("민지", "")
 
         return ""
     }
