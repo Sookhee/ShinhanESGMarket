@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout.VERTICAL
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.github.sookhee.shinhanesgmarket.AppApplication
 import com.github.sookhee.shinhanesgmarket.databinding.FragmentChattingBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,6 +19,7 @@ class ChattingFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var viewModel: ChatViewModel
+    private val loginInfo = AppApplication.getInstance().getLoginInfo()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +31,7 @@ class ChattingFragment : Fragment() {
         initRecyclerView()
         setObserver()
 
-        viewModel.getChatRoomPreviewList()
+        viewModel.getChatRoomPreviewList(loginInfo.employee_no)
 
         return binding.root
     }
@@ -52,7 +54,9 @@ class ChattingFragment : Fragment() {
 
     private fun setObserver() {
         viewModel.chatPreviewList.observe(viewLifecycleOwner) {
-
+            if (it.isNotEmpty()) {
+                (binding.chatPreviewRecyclerView.adapter as ChatPreviewAdapter).setItem(it)
+            }
         }
     }
 }

@@ -73,7 +73,7 @@ class ChatRoomActivity : AppCompatActivity() {
                                 "0",
                                 intent.getStringExtra("product_photo") ?: ""
                             )
-                        )
+                        ),
                     ),
                     userLoginInfo
                 )

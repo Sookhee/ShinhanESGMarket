@@ -4,6 +4,7 @@ data class ProductResponse(
     val id: String,
     val title: String = "",
     val owner: String = "",
+    val ownerId: String = "",
     val price: Int = 0,
     val category: Int = 0,
     val status: Int = 0,
