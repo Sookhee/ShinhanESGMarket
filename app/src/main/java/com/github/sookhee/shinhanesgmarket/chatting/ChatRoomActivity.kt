@@ -51,9 +51,9 @@ class ChatRoomActivity : AppCompatActivity() {
     private fun initChatPreviewActivity() {
         val intent = intent
         val title = intent.getStringExtra("product_title")
-        val price = intent.getIntExtra("product_title", 0)
+        val price = intent.getIntExtra("product_price", 0)
         val owner = intent.getStringExtra("product_owner")
-        val photo = intent.getStringExtra("product_photo")
+        val photo = intent.getStringExtra("product_image")
 
         binding.productPrice.text = "${price?.withComma()}원"
         binding.productName.text = title
@@ -70,6 +70,8 @@ class ChatRoomActivity : AppCompatActivity() {
                 val roomKey = viewModel.createRoom(
                     Product(
                         id = intent.getStringExtra("product_id") ?: "",
+                        title = intent.getStringExtra("product_title") ?: "",
+                        price = intent.getIntExtra("product_price", 0),
                         owner = intent.getStringExtra("product_owner") ?: "",
                         owner_id = intent.getStringExtra("product_owner_id") ?: "",
                         area = intent.getStringExtra("product_area") ?: "",
@@ -87,6 +89,10 @@ class ChatRoomActivity : AppCompatActivity() {
                 roomId = roomKey
                 sendMessage(roomId)
             }
+        }
+
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
         }
     }
 
@@ -138,17 +144,14 @@ class ChatRoomActivity : AppCompatActivity() {
 
             override fun onChildRemoved(snapshot: DataSnapshot) {
                 Log.i("민지", "onChildRemoved: ${snapshot.value}")
-
             }
 
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
                 Log.i("민지", "onChildMoved: ${snapshot.value}")
-
             }
 
             override fun onCancelled(error: DatabaseError) {
                 Log.i("민지", "onCancelled: $error}")
-
             }
         })
     }

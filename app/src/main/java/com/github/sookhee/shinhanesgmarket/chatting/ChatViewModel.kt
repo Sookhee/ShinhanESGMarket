@@ -46,6 +46,8 @@ class ChatViewModel @ViewModelInject constructor(
                     id = key,
                     product_id = product.id,
                     product_image = product.photoList["0"] ?: "",
+                    product_title = product.title,
+                    product_price = product.price.toString(),
                     seller_id = product.owner_id,
                     seller_name = product.owner,
                     seller_image = "",

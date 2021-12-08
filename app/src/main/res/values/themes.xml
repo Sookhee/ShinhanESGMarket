@@ -11,6 +11,7 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/white</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <!-- Over Scroll Mode -->
         <item name="android:colorEdgeEffect">@color/white</item>
         <!-- Customize your theme here. -->
@@ -74,7 +75,7 @@
         <item name="tabIndicatorHeight">0dp</item>
         <item name="tabMode">fixed</item>
         <item name="tabRippleColor">@null</item>
-        <item name="tabSelectedTextColor">@color/blue</item>
+        <item name="tabSelectedTextColor">#002daa</item>
         <item name="tabTextColor">@color/gray900</item>
     </style>
 </resources>

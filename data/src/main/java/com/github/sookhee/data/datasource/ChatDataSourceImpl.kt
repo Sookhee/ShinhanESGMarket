@@ -25,6 +25,8 @@ class ChatDataSourceImpl @Inject constructor() : ChatDataSource {
                         id = key,
                         product_id = room["product_id"] ?: "",
                         product_image = room["product_image"] ?: "",
+                        product_title = room["product_title"] ?: "",
+                        product_price = room["product_price"] ?: "",
                         seller_id = room["seller_id"] ?: "",
                         seller_name = room["seller_name"] ?: "",
                         seller_image = room["seller_image"] ?: "",
@@ -46,6 +48,8 @@ class ChatDataSourceImpl @Inject constructor() : ChatDataSource {
                         id = key,
                         product_id = room["product_id"] ?: "",
                         product_image = room["product_image"] ?: "",
+                        product_title = room["product_title"] ?: "",
+                        product_price = room["product_price"] ?: "",
                         seller_id = room["seller_id"] ?: "",
                         seller_name = room["seller_name"] ?: "",
                         seller_image = room["seller_image"] ?: "",
@@ -111,7 +115,9 @@ class ChatDataSourceImpl @Inject constructor() : ChatDataSource {
                     buyer_name = "",
                     buyer_image = "",
                     last_message = "",
-                    last_time = ""
+                    last_time = "",
+                    product_title = "",
+                    product_price = ""
                 )
             ).await()
 
