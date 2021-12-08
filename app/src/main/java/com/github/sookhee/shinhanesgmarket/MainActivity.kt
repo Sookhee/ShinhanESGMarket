@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    private val homeFragment by lazy { HomeFragment() }
+    val homeFragment by lazy { HomeFragment() }
     private val registerFragment by lazy { RegisterFragment() }
     private val mypageFragment by lazy { MypageFragment() }
     private val chattingFragment by lazy { ChattingFragment() }
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setFragment(currentFragment: Fragment) {
+    fun setFragment(currentFragment: Fragment) {
         val fm = supportFragmentManager.beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).hide(activeFragment)
 

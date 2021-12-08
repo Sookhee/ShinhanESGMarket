@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.github.sookhee.shinhanesgmarket.AppApplication
+import com.github.sookhee.shinhanesgmarket.MainActivity
 import com.github.sookhee.shinhanesgmarket.R
 import com.github.sookhee.shinhanesgmarket.adapter.PhotoAdapter
 import com.github.sookhee.shinhanesgmarket.databinding.FragmentRegisterBinding
@@ -94,6 +95,12 @@ class RegisterFragment : Fragment() {
                     "등록 성공",
                     Toast.LENGTH_SHORT
                 ).show()
+
+                binding.titleEditText.text = null
+                binding.mainEditText.text = null
+                binding.priceEditText.text = null
+
+                (activity as MainActivity).setFragment((activity as MainActivity).homeFragment)
             } else {
                 Toast.makeText(
                     context,
