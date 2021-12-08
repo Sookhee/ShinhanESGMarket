@@ -1,14 +1,8 @@
 package com.github.sookhee.shinhanesgmarket.utils
 
-import com.github.sookhee.data.BannerRepositoryImpl
-import com.github.sookhee.data.CategoryRepositoryImpl
-import com.github.sookhee.data.ProductRepositoryImpl
-import com.github.sookhee.data.UserRepositoryImpl
+import com.github.sookhee.data.*
 import com.github.sookhee.data.datasource.*
-import com.github.sookhee.domain.BannerRepository
-import com.github.sookhee.domain.CategoryRepository
-import com.github.sookhee.domain.ProductRepository
-import com.github.sookhee.domain.UserRepository
+import com.github.sookhee.domain.*
 import com.github.sookhee.domain.usecase.*
 import dagger.Module
 import dagger.Provides
@@ -116,4 +110,24 @@ object HiltProvider {
     @Provides
     fun provideGetBannerRepository(repository: BannerRepository): GetBannerListUseCase =
         GetBannerListUseCaseImpl(repository)
+
+    // CHAT
+    @Singleton
+    @Provides
+    fun provideChatDataSource(): ChatDataSource = ChatDataSourceImpl()
+
+    @Singleton
+    @Provides
+    fun provideChatRepository(dataSource: ChatDataSource): ChatRepository =
+        ChatRepositoryImpl(dataSource)
+
+    @Singleton
+    @Provides
+    fun provideGetChatPreviewUseCase(repository: ChatRepository): GetChatPreviewUseCase =
+        GetChatPreviewUseCaseImpl(repository)
+
+    @Singleton
+    @Provides
+    fun provideGetChatLogUseCase(repository: ChatRepository): GetChatLogUseCase =
+        GetChatLogUseCaseImpl(repository)
 }

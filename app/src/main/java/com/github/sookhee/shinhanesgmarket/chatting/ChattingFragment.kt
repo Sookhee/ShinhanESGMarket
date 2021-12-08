@@ -7,21 +7,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout.VERTICAL
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.github.sookhee.domain.entity.ChatPreview
 import com.github.sookhee.shinhanesgmarket.databinding.FragmentChattingBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ChattingFragment : Fragment() {
     private var _binding: FragmentChattingBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var viewModel: ChatViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentChattingBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this).get(ChatViewModel::class.java)
 
         initRecyclerView()
+        setObserver()
+
+        viewModel.getChatRoomPreviewList()
 
         return binding.root
     }
@@ -33,7 +41,6 @@ class ChattingFragment : Fragment() {
 
     private fun initRecyclerView() {
         binding.chatPreviewRecyclerView.adapter = ChatPreviewAdapter().apply {
-            items = CHAT_PREVIEW_LIST
             onItemClick = {
                 val intent = Intent(context, ChatRoomActivity::class.java)
                 startActivity(intent)
@@ -43,11 +50,9 @@ class ChattingFragment : Fragment() {
         binding.chatPreviewRecyclerView.addItemDecoration(DividerItemDecoration(context, VERTICAL))
     }
 
-    companion object {
-        private val CHAT_PREVIEW_LIST = listOf(
-            ChatPreview("닉네임1", "화도읍", "10월 30일", "감사합니다~"),
-            ChatPreview("닉네임2", "호평동", "10월 24일", "아직 안팔렸어요"),
-            ChatPreview("닉네임3", "양서면", "10월 23일", "다행이네요. ~~~~~~~~~~~~~~~~~~~"),
-        )
+    private fun setObserver() {
+        viewModel.chatPreviewList.observe(viewLifecycleOwner) {
+
+        }
     }
 }
