@@ -48,7 +48,6 @@ class SplashActivity : AppCompatActivity() {
             val employeeNo = currentUser.email.toString().replace("@doremi.com", "")
 
             loginIntent = Intent(this, MainActivity::class.java)
-            loginIntent.putExtra("employeeNo", employeeNo)
 
             viewModel.getUserInfo(employeeNo)
         } else {
@@ -66,7 +65,5 @@ class SplashActivity : AppCompatActivity() {
 
             finish()
         }
-
-
     }
 }
