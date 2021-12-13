@@ -29,6 +29,7 @@ class ChattingFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(ChatViewModel::class.java)
 
         initRecyclerView()
+        initSwipeLayout()
         setObserver()
 
         viewModel.getChatRoomPreviewList(loginInfo.employee_no)
@@ -57,9 +58,16 @@ class ChattingFragment : Fragment() {
         binding.chatPreviewRecyclerView.addItemDecoration(DividerItemDecoration(context, VERTICAL))
     }
 
+    private fun initSwipeLayout() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.getChatRoomPreviewList(loginInfo.employee_no)
+        }
+    }
+
     private fun setObserver() {
         viewModel.chatPreviewList.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
+                binding.swipeRefreshLayout.isRefreshing = false
                 (binding.chatPreviewRecyclerView.adapter as ChatPreviewAdapter).setItem(it)
             }
         }
