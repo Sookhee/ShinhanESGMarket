@@ -42,8 +42,8 @@ class HomeFragment : Fragment() {
         observeFlow()
 
         initProductRecyclerView()
-
         initCategoryRecyclerView()
+        initRefreshLayout()
 
         return binding.root
     }
@@ -60,6 +60,8 @@ class HomeFragment : Fragment() {
 
         viewModel.productList.observe(viewLifecycleOwner) {
             (binding.productRecyclerView.adapter as ProductAdapter).setItem(it)
+
+            binding.refreshLayout.isRefreshing = false
         }
 
         viewModel.bannerList.observe(viewLifecycleOwner) {
@@ -191,6 +193,12 @@ class HomeFragment : Fragment() {
                     Toast.makeText(context, "category: ${it.name}", Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+    }
+
+    private fun initRefreshLayout() {
+        binding.refreshLayout.setOnRefreshListener {
+            viewModel.getProductList()
         }
     }
 }
