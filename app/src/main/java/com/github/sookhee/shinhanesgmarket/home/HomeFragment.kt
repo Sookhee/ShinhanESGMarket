@@ -1,17 +1,23 @@
 package com.github.sookhee.shinhanesgmarket.home
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.github.sookhee.domain.entity.Banner
+import com.github.sookhee.shinhanesgmarket.R
 import com.github.sookhee.shinhanesgmarket.alarm.AlarmActivity
 import com.github.sookhee.shinhanesgmarket.databinding.FragmentHomeBinding
 import com.github.sookhee.shinhanesgmarket.product.ProductActivity
@@ -97,7 +103,12 @@ class HomeFragment : Fragment() {
                 .apply {
                     setItem(list)
                     onItemClick = {
-                        Toast.makeText(context, "click: $it", Toast.LENGTH_SHORT).show()
+                        val dialog = Dialog(context).apply {
+                            requestWindowFeature(Window.FEATURE_NO_TITLE)
+                            setContentView(R.layout.layout_custom_dialog)
+                        }
+
+                        showBannerDialog(dialog)
                     }
                 }
             orientation = ViewPager2.ORIENTATION_HORIZONTAL
@@ -174,6 +185,26 @@ class HomeFragment : Fragment() {
                     ((position % bannerSize) + positionOffset) * binding.bannerIndicator.width - binding.bannerIndicatorBackground.width
             }
         })
+    }
+
+    private fun showBannerDialog(dialog: Dialog) {
+        dialog.show()
+
+        dialog.findViewById<ImageView>(R.id.dialogImage).apply {
+            setImageResource(R.drawable.dialog_coming_soon)
+            layoutParams.apply {
+                height = 800
+            }
+        }
+
+        dialog.findViewById<TextView>(R.id.dialogText).setGone()
+
+        dialog.findViewById<TextView>(R.id.dialogButton).apply {
+            text = getString(R.string.dialog_coming_soon)
+            setOnClickListener {
+                dialog.dismiss()
+            }
+        }
     }
 
     private fun initProductRecyclerView() {
