@@ -25,8 +25,8 @@ class CategoryDataSourceImpl @Inject constructor() : CategoryDataSource {
 
     companion object {
         private const val COLLECTION = "category"
-        private const val KEY_ID = "ID"
-        private const val KEY_NAME = "CATEGORY_NAME"
-        private const val KEY_ICON = "CATEGORY_ICON"
+        private const val KEY_ID = "id"
+        private const val KEY_NAME = "name"
+        private const val KEY_ICON = "icon"
     }
 }
