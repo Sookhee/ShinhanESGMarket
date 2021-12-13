@@ -34,4 +34,7 @@
     <string name="join_welcome">도레미 마켓에 오신 것을\n환영합니다!</string>
     <string name="join_input_info">기본 정보를 확인하고\n잘못된 정보는 수정해주세요</string>
 
+    // splash
+    <string name="splash_text">가장 가까이에서\n시작되는 ESG,\n도레미 마켓!</string>
+
 </resources>

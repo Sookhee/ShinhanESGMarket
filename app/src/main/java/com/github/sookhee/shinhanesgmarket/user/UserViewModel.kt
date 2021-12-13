@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.github.sookhee.domain.entity.User
 import com.github.sookhee.domain.usecase.GetUserInfoUseCase
 import com.github.sookhee.domain.usecase.RegisterUserUseCase
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
@@ -32,6 +33,7 @@ class UserViewModel @ViewModelInject constructor(
                 val userInfo = getUserInfoUseCase(employeeNo)
 
                 _searchUserState.value = UserState.SUCCESS
+                delay(500)
                 _userInfo.value = userInfo
             } catch (e: Exception) {
                 Log.i(TAG, "getUserInfo exception : $e")

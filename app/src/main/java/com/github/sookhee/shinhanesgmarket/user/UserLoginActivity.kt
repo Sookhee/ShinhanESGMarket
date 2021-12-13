@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import com.github.sookhee.shinhanesgmarket.AppApplication
 import com.github.sookhee.shinhanesgmarket.MainActivity
 import com.github.sookhee.shinhanesgmarket.databinding.ActivityUserLoginBinding
 import com.google.firebase.auth.ktx.auth
@@ -26,23 +25,8 @@ class UserLoginActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
         setOnClickListener()
-        setObserver()
 
         setContentView(binding.root)
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        val currentUser = Firebase.auth.currentUser
-        if (currentUser != null) {
-            val employeeNo = currentUser.email.toString().replace("@doremi.com", "")
-
-            loginIntent = Intent(this, MainActivity::class.java)
-            loginIntent.putExtra("employeeNo", employeeNo)
-
-            viewModel.getUserInfo(employeeNo)
-        }
     }
 
     private fun setOnClickListener() {
@@ -60,17 +44,6 @@ class UserLoginActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "로그인 정보를 정확히 입력해주세요", Toast.LENGTH_SHORT).show()
             }
-        }
-    }
-
-    private fun setObserver() {
-        viewModel.userInfo.observe(this) {
-            val app = AppApplication.getInstance()
-            app.setLoginInfo(it)
-
-            startActivity(loginIntent)
-
-            finish()
         }
     }
 
