@@ -8,81 +8,14 @@
         android:layout_height="match_parent"
         tools:context=".home.HomeFragment">
 
-        <LinearLayout
-            android:id="@+id/spinner"
-            android:layout_width="wrap_content"
+        <Spinner
+            android:id="@+id/distanceSpinner"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="@id/toolbar"
+            app:layout_constraintBottom_toTopOf="@id/toolbarGuideLine"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/spinnerText"
-                style="@style/ToolbarTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="내 근처 5km" />
-
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_marginStart="4dp"
-                android:src="@drawable/ic_arrow_down" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/spinnerExpanded"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/gray_border_background"
-            android:backgroundTint="@color/white"
-            android:elevation="10dp"
-            android:orientation="vertical"
-            android:paddingVertical="8dp"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="@id/spinner"
-            app:layout_constraintTop_toBottomOf="@id/spinner">
-
-            <TextView
-                android:id="@+id/search5km"
-                style="@style/Gray900.15"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="8dp"
-                android:text="5km 이내" />
-
-            <TextView
-                android:id="@+id/search10km"
-                style="@style/Gray900.15"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="8dp"
-                android:text="10km 이내" />
-
-            <TextView
-                android:id="@+id/search15km"
-                style="@style/Gray900.15"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="8dp"
-                android:text="15km 이내" />
-
-            <TextView
-                android:id="@+id/searchAll"
-                style="@style/Gray900.15"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="8dp"
-                android:text="전체" />
-
-        </LinearLayout>
+            app:layout_constraintTop_toTopOf="@id/toolbar" />
 
         <LinearLayout
             android:id="@+id/toolbar"
@@ -134,8 +67,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="60dp">
+                    android:layout_marginBottom="60dp"
+                    android:orientation="vertical">
 
                     <androidx.viewpager2.widget.ViewPager2
                         android:id="@+id/banner"

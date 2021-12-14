@@ -8,22 +8,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
-import androidx.core.view.isVisible
+import android.widget.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.github.sookhee.domain.entity.Banner
+import com.github.sookhee.domain.entity.User
+import com.github.sookhee.shinhanesgmarket.AppApplication
 import com.github.sookhee.shinhanesgmarket.R
 import com.github.sookhee.shinhanesgmarket.alarm.AlarmActivity
 import com.github.sookhee.shinhanesgmarket.databinding.FragmentHomeBinding
 import com.github.sookhee.shinhanesgmarket.product.ProductActivity
 import com.github.sookhee.shinhanesgmarket.search.SearchActivity
 import com.github.sookhee.shinhanesgmarket.utils.setGone
-import com.github.sookhee.shinhanesgmarket.utils.setVisible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,6 +29,8 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var viewModel: HomeViewModel
+
+    private var loginInfo: User = User()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,6 +49,9 @@ class HomeFragment : Fragment() {
         initProductRecyclerView()
         initCategoryRecyclerView()
         initRefreshLayout()
+        initDistanceSpinner()
+
+        loginInfo = AppApplication.getInstance().getLoginInfo()
 
         return binding.root
     }
@@ -86,14 +88,6 @@ class HomeFragment : Fragment() {
         binding.btnAlarm.setOnClickListener {
             val intent = Intent(context, AlarmActivity::class.java)
             startActivity(intent)
-        }
-
-        binding.spinner.setOnClickListener {
-            if (binding.spinnerExpanded.isVisible) {
-                binding.spinnerExpanded.setGone()
-            } else {
-                binding.spinnerExpanded.setVisible()
-            }
         }
     }
 
@@ -230,6 +224,41 @@ class HomeFragment : Fragment() {
     private fun initRefreshLayout() {
         binding.refreshLayout.setOnRefreshListener {
             viewModel.getProductList()
+        }
+    }
+
+    private fun initDistanceSpinner() {
+        val distanceList = arrayListOf<Pair<String, DISTANCE>>()
+        if (false) { // 커뮤니티 없으면
+            distanceList.add(Pair("5km", DISTANCE.FIVE_KM))
+            distanceList.add(Pair("10km", DISTANCE.TEN_KM))
+            distanceList.add(Pair("전체", DISTANCE.ALL))
+        } else if (false) { // 주소 없으면
+            distanceList.add(Pair("전체", DISTANCE.ALL))
+        } else { // 일반적
+            distanceList.add(Pair("5km", DISTANCE.FIVE_KM))
+            distanceList.add(Pair("10km", DISTANCE.TEN_KM))
+            distanceList.add(Pair("커뮤니티", DISTANCE.COMMUNITY))
+            distanceList.add(Pair("전체", DISTANCE.ALL))
+        }
+
+        binding.distanceSpinner.apply {
+            adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, distanceList.map { it.first })
+            onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                    Toast.makeText(context, "CLICK ${distanceList[position].second}", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    Toast.makeText(context, "NOTHING", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    companion object {
+        enum class DISTANCE {
+            FIVE_KM, TEN_KM, COMMUNITY, ALL
         }
     }
 }
