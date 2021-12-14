@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.github.sookhee.shinhanesgmarket.AppApplication
@@ -30,6 +32,7 @@ class RegisterFragment : Fragment() {
     private val loginInfo = app.getLoginInfo()
 
     private val photoList = hashMapOf<String, String>()
+    private var category: Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +45,7 @@ class RegisterFragment : Fragment() {
 
         setOnClickListener()
         initPhotoRecyclerView()
+        initSpinner()
 
         return binding.root
     }
@@ -69,7 +73,7 @@ class RegisterFragment : Fragment() {
     private fun setOnClickListener() {
         binding.btnSubmit.setOnClickListener {
             val title = binding.titleEditText.text.toString()
-            val category: Int? = 0
+            val category = category
             val price = binding.priceEditText.text.toString()
             val content = binding.mainEditText.text.toString()
 
@@ -88,7 +92,7 @@ class RegisterFragment : Fragment() {
             }
 
             if (needItem.size == 0) {
-                viewModel.registerProduct(loginInfo, photoList)
+                viewModel.registerProduct(loginInfo, photoList, category ?: 0)
 
                 Toast.makeText(
                     context,
@@ -126,6 +130,21 @@ class RegisterFragment : Fragment() {
 
         binding.photoRecyclerView.apply {
             adapter = photoAdapter
+        }
+    }
+
+    private fun initSpinner() {
+        val categoryList = arrayOf("기부", "무료나눔", "도서", "생활가전", "디지털기기", "스포츠", "여성의류", "남성의류")
+        binding.categorySpinner.apply {
+            adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, categoryList)
+            onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                    category = position
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                }
+            }
         }
     }
 

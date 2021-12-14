@@ -43,7 +43,7 @@ class ProductRepositoryImpl @Inject constructor(
             area_name = product.area,
             created_at = product.createdAt,
             content = product.content,
-            category_id = product.category,
+            category_id = product.category.toString(),
             owner = product.owner,
             owner_id = product.owner_id,
             title = product.title,

@@ -125,25 +125,10 @@
                     android:layout_height="1dp"
                     android:background="@color/gray100" />
 
-                <LinearLayout
-                    android:id="@+id/categoryLayout"
+                <Spinner
+                    android:id="@+id/categorySpinner"
                     android:layout_width="match_parent"
-                    android:layout_height="66dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/Gray900.17"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/hint_category" />
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_arrow_down" />
-                </LinearLayout>
+                    android:layout_height="wrap_content" />
 
                 <View
                     android:id="@+id/categoryGuideLine"

@@ -3,7 +3,7 @@ package com.github.sookhee.data.spec
 data class ProductRequest(
     val area_name: String,
     val created_at: String,
-    val category_id: Int,
+    val category_id: String,
     val owner: String,
     val owner_id: String,
     val title: String,
