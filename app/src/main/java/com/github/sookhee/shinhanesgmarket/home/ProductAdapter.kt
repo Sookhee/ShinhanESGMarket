@@ -49,7 +49,7 @@ class ProductAdapter :
             item: Product,
         ) {
             binding.item = item
-            binding.productTime.text = item.updatedAt.calcTime()
+            binding.productTime.text = item.updated_at.calcTime()
             binding.productPrice.text = if (item.price == 0) "무료나눔" else "${item.price.withComma()}원"
 
             binding.productImage.setImageWithUrl(item.photoList["0"] ?: "", 16)

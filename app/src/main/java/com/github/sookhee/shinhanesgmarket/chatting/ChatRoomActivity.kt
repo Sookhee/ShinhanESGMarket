@@ -69,18 +69,21 @@ class ChatRoomActivity : AppCompatActivity() {
             } else {
                 val roomKey = viewModel.createRoom(
                     Product(
-                        id = intent.getStringExtra("product_id") ?: "",
-                        title = intent.getStringExtra("product_title") ?: "",
-                        price = intent.getIntExtra("product_price", 0),
-                        owner = intent.getStringExtra("product_owner") ?: "",
+                        area_community_code = userLoginInfo.community_code,
+                        area_id = userLoginInfo.branch_no,
+                        area_latitude = userLoginInfo.latitude,
+                        area_longitude = userLoginInfo.longitude,
+                        area_name = userLoginInfo.branch_nm,
                         owner_id = intent.getStringExtra("product_owner_id") ?: "",
-                        area = intent.getStringExtra("product_area") ?: "",
+                        owner_name = intent.getStringExtra("product_owner") ?: "",
                         photoList = hashMapOf(
                             Pair(
                                 "0",
                                 intent.getStringExtra("product_image") ?: ""
                             )
                         ),
+                        price = intent.getIntExtra("product_price", 0),
+                        title = intent.getStringExtra("product_title") ?: "",
                     ),
                     userLoginInfo,
                     binding.chatEditText.text.toString()

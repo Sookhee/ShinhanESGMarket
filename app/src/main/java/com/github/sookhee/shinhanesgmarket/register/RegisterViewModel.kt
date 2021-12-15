@@ -21,21 +21,24 @@ class RegisterViewModel @ViewModelInject constructor(
     val title = MutableLiveData<String>()
     val price = MutableLiveData<String>()
     val content = MutableLiveData<String>()
-    val category = MutableLiveData<Int>()
 
     fun registerProduct(loginInfo: User, photoList: HashMap<String, String>, category: Int) {
         val product = Product(
-            title = title.value ?: "",
-            owner = loginInfo.nickname,
+            area_community_code = loginInfo.community_code,
+            area_id = loginInfo.branch_no,
+            area_latitude = loginInfo.latitude,
+            area_longitude = loginInfo.longitude,
+            area_name = loginInfo.branch_nm,
+            category_id = "",
+            content = content.value.toString(),
+            created_at = simpleDate.format(Date(System.currentTimeMillis())),
             owner_id = loginInfo.employee_no,
+            owner_name = loginInfo.name,
+            photoList = photoList,
             price = price.value?.toInt() ?: 0,
-            category = category,
             status = 0,
-            createdAt = simpleDate.format(Date(System.currentTimeMillis())),
-            updatedAt = simpleDate.format(Date(System.currentTimeMillis())),
-            area = loginInfo.branch_nm,
-            content = content.value ?: "",
-            photoList = photoList
+            title = title.value ?: "",
+            updated_at = simpleDate.format(Date(System.currentTimeMillis()))
         )
 
         viewModelScope.launch {

@@ -20,31 +20,39 @@ class ProductDataSourceImpl @Inject constructor(
             .get().await()
 
         for (document in resultList) {
-            val id = document.id
-            val title = document.getString(KEY_TITLE) ?: ""
-            val owner = document.getString(KEY_OWNER) ?: ""
-            val ownerId = document.getString(KEY_OWNER_ID) ?: ""
-            val price = document.getLong(KEY_PRICE) ?: 0
-            val category = document.getLong(KEY_CATEGORY) ?: 0
-            val status = document.getLong(KEY_STATUS) ?: 0
+            val areaCommunityCode = document.getString(KEY_COMMUNITY_CODE) ?: ""
+            val areaId = document.getString(KEY_AREA_ID) ?: ""
+            val areaLatitude: Double = document.getDouble(KEY_AREA_LATITUDE) ?: 0.0
+            val areaLongitude: Double = document.getDouble(KEY_AREA_LONGITUDE) ?: 0.0
+            val areaName = document.getString(KEY_AREA_NAME) ?: ""
+            val categoryId = document.getString(KEY_CATEGORY_ID) ?: ""
+            val content = document.getString(KEY_CONTENT) ?: ""
             val createdAt = document.getString(KEY_CREATED_AT) ?: ""
-            val updatedAt = document.getString(KEY_UPDATED_AT) ?: ""
-            val area = document.getString(KEY_AREA) ?: ""
+            val ownerId = document.getString(KEY_OWNER_ID) ?: ""
+            val ownerName = document.getString(KEY_OWNER_NAME) ?: ""
             val photoList = document.data.get(KEY_PHOTO_LIST) as? List<String> ?: emptyList()
+            val price = document.getLong(KEY_PRICE) ?: 0
+            val status = document.getLong(KEY_STATUS) ?: 0
+            val title = document.getString(KEY_TITLE) ?: ""
+            val updatedAt = document.getString(KEY_UPDATED_AT) ?: ""
 
             productList.add(
                 ProductResponse(
-                    id = id,
-                    title = title,
-                    owner = owner,
-                    ownerId = ownerId,
+                    area_community_code = areaCommunityCode,
+                    area_id = areaId,
+                    area_latitude = areaLatitude,
+                    area_longitude = areaLongitude,
+                    area_name = areaName,
+                    category_id = categoryId,
+                    content = content,
+                    created_at = createdAt,
+                    owner_id = ownerId,
+                    owner_name = ownerName,
+                    photoList = photoList,
                     price = price.toInt(),
-                    category = category.toInt(),
                     status = status.toInt(),
-                    createdAt = createdAt,
-                    updatedAt = updatedAt,
-                    area = area,
-                    photoList = photoList
+                    title = title,
+                    updated_at = updatedAt
                 )
             )
         }
@@ -65,18 +73,21 @@ class ProductDataSourceImpl @Inject constructor(
             .get().await()
 
         return ProductResponse(
-            id = result.id,
+            area_community_code = result.getString(KEY_TITLE) ?: "",
+            area_id = result.getString(KEY_TITLE) ?: "",
+            area_latitude = result.getDouble(KEY_TITLE) ?: 0.0,
+            area_longitude = result.getDouble(KEY_TITLE) ?: 0.0,
+            area_name = result.getString(KEY_TITLE) ?: "",
+            category_id = result.getString(KEY_TITLE) ?: "",
+            content = result.getString(KEY_TITLE) ?: "",
+            created_at = result.getString(KEY_TITLE) ?: "",
+            owner_id = result.getString(KEY_TITLE) ?: "",
+            owner_name = result.getString(KEY_TITLE) ?: "",
+            photoList = result.data?.get(KEY_PHOTO_LIST) as? List<String> ?: emptyList(),
+            price = result.getLong(KEY_TITLE)?.toInt() ?: 0,
+            status = result.getLong(KEY_TITLE)?.toInt() ?: 0,
             title = result.getString(KEY_TITLE) ?: "",
-            owner = result.getString(KEY_OWNER) ?: "",
-            ownerId = result.getString(KEY_OWNER_ID) ?: "",
-            price = result.getLong(KEY_PRICE)?.toInt() ?: 0,
-            category = result.getLong(KEY_CATEGORY)?.toInt() ?: 0,
-            status = result.getLong(KEY_STATUS)?.toInt() ?: 0,
-            createdAt = result.getString(KEY_CREATED_AT) ?: "",
-            updatedAt = result.getString(KEY_UPDATED_AT) ?: "",
-            area = result.getString(KEY_AREA) ?: "",
-            content = result.getString(KEY_CONTENT) ?: "",
-            photoList = result.data?.get(KEY_PHOTO_LIST) as? List<String> ?: emptyList()
+            updated_at = result.getString(KEY_TITLE) ?: ""
         )
     }
 
@@ -91,29 +102,39 @@ class ProductDataSourceImpl @Inject constructor(
             .get().await()
 
         for (document in resultList) {
-            val id = document.id
-            val title = document.getString(KEY_TITLE) ?: ""
-            val owner = document.getString(KEY_OWNER) ?: ""
-            val price = document.getLong(KEY_PRICE) ?: 0
-            val category = document.getLong(KEY_CATEGORY) ?: 0
-            val status = document.getLong(KEY_STATUS) ?: 0
+            val areaCommunityCode = document.getString(KEY_COMMUNITY_CODE) ?: ""
+            val areaId = document.getString(KEY_AREA_ID) ?: ""
+            val areaLatitude: Double = document.getDouble(KEY_AREA_LATITUDE) ?: 0.0
+            val areaLongitude: Double = document.getDouble(KEY_AREA_LONGITUDE) ?: 0.0
+            val areaName = document.getString(KEY_AREA_NAME) ?: ""
+            val categoryId = document.getString(KEY_CATEGORY_ID) ?: ""
+            val content = document.getString(KEY_CONTENT) ?: ""
             val createdAt = document.getString(KEY_CREATED_AT) ?: ""
+            val ownerId = document.getString(KEY_OWNER_ID) ?: ""
+            val ownerName = document.getString(KEY_OWNER_NAME) ?: ""
+            val photoList = document.data.get(KEY_PHOTO_LIST) as? List<String> ?: emptyList()
+            val price = document.getLong(KEY_PRICE) ?: 0
+            val status = document.getLong(KEY_STATUS) ?: 0
+            val title = document.getString(KEY_TITLE) ?: ""
             val updatedAt = document.getString(KEY_UPDATED_AT) ?: ""
-            val area = document.getString(KEY_AREA) ?: ""
-            val photoList = document.data.get(KEY_PHOTO_LIST)
 
             productList.add(
                 ProductResponse(
-                    id = id,
-                    title = title,
-                    owner = owner,
+                    area_community_code = areaCommunityCode,
+                    area_id = areaId,
+                    area_latitude = areaLatitude,
+                    area_longitude = areaLongitude,
+                    area_name = areaName,
+                    category_id = categoryId,
+                    content = content,
+                    created_at = createdAt,
+                    owner_id = ownerId,
+                    owner_name = ownerName,
+                    photoList = photoList,
                     price = price.toInt(),
-                    category = category.toInt(),
                     status = status.toInt(),
-                    createdAt = createdAt,
-                    updatedAt = updatedAt,
-                    area = area,
-                    photoList = photoList as? List<String> ?: emptyList()
+                    title = title,
+                    updated_at = updatedAt
                 )
             )
         }
@@ -133,17 +154,21 @@ class ProductDataSourceImpl @Inject constructor(
 
             likeProductList.add(
                 ProductResponse(
-                    id = document.id,
+                    area_community_code = document.getString(KEY_TITLE) ?: "",
+                    area_id = document.getString(KEY_TITLE) ?: "",
+                    area_latitude = document.getDouble(KEY_TITLE) ?: 0.0,
+                    area_longitude = document.getDouble(KEY_TITLE) ?: 0.0,
+                    area_name = document.getString(KEY_TITLE) ?: "",
+                    category_id = document.getString(KEY_TITLE) ?: "",
+                    content = document.getString(KEY_TITLE) ?: "",
+                    created_at = document.getString(KEY_TITLE) ?: "",
+                    owner_id = document.getString(KEY_TITLE) ?: "",
+                    owner_name = document.getString(KEY_TITLE) ?: "",
+                    photoList = document.data?.get(KEY_PHOTO_LIST) as? List<String> ?: emptyList(),
+                    price = document.getLong(KEY_TITLE)?.toInt() ?: 0,
+                    status = document.getLong(KEY_TITLE)?.toInt() ?: 0,
                     title = document.getString(KEY_TITLE) ?: "",
-                    owner = document.getString(KEY_OWNER) ?: "",
-                    price = document.getLong(KEY_PRICE)?.toInt() ?: 0,
-                    category = document.getLong(KEY_CATEGORY)?.toInt() ?: 0,
-                    status = document.getLong(KEY_STATUS)?.toInt() ?: 0,
-                    createdAt = document.getString(KEY_CREATED_AT) ?: "",
-                    updatedAt = document.getString(KEY_UPDATED_AT) ?: "",
-                    area = document.getString(KEY_AREA) ?: "",
-                    content = document.getString(KEY_CONTENT) ?: "",
-                    photoList = document.data?.get(KEY_PHOTO_LIST) as? List<String> ?: emptyList()
+                    updated_at = document.getString(KEY_TITLE) ?: ""
                 )
             )
         }
@@ -176,17 +201,21 @@ class ProductDataSourceImpl @Inject constructor(
     companion object {
         private const val COLLECTION = "product"
 
-        private const val KEY_TITLE = "title"
-        private const val KEY_OWNER = "owner_name"
-        private const val KEY_PRICE = "price"
-        private const val KEY_CATEGORY = "feed_category_id"
-        private const val KEY_STATUS = "status"
-        private const val KEY_CREATED_AT = "created_at"
-        private const val KEY_UPDATED_AT = "updated_at"
-        private const val KEY_AREA = "area_name"
+        private const val KEY_COMMUNITY_CODE = "area_community_code"
+        private const val KEY_AREA_ID = "area_id"
+        private const val KEY_AREA_LATITUDE = "area_latitude"
+        private const val KEY_AREA_LONGITUDE = "area_longitude"
+        private const val KEY_AREA_NAME = "area_name"
+        private const val KEY_CATEGORY_ID = "category_id"
         private const val KEY_CONTENT = "content"
-        private const val KEY_PHOTO_LIST = "photo_list"
+        private const val KEY_CREATED_AT = "created_at"
         private const val KEY_OWNER_ID = "owner_id"
+        private const val KEY_OWNER_NAME = "owner_name"
+        private const val KEY_PHOTO_LIST = "photo_list"
+        private const val KEY_PRICE = "price"
+        private const val KEY_STATUS = "status"
+        private const val KEY_TITLE = "title"
+        private const val KEY_UPDATED_AT = "updated_at"
 
         private const val STORAGE_PATH = "/product_image"
     }

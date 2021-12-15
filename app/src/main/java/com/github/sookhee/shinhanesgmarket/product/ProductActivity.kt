@@ -45,12 +45,12 @@ class ProductActivity : AppCompatActivity() {
 
     private fun observeFlow() {
         viewModel.product.observe(this) {
-            binding.sellerName.text = it.owner
-            binding.sellerArea.text = it.area
+            binding.sellerName.text = it.owner_name
+            binding.sellerArea.text = it.area_name
             binding.productTitle.text = it.title
             binding.productPrice.text = if (it.price == 0) "무료나눔" else "${it.price.withComma()}원"
-            binding.productCategory.text = it.category.parseCategory()
-            binding.productTime.text = it.updatedAt.calcTime()
+            binding.productCategory.text = it.category_id
+            binding.productTime.text = it.updated_at.calcTime()
             binding.productDescription.text = it.content
 
             binding.photoRecyclerView.apply {
@@ -88,10 +88,10 @@ class ProductActivity : AppCompatActivity() {
             intent.putExtra("product_id", viewModel.product.value?.id)
             intent.putExtra("product_title", viewModel.product.value?.title)
             intent.putExtra("product_price", viewModel.product.value?.price)
-            intent.putExtra("product_owner", viewModel.product.value?.owner)
+            intent.putExtra("product_owner", viewModel.product.value?.owner_name)
             intent.putExtra("product_owner_id", viewModel.product.value?.owner_id)
             intent.putExtra("product_image", viewModel.product.value!!.photoList["0"])
-            intent.putExtra("product_area", viewModel.product.value!!.area)
+            intent.putExtra("product_area", viewModel.product.value!!.area_name)
 
             startActivity(intent)
         }

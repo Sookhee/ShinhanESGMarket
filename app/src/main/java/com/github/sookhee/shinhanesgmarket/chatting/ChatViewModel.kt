@@ -44,14 +44,13 @@ class ChatViewModel @ViewModelInject constructor(
             database.child(it).setValue(
                 ChatPreview(
                     id = key,
-                    product_id = product.id,
                     product_image = product.photoList["0"] ?: "",
                     product_title = product.title,
                     product_price = product.price.toString(),
                     seller_id = product.owner_id,
-                    seller_name = product.owner,
+                    seller_name = product.owner_name,
                     seller_image = "",
-                    seller_area = product.area,
+                    seller_area = product.area_name,
                     buyer_id = buyer.employee_no,
                     buyer_name = buyer.nickname,
                     buyer_image = "",

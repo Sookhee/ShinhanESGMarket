@@ -3,7 +3,7 @@ package com.github.sookhee.domain.entity
 data class ChatPreview(
     val id: String,
 
-    val product_id: String,
+    val product_id: String = "",
     val product_image: String,
     val product_title: String,
     val product_price: String,

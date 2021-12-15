@@ -19,16 +19,21 @@ class ProductRepositoryImpl @Inject constructor(
         result.forEach {
             productList.add(
                 Product(
-                    id = it.id,
-                    title = it.title,
-                    owner = it.owner,
+                    area_community_code = it.area_community_code,
+                    area_id = it.area_id,
+                    area_latitude = it.area_latitude,
+                    area_longitude = it.area_longitude,
+                    area_name = it.area_name,
+                    category_id = it.category_id,
+                    content = it.content,
+                    created_at = it.created_at,
+                    owner_id = it.owner_id,
+                    owner_name = it.owner_name,
+                    photoList = listToHash(it.photoList),
                     price = it.price,
-                    category = it.category,
                     status = it.status,
-                    createdAt = it.createdAt,
-                    updatedAt = it.updatedAt,
-                    area = it.area,
-                    photoList = listToHash(it.photoList)
+                    title = it.title,
+                    updated_at = it.updated_at
                 )
             )
         }
@@ -40,17 +45,21 @@ class ProductRepositoryImpl @Inject constructor(
         val photoList = dataSource.uploadProductImage(product.photoList)
 
         val productRequest = ProductRequest(
-            area_name = product.area,
-            created_at = product.createdAt,
+            area_community_code = product.area_community_code,
+            area_id = product.area_id,
+            area_latitude = product.area_latitude,
+            area_longitude = product.area_longitude,
+            area_name = product.area_name,
+            category_id = product.category_id,
             content = product.content,
-            category_id = product.category.toString(),
-            owner = product.owner,
+            created_at = product.created_at,
             owner_id = product.owner_id,
-            title = product.title,
+            owner_name = product.owner_name,
+            photoList = photoList,
             price = product.price,
             status = product.status,
-            updated_at = product.updatedAt,
-            photo_list = photoList
+            title = product.title,
+            updated_at = product.updated_at
         )
 
         dataSource.registerProduct(productRequest)
@@ -60,18 +69,21 @@ class ProductRepositoryImpl @Inject constructor(
         val result = dataSource.getProductDetail(productId)
 
         return Product(
-            id = result.id,
-            title = result.title,
-            owner = result.owner,
-            owner_id = result.ownerId,
-            price = result.price,
-            category = result.category,
-            status = result.status,
-            createdAt = result.createdAt,
-            updatedAt = result.updatedAt,
-            area = result.area,
+            area_community_code = result.area_community_code,
+            area_id = result.area_id,
+            area_latitude = result.area_latitude,
+            area_longitude = result.area_longitude,
+            area_name = result.area_name,
+            category_id = result.category_id,
             content = result.content,
-            photoList = listToHash(result.photoList)
+            created_at = result.created_at,
+            owner_id = result.owner_id,
+            owner_name = result.owner_name,
+            photoList = listToHash(result.photoList),
+            price = result.price,
+            status = result.status,
+            title = result.title,
+            updated_at = result.updated_at
         )
     }
 
@@ -82,16 +94,21 @@ class ProductRepositoryImpl @Inject constructor(
         result.forEach {
             productList.add(
                 Product(
-                    id = it.id,
-                    title = it.title,
-                    owner = it.owner,
+                    area_community_code = it.area_community_code,
+                    area_id = it.area_id,
+                    area_latitude = it.area_latitude,
+                    area_longitude = it.area_longitude,
+                    area_name = it.area_name,
+                    category_id = it.category_id,
+                    content = it.content,
+                    created_at = it.created_at,
+                    owner_id = it.owner_id,
+                    owner_name = it.owner_name,
+                    photoList = listToHash(it.photoList),
                     price = it.price,
-                    category = it.category,
                     status = it.status,
-                    createdAt = it.createdAt,
-                    updatedAt = it.updatedAt,
-                    area = it.area,
-                    photoList = listToHash(it.photoList)
+                    title = it.title,
+                    updated_at = it.updated_at
                 )
             )
         }
@@ -115,16 +132,21 @@ class ProductRepositoryImpl @Inject constructor(
         result.forEach {
             productList.add(
                 Product(
-                    id = it.id,
-                    title = it.title,
-                    owner = it.owner,
+                    area_community_code = it.area_community_code,
+                    area_id = it.area_id,
+                    area_latitude = it.area_latitude,
+                    area_longitude = it.area_longitude,
+                    area_name = it.area_name,
+                    category_id = it.category_id,
+                    content = it.content,
+                    created_at = it.created_at,
+                    owner_id = it.owner_id,
+                    owner_name = it.owner_name,
+                    photoList = listToHash(it.photoList),
                     price = it.price,
-                    category = it.category,
                     status = it.status,
-                    createdAt = it.createdAt,
-                    updatedAt = it.updatedAt,
-                    area = it.area,
-                    photoList = listToHash(it.photoList)
+                    title = it.title,
+                    updated_at = it.updated_at
                 )
             )
         }
