@@ -54,7 +54,7 @@ class UserLoginActivity : AppCompatActivity() {
                 when (it) {
                     // 게정없음
                     is FirebaseAuthInvalidUserException -> {
-                        if (password == "shinhan1") {
+                        if (password == "shinhan1!") {
                             viewModel.registerUser(User(
                                 employee_no = employeeNo,
                                 user_pw = password
