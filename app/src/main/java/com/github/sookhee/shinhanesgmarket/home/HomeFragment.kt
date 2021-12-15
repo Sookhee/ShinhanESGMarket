@@ -42,7 +42,6 @@ class HomeFragment : Fragment() {
 
         viewModel.getBannerList()
         viewModel.getCategoryList()
-        viewModel.getProductList(distance, loginInfo.community_code)
 
         setOnClickListener()
         observeFlow()
@@ -224,7 +223,7 @@ class HomeFragment : Fragment() {
 
     private fun initRefreshLayout() {
         binding.refreshLayout.setOnRefreshListener {
-            viewModel.getProductList(distance, loginInfo.community_code)
+            viewModel.getProductList(distance, loginInfo)
         }
     }
 
@@ -248,7 +247,7 @@ class HomeFragment : Fragment() {
             onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                     distance = distanceList[position].second
-                    viewModel.getProductList(distance, loginInfo.community_code)
+                    viewModel.getProductList(distance, loginInfo)
                     binding.refreshLayout.isRefreshing = true
                 }
 

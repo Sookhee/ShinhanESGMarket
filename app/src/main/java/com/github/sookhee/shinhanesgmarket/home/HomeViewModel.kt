@@ -9,12 +9,15 @@ import androidx.lifecycle.viewModelScope
 import com.github.sookhee.domain.entity.Banner
 import com.github.sookhee.domain.entity.Category
 import com.github.sookhee.domain.entity.Product
+import com.github.sookhee.domain.entity.User
 import com.github.sookhee.domain.usecase.GetBannerListUseCase
 import com.github.sookhee.domain.usecase.GetCategoryListUseCase
 import com.github.sookhee.domain.usecase.GetProductListUseCase
 import com.github.sookhee.domain.usecase.GetProductListWithQueryUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.lang.Math.*
+import kotlin.math.pow
 
 class HomeViewModel @ViewModelInject constructor(
     private val getCategoryListUseCase: GetCategoryListUseCase,
@@ -43,7 +46,7 @@ class HomeViewModel @ViewModelInject constructor(
         }
     }
 
-    fun getProductList(distance: DISTANCE, communityCode: String = "") {
+    fun getProductList(distance: DISTANCE, loginInfo: User) {
         viewModelScope.launch {
             try {
                 val result = when (distance) {
@@ -51,15 +54,17 @@ class HomeViewModel @ViewModelInject constructor(
                         getProductListUseCase()
                     }
                     DISTANCE.COMMUNITY -> {
-                        getProductListWithQueryUseCase(key = "community_code", value = communityCode)
+                        getProductListWithQueryUseCase(key = "community_code", value = loginInfo.community_code)
                     }
                     DISTANCE.FIVE_KM -> {
-                        val tempList = getProductListUseCase()
-                        tempList
+                        getProductListUseCase().filter {
+                            getDistance(it.area_latitude, it.area_longitude, loginInfo.latitude, loginInfo.longitude) <= 5000
+                        }
                     }
                     DISTANCE.TEN_KM -> {
-                        val tempList = getProductListUseCase()
-                        tempList
+                        getProductListUseCase().filter {
+                            getDistance(it.area_latitude, it.area_longitude, loginInfo.latitude, loginInfo.longitude) <= 10000
+                        }
                     }
                 }
                 _productList.postValue(result)
@@ -69,6 +74,17 @@ class HomeViewModel @ViewModelInject constructor(
                 Log.i(TAG, "getProductList Exception: $e")
             }
         }
+    }
+
+    private fun getDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Int {
+        val R = 6372.8 * 1000
+
+        val dLat = toRadians(lat2 - lat1)
+        val dLon = toRadians(lon2 - lon1)
+        val a = kotlin.math.sin(dLat / 2).pow(2.0) + kotlin.math.sin(dLon / 2).pow(2.0) * kotlin.math.cos(toRadians(lat1)) * kotlin.math.cos(toRadians(lat2))
+        val c = 2 * kotlin.math.asin(kotlin.math.sqrt(a))
+
+        return (R * c).toInt()
     }
 
     fun getBannerList() {
