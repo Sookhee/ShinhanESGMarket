@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">신한마켓(beta)</string>
+    <string name="app_name">도레미마켓\n(베타)</string>
 
     // navigation
     <string name="navigation_home">홈</string>
