@@ -39,8 +39,10 @@
         <entry key="app/src/main/res/layout/item_product.xml" value="0.17847549456362957" />
         <entry key="app/src/main/res/layout/item_product_grid.xml" value="0.14010416666666667" />
         <entry key="app/src/main/res/layout/item_spinner.xml" value="0.128125" />
-        <entry key="app/src/main/res/layout/layout_custom_dialog.xml" value="0.42356687898089174" />
+        <entry key="app/src/main/res/layout/layout_custom_dialog.xml" value="0.37215680568087084" />
         <entry key="app/src/main/res/layout/layout_home_spinner_expand.xml" value="0.5" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.15" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.15052083333333333" />
       </map>
     </option>
   </component>

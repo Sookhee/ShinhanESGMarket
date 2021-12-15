@@ -1,8 +1,13 @@
 package com.github.sookhee.shinhanesgmarket.product
 
+import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Window
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.github.sookhee.shinhanesgmarket.AppApplication
@@ -73,6 +78,35 @@ class ProductActivity : AppCompatActivity() {
                 binding.productHeart.setImageResource(R.drawable.ic_heart_off)
             } else {
                 binding.productHeart.setImageResource(R.drawable.ic_heart_on)
+            }
+        }
+
+        viewModel.stateError.observe(this) {
+            if (it) {
+                val dialog = Dialog(this).apply {
+                    requestWindowFeature(Window.FEATURE_NO_TITLE)
+                    setContentView(R.layout.layout_custom_dialog)
+                }
+
+                showErrorDialog(dialog)
+            }
+        }
+    }
+
+    private fun showErrorDialog(dialog: Dialog) {
+        dialog.show()
+
+        dialog.findViewById<ImageView>(R.id.dialogImage).apply {
+            setImageResource(R.drawable.dialog_exception)
+            (layoutParams as LinearLayout.LayoutParams).setMargins(200, 0, 200, 0)
+        }
+
+        dialog.findViewById<TextView>(R.id.dialogText).text = getString(R.string.dialog_exception)
+
+        dialog.findViewById<TextView>(R.id.dialogButton).apply {
+            text = getString(R.string.dialog_close)
+            setOnClickListener {
+                dialog.dismiss()
             }
         }
     }

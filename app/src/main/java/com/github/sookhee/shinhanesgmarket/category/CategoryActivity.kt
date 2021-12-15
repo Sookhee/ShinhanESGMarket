@@ -1,9 +1,15 @@
 package com.github.sookhee.shinhanesgmarket.category
 
+import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Window
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import com.github.sookhee.shinhanesgmarket.R
 import com.github.sookhee.shinhanesgmarket.databinding.ActivityCategoryBinding
 import com.github.sookhee.shinhanesgmarket.home.ProductAdapter
 import com.github.sookhee.shinhanesgmarket.product.ProductActivity
@@ -55,6 +61,36 @@ class CategoryActivity : AppCompatActivity() {
     private fun setObserver() {
         viewModel.productList.observe(this) {
             (binding.categoryRecyclerView.adapter as ProductAdapter).setItem(it)
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
+
+        viewModel.stateError.observe(this) {
+            if (it) {
+                val dialog = Dialog(this).apply {
+                    requestWindowFeature(Window.FEATURE_NO_TITLE)
+                    setContentView(R.layout.layout_custom_dialog)
+                }
+
+                showErrorDialog(dialog)
+            }
+        }
+    }
+
+    private fun showErrorDialog(dialog: Dialog) {
+        dialog.show()
+
+        dialog.findViewById<ImageView>(R.id.dialogImage).apply {
+            setImageResource(R.drawable.dialog_exception)
+            (layoutParams as LinearLayout.LayoutParams).setMargins(200, 0, 200, 0)
+        }
+
+        dialog.findViewById<TextView>(R.id.dialogText).text = getString(R.string.dialog_exception)
+
+        dialog.findViewById<TextView>(R.id.dialogButton).apply {
+            text = getString(R.string.dialog_close)
+            setOnClickListener {
+                dialog.dismiss()
+            }
         }
     }
 

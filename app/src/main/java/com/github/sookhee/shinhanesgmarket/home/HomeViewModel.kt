@@ -35,6 +35,9 @@ class HomeViewModel @ViewModelInject constructor(
     private val _bannerList = MutableLiveData<List<Banner>>()
     val bannerList: LiveData<List<Banner>> = _bannerList
 
+    private val _stateError = MutableLiveData<Boolean>()
+    val stateError: LiveData<Boolean> = _stateError
+
     fun getCategoryList() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -44,6 +47,7 @@ class HomeViewModel @ViewModelInject constructor(
                 AppApplication.getInstance().setCategoryList(result)
             } catch (e: Exception) {
                 Log.i(TAG, "getCategoryList Exception: $e")
+                _stateError.postValue(true)
             }
         }
     }
@@ -74,6 +78,7 @@ class HomeViewModel @ViewModelInject constructor(
                 Log.i(TAG, "getProductList SUCCESS: $result")
             } catch (e: Exception) {
                 Log.i(TAG, "getProductList Exception: $e")
+                _stateError.postValue(true)
             }
         }
     }
@@ -95,7 +100,8 @@ class HomeViewModel @ViewModelInject constructor(
                 val result = getBannerListUseCase()
                 _bannerList.postValue(result)
             } catch (e: Exception) {
-                Log.i(TAG, "getCategoryList Exception: $e")
+                Log.i(TAG, "getBannerList Exception: $e")
+                _stateError.postValue(true)
             }
         }
     }

@@ -22,17 +22,19 @@ class ProductViewModel @ViewModelInject constructor(
     val product: LiveData<Product> = _product
 
     private val _isLikeProduct = MutableLiveData<String>()
-    val isLikeProduct: LiveData<String>
-        get() = _isLikeProduct
+    val isLikeProduct: LiveData<String> = _isLikeProduct
+
+    private val _stateError = MutableLiveData<Boolean>()
+    val stateError: LiveData<Boolean> = _stateError
 
     fun getProductDetail(productId: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val result = getProductDetailUseCase(productId)
                 _product.postValue(result)
-
             } catch (e: Exception) {
                 Log.i(TAG, "getProductDetail Exception: $e")
+                _stateError.postValue(true)
             }
         }
     }
@@ -44,6 +46,7 @@ class ProductViewModel @ViewModelInject constructor(
                 _isLikeProduct.value = result
             } catch (e: Exception) {
                 Log.i(TAG, "isLikeProduct Exception: $e")
+                _stateError.postValue(true)
             }
         }
     }
@@ -65,6 +68,7 @@ class ProductViewModel @ViewModelInject constructor(
             db.collection("user_like")
                 .add(data)
                 .addOnSuccessListener { _isLikeProduct.value = it.id }
+                .addOnFailureListener { _stateError.postValue(true) }
         }
     }
 

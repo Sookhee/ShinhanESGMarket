@@ -1,6 +1,8 @@
 package com.github.sookhee.shinhanesgmarket.register
 
+import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,6 +18,9 @@ import kotlin.collections.HashMap
 class RegisterViewModel @ViewModelInject constructor(
     private val registerProductUseCase: RegisterProductUseCase
 ) : ViewModel() {
+    private val _stateError = MutableLiveData<Boolean>()
+    val stateError: LiveData<Boolean> = _stateError
+
     private val simpleDate = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault())
 
     val title = MutableLiveData<String>()
@@ -45,6 +50,8 @@ class RegisterViewModel @ViewModelInject constructor(
             try {
                 registerProductUseCase(product)
             } catch (e: Exception) {
+                Log.i("민지", "registerProduct Exception: $e")
+                _stateError.postValue(true)
             }
         }
     }

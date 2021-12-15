@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.*
+import androidx.core.view.marginStart
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -23,6 +24,9 @@ import com.github.sookhee.shinhanesgmarket.product.ProductActivity
 import com.github.sookhee.shinhanesgmarket.search.SearchActivity
 import com.github.sookhee.shinhanesgmarket.utils.setGone
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -76,6 +80,17 @@ class HomeFragment : Fragment() {
             if (it.isNotEmpty()) {
                 initBanner(it)
                 initBannerIndicator(it.size)
+            }
+        }
+
+        viewModel.stateError.observe(viewLifecycleOwner) {
+            if (it) {
+                val dialog = Dialog(requireContext()).apply {
+                    requestWindowFeature(Window.FEATURE_NO_TITLE)
+                    setContentView(R.layout.layout_custom_dialog)
+                }
+
+                showErrorDialog(dialog)
             }
         }
     }
@@ -184,6 +199,24 @@ class HomeFragment : Fragment() {
 
         dialog.findViewById<TextView>(R.id.dialogButton).apply {
             text = getString(R.string.dialog_coming_soon)
+            setOnClickListener {
+                dialog.dismiss()
+            }
+        }
+    }
+
+    private fun showErrorDialog(dialog: Dialog) {
+        dialog.show()
+
+        dialog.findViewById<ImageView>(R.id.dialogImage).apply {
+            setImageResource(R.drawable.dialog_exception)
+            (layoutParams as LinearLayout.LayoutParams).setMargins(200, 0, 200, 0)
+        }
+
+        dialog.findViewById<TextView>(R.id.dialogText).text = getString(R.string.dialog_exception)
+
+        dialog.findViewById<TextView>(R.id.dialogButton).apply {
+            text = getString(R.string.dialog_close)
             setOnClickListener {
                 dialog.dismiss()
             }

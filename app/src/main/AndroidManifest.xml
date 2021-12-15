@@ -26,13 +26,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".user.UserRegisterInfoActivity"
-            android:exported="true" />
-        <activity
             android:name=".user.UserLoginActivity"
-            android:exported="true" />
-        <activity
-            android:name=".user.UserJoinActivity"
             android:exported="true" />
         <activity
             android:name=".search.SearchActivity"

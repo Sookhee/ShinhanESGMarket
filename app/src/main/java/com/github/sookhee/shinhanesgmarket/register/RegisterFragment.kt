@@ -2,6 +2,7 @@ package com.github.sookhee.shinhanesgmarket.register
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
@@ -10,9 +11,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Toast
+import android.view.Window
+import android.widget.*
 import androidx.lifecycle.ViewModelProvider
 import com.github.sookhee.shinhanesgmarket.AppApplication
 import com.github.sookhee.shinhanesgmarket.MainActivity
@@ -46,6 +46,8 @@ class RegisterFragment : Fragment() {
         setOnClickListener()
         initPhotoRecyclerView()
         initSpinner()
+
+        setObserver()
 
         return binding.root
     }
@@ -144,6 +146,37 @@ class RegisterFragment : Fragment() {
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
                 }
+            }
+        }
+    }
+
+    private fun setObserver() {
+        viewModel.stateError.observe(viewLifecycleOwner) {
+            if (it) {
+                val dialog = Dialog(requireContext()).apply {
+                    requestWindowFeature(Window.FEATURE_NO_TITLE)
+                    setContentView(R.layout.layout_custom_dialog)
+                }
+
+                showErrorDialog(dialog)
+            }
+        }
+    }
+
+    private fun showErrorDialog(dialog: Dialog) {
+        dialog.show()
+
+        dialog.findViewById<ImageView>(R.id.dialogImage).apply {
+            setImageResource(R.drawable.dialog_exception)
+            (layoutParams as LinearLayout.LayoutParams).setMargins(200, 0, 200, 0)
+        }
+
+        dialog.findViewById<TextView>(R.id.dialogText).text = getString(R.string.dialog_exception)
+
+        dialog.findViewById<TextView>(R.id.dialogButton).apply {
+            text = getString(R.string.dialog_close)
+            setOnClickListener {
+                dialog.dismiss()
             }
         }
     }

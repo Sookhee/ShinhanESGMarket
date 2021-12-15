@@ -17,14 +17,17 @@ class CategoryViewModel @ViewModelInject constructor(
     private val _productList: MutableLiveData<List<Product>> = MutableLiveData()
     val productList: LiveData<List<Product>> = _productList
 
+    private val _stateError = MutableLiveData<Boolean>()
+    val stateError: LiveData<Boolean> = _stateError
+
     fun getProductListWithCategory(categoryId: String) {
         viewModelScope.launch {
             try {
                 val result = getProductListWithQueryUseCase(key = "category_id", value = categoryId)
                 _productList.value = result
-                Log.i("민지", "result: $result")
             } catch (e: Exception) {
                 Log.i("민지", "getProductListWithCategory Exception: $e")
+                _stateError.value = true
             }
         }
     }
