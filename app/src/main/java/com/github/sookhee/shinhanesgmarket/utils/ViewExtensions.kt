@@ -38,7 +38,6 @@ fun ImageView.setImageWithUrl(url: String, radius: Int = 0) {
         .diskCacheStrategy(DiskCacheStrategy.RESOURCE) // 디스크 캐시 리소스
         .skipMemoryCache(true) // 메모리 캐시 사용안함.
         .priority(Priority.HIGH) // 처리순서
-        .centerCrop()
 
     if (radius != 0) options.transform(RoundedCorners(radius))
 
