@@ -5,7 +5,7 @@ import com.github.sookhee.domain.entity.Product
 interface ProductRepository {
     suspend fun getProductList(): List<Product>
 
-    suspend fun registerProduct(product: Product)
+    suspend fun registerProduct(product: Product): Boolean
 
     suspend fun getProductDetail(productId: String): Product
 

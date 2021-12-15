@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    val homeFragment by lazy { HomeFragment() }
+    private val homeFragment by lazy { HomeFragment() }
     private val registerFragment by lazy { RegisterFragment() }
     private val mypageFragment by lazy { MypageFragment() }
     private val chattingFragment by lazy { ChattingFragment() }
@@ -37,11 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setOnClickListener() {
         binding.home.setOnClickListener {
-            setFragment(homeFragment)
-            binding.homeImage.setImageResource(R.drawable.ic_home_on)
-            binding.registerImage.setImageResource(R.drawable.ic_plus_off)
-            binding.chattingImage.setImageResource(R.drawable.ic_chat_off)
-            binding.mypageImage.setImageResource(R.drawable.ic_user_off)
+            setHomeFragmentFocus()
         }
 
         binding.register.setOnClickListener {
@@ -69,7 +65,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun setFragment(currentFragment: Fragment) {
+    fun setHomeFragmentFocus() {
+        setFragment(homeFragment)
+        binding.homeImage.setImageResource(R.drawable.ic_home_on)
+        binding.registerImage.setImageResource(R.drawable.ic_plus_off)
+        binding.chattingImage.setImageResource(R.drawable.ic_chat_off)
+        binding.mypageImage.setImageResource(R.drawable.ic_user_off)
+    }
+
+    private fun setFragment(currentFragment: Fragment) {
         val fm = supportFragmentManager.beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).hide(activeFragment)
 

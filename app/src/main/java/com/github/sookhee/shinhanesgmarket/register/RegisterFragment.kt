@@ -96,18 +96,12 @@ class RegisterFragment : Fragment() {
 
             if (needItem.size == 0) {
                 viewModel.registerProduct(loginInfo, photoList, category ?: "")
-
                 Toast.makeText(
                     context,
-                    "등록 성공",
+                    "등록중",
                     Toast.LENGTH_SHORT
                 ).show()
-
-                binding.titleEditText.text = null
-                binding.mainEditText.text = null
-                binding.priceEditText.text = null
-
-                (activity as MainActivity).setFragment((activity as MainActivity).homeFragment)
+                binding.btnSubmit.isClickable = false
             } else {
                 Toast.makeText(
                     context,
@@ -160,6 +154,31 @@ class RegisterFragment : Fragment() {
                 }
 
                 showErrorDialog(dialog)
+            }
+        }
+
+        viewModel.stateSuccess.observe(viewLifecycleOwner) {
+            binding.btnSubmit.isClickable = true
+            if (it){
+                Toast.makeText(
+                    context,
+                    "등록 성공",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                binding.titleEditText.text = null
+                binding.mainEditText.text = null
+                binding.priceEditText.text = null
+                binding.photoCountText.text = "0/10"
+                (binding.photoRecyclerView.adapter as PhotoAdapter).setItem(emptyList())
+
+                (activity as MainActivity).setHomeFragmentFocus()
+            } else {
+                Toast.makeText(
+                    context,
+                    "등록 실패ㅠㅠ 다시 시도해주세요",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }

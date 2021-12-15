@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class RegisterProductUseCaseImpl @Inject constructor(private val repository: ProductRepository) :
     RegisterProductUseCase {
-    override suspend fun invoke(product: Product) {
-        repository.registerProduct(product)
+    override suspend fun invoke(product: Product): Boolean {
+        return repository.registerProduct(product)
     }
 }

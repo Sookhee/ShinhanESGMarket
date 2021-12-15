@@ -38,6 +38,14 @@ class HomeFragment : Fragment() {
     private var loginInfo: User = User()
     private var distance: DISTANCE = DISTANCE.ALL
 
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+
+        if (!hidden) {
+            viewModel.getProductList(distance, loginInfo)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

@@ -13,7 +13,7 @@ interface ProductDataSource {
 
     suspend fun getLikeProductList(userId: String): List<ProductResponse>
 
-    suspend fun registerProduct(product: ProductRequest)
+    suspend fun registerProduct(product: ProductRequest): Boolean
 
     suspend fun uploadProductImage(photoList: HashMap<String, String>): List<String>
 }

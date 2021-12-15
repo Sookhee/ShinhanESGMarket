@@ -1,5 +1,6 @@
 package com.github.sookhee.data.datasource
 
+import android.util.Log
 import androidx.core.net.toUri
 import com.github.sookhee.data.spec.ProductRequest
 import com.github.sookhee.data.spec.ProductResponse
@@ -62,10 +63,13 @@ class ProductDataSourceImpl @Inject constructor(
         return productList
     }
 
-    override suspend fun registerProduct(product: ProductRequest) {
-        FirebaseFirestore.getInstance()
+    override suspend fun registerProduct(product: ProductRequest): Boolean {
+        val result = FirebaseFirestore.getInstance()
             .collection(COLLECTION)
             .add(product)
+            .await()
+
+        return result.id.isNotEmpty()
     }
 
     override suspend fun getProductDetail(productId: String): ProductResponse {

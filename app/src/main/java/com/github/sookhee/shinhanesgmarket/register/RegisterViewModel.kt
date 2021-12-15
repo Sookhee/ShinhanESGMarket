@@ -21,6 +21,9 @@ class RegisterViewModel @ViewModelInject constructor(
     private val _stateError = MutableLiveData<Boolean>()
     val stateError: LiveData<Boolean> = _stateError
 
+    private val _stateSuccess = MutableLiveData<Boolean>()
+    val stateSuccess: LiveData<Boolean> = _stateSuccess
+
     private val simpleDate = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault())
 
     val title = MutableLiveData<String>()
@@ -48,7 +51,8 @@ class RegisterViewModel @ViewModelInject constructor(
 
         viewModelScope.launch {
             try {
-                registerProductUseCase(product)
+                val result = registerProductUseCase(product)
+                _stateSuccess.postValue(result)
             } catch (e: Exception) {
                 Log.i("민지", "registerProduct Exception: $e")
                 _stateError.postValue(true)

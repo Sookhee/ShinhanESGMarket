@@ -42,7 +42,7 @@ class ProductRepositoryImpl @Inject constructor(
         return productList
     }
 
-    override suspend fun registerProduct(product: Product) {
+    override suspend fun registerProduct(product: Product): Boolean {
         val photoList = dataSource.uploadProductImage(product.photoList)
 
         val productRequest = ProductRequest(
@@ -63,7 +63,7 @@ class ProductRepositoryImpl @Inject constructor(
             updated_at = product.updated_at
         )
 
-        dataSource.registerProduct(productRequest)
+        return dataSource.registerProduct(productRequest)
     }
 
     override suspend fun getProductDetail(productId: String): Product {
