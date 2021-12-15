@@ -22,14 +22,14 @@ class RegisterViewModel @ViewModelInject constructor(
     val price = MutableLiveData<String>()
     val content = MutableLiveData<String>()
 
-    fun registerProduct(loginInfo: User, photoList: HashMap<String, String>, category: Int) {
+    fun registerProduct(loginInfo: User, photoList: HashMap<String, String>, category: String) {
         val product = Product(
             area_community_code = loginInfo.community_code,
             area_id = loginInfo.branch_no,
             area_latitude = loginInfo.latitude,
             area_longitude = loginInfo.longitude,
             area_name = loginInfo.branch_nm,
-            category_id = "",
+            category_id = category,
             content = content.value.toString(),
             created_at = simpleDate.format(Date(System.currentTimeMillis())),
             owner_id = loginInfo.employee_no,

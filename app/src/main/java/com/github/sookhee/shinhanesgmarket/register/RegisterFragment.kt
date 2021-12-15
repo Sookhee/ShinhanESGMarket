@@ -32,7 +32,7 @@ class RegisterFragment : Fragment() {
     private val loginInfo = app.getLoginInfo()
 
     private val photoList = hashMapOf<String, String>()
-    private var category: Int? = null
+    private var category: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -92,7 +92,7 @@ class RegisterFragment : Fragment() {
             }
 
             if (needItem.size == 0) {
-                viewModel.registerProduct(loginInfo, photoList, category ?: 0)
+                viewModel.registerProduct(loginInfo, photoList, category ?: "")
 
                 Toast.makeText(
                     context,
@@ -134,12 +134,12 @@ class RegisterFragment : Fragment() {
     }
 
     private fun initSpinner() {
-        val categoryList = arrayOf("기부", "무료나눔", "도서", "생활가전", "디지털기기", "스포츠", "여성의류", "남성의류")
+        val categoryList = AppApplication.getInstance().getCategoryList()
         binding.categorySpinner.apply {
-            adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, categoryList)
+            adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, categoryList.map {it.name})
             onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                    category = position
+                    category = categoryList[position].id
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {

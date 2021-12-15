@@ -1,6 +1,7 @@
 package com.github.sookhee.shinhanesgmarket
 
 import android.app.Application
+import com.github.sookhee.domain.entity.Category
 import com.github.sookhee.domain.entity.User
 import dagger.hilt.android.HiltAndroidApp
 
@@ -19,10 +20,19 @@ class AppApplication : Application() {
         return loginInfo
     }
 
+    fun setCategoryList(list: List<Category>) {
+        categoryList = list
+    }
+
+    fun getCategoryList(): List<Category> {
+        return categoryList
+    }
+
     companion object {
         private lateinit var instance: AppApplication
         fun getInstance(): AppApplication = instance
 
         private var loginInfo = User()
+        private var categoryList: List<Category> = listOf()
     }
 }

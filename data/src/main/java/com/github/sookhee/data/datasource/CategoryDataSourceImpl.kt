@@ -14,7 +14,7 @@ class CategoryDataSourceImpl @Inject constructor() : CategoryDataSource {
             .get().await()
 
         for (document in resultList) {
-            val id = document.getLong(KEY_ID)?.toInt() ?: 0
+            val id = document.id
             val name = document.getString(KEY_NAME) ?: ""
             val icon = document.getString(KEY_ICON) ?: ""
             categoryList.add(CategoryResponse(id, name, icon))

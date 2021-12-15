@@ -14,6 +14,7 @@ import com.github.sookhee.domain.usecase.GetBannerListUseCase
 import com.github.sookhee.domain.usecase.GetCategoryListUseCase
 import com.github.sookhee.domain.usecase.GetProductListUseCase
 import com.github.sookhee.domain.usecase.GetProductListWithQueryUseCase
+import com.github.sookhee.shinhanesgmarket.AppApplication
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Math.*
@@ -40,6 +41,7 @@ class HomeViewModel @ViewModelInject constructor(
                 val result = getCategoryListUseCase()
                 _categoryList.postValue(result)
 
+                AppApplication.getInstance().setCategoryList(result)
             } catch (e: Exception) {
                 Log.i(TAG, "getCategoryList Exception: $e")
             }
