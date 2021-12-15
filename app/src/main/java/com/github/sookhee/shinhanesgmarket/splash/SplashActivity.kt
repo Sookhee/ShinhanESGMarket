@@ -43,17 +43,20 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun checkLoginState() {
-        val currentUser = Firebase.auth.currentUser
-        if (currentUser != null) {
-            val employeeNo = currentUser.email.toString().replace("@doremi.com", "")
+//        val currentUser = Firebase.auth.currentUser
+//        if (false) {
+//            val employeeNo = currentUser?.email.toString().replace("@doremi.com", "")
+//
+//            loginIntent = Intent(this, MainActivity::class.java)
+//
+//            viewModel.getUserInfo(employeeNo)
+//        } else {
+//            loginIntent = Intent(this, UserLoginActivity::class.java)
+//            startActivity(loginIntent)
+//        }
 
-            loginIntent = Intent(this, MainActivity::class.java)
-
-            viewModel.getUserInfo(employeeNo)
-        } else {
-            loginIntent = Intent(this, UserLoginActivity::class.java)
-            startActivity(loginIntent)
-        }
+        loginIntent = Intent(this, UserLoginActivity::class.java)
+        startActivity(loginIntent)
     }
 
     private fun setObserver() {

@@ -10,47 +10,22 @@
 
         <Spinner
             android:id="@+id/distanceSpinner"
-            android:layout_width="160dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             app:layout_constraintBottom_toTopOf="@id/toolbarGuideLine"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/toolbar" />
-
-        <LinearLayout
-            android:id="@+id/toolbar"
-            android:layout_width="wrap_content"
-            android:layout_height="56dp"
-            android:gravity="center_vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/btnSearch"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:padding="14dp"
-                android:src="@drawable/ic_search" />
-
-            <ImageView
-                android:id="@+id/btnAlarm"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:padding="14dp"
-                android:src="@drawable/ic_alarm" />
-
-        </LinearLayout>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <View
             android:id="@+id/toolbarGuideLine"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginTop="56dp"
             android:background="@color/gray100"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/refreshLayout"

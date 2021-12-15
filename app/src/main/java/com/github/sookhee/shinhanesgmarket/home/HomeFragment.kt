@@ -44,7 +44,6 @@ class HomeFragment : Fragment() {
         viewModel.getBannerList()
         viewModel.getCategoryList()
 
-        setOnClickListener()
         observeFlow()
 
         initProductRecyclerView()
@@ -78,17 +77,6 @@ class HomeFragment : Fragment() {
                 initBanner(it)
                 initBannerIndicator(it.size)
             }
-        }
-    }
-
-    private fun setOnClickListener() {
-        binding.btnSearch.setOnClickListener {
-            val intent = Intent(context, SearchActivity::class.java)
-            startActivity(intent)
-        }
-        binding.btnAlarm.setOnClickListener {
-            val intent = Intent(context, AlarmActivity::class.java)
-            startActivity(intent)
         }
     }
 

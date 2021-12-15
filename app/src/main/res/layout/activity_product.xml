@@ -11,15 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:elevation="10dp"
-        android:paddingHorizontal="16dp"
+        android:paddingHorizontal="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/btnBack"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:padding="8dp"
             android:src="@drawable/ic_back_off"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,23 +28,14 @@
 
         <ImageView
             android:id="@+id/btnHome"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="16dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="8dp"
+            android:padding="8dp"
             android:src="@drawable/ic_home_white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/btnBack"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/btnMenu"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_dots_menu_off"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
