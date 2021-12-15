@@ -68,6 +68,7 @@ class RegisterFragment : Fragment() {
             }
 
             (binding.photoRecyclerView.adapter as PhotoAdapter).setItem(photoList.values.toList())
+            binding.photoCountText.text = "${photoList.values.toList().size}/10"
         }
     }
 

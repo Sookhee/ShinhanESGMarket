@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.140625" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1453125" />
         <entry key="app/src/main/res/drawable/background_circle.xml" value="0.15260416666666668" />
         <entry key="app/src/main/res/drawable/bubble_blue.xml" value="0.26197916666666665" />
         <entry key="app/src/main/res/drawable/bubble_white.xml" value="0.2326924496128678" />
@@ -17,9 +18,9 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.38802395209580837" />
         <entry key="app/src/main/res/layout/activity_product.xml" value="0.27319587628865977" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.14191852825229961" />
-        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.10051772407049245" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.2963975890376781" />
         <entry key="app/src/main/res/layout/activity_user_join.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_user_login.xml" value="0.31926259064816226" />
+        <entry key="app/src/main/res/layout/activity_user_login.xml" value="0.27358490566037735" />
         <entry key="app/src/main/res/layout/activity_user_register_info.xml" value="0.3293658695921618" />
         <entry key="app/src/main/res/layout/activity_write.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_chatting.xml" value="0.13294906073437404" />
@@ -51,5 +52,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.2963975890376781" />
+      </ProjectState>
+    </option>
   </component>
 </project>

@@ -150,10 +150,10 @@ class UserLoginActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        binding.inputEmployeeNo.setOnKeyListener { v, keyCode, event ->
-            if (keyCode == KeyEvent.KEYCODE_ENTER) return@setOnKeyListener true
-            return@setOnKeyListener false
-        }
+//        binding.inputEmployeeNo.setOnKeyListener { v, keyCode, event ->
+//            if (keyCode == KeyEvent.KEYCODE_ENTER) return@setOnKeyListener true
+//            return@setOnKeyListener false
+//        }
     }
 
     companion object {

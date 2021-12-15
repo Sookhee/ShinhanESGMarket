@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/loginImage"
-        android:layout_width="160dp"
-        android:layout_height="120dp"
+        android:layout_width="240dp"
+        android:layout_height="160dp"
         android:src="@drawable/image_login" />
 
     <TextView
@@ -29,7 +29,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:nextFocusDown="@id/inputPassword"
         android:theme="@style/EditTextTheme" />
 
     <TextView
