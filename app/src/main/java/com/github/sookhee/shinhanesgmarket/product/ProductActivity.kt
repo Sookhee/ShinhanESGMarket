@@ -67,7 +67,6 @@ class ProductActivity : AppCompatActivity() {
                     viewType = PhotoAdapter.Companion.PhotoViewType.MATCH_PARENT
                     items = product.photoList.values.toList()
                     onItemClick = {
-                        Toast.makeText(context, "click: $it", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
