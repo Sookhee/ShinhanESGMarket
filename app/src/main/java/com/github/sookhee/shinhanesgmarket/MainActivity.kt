@@ -2,6 +2,7 @@ package com.github.sookhee.shinhanesgmarket
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.github.sookhee.shinhanesgmarket.chatting.ChattingFragment
@@ -20,10 +21,6 @@ class MainActivity : AppCompatActivity() {
     private val mypageFragment by lazy { MypageFragment() }
     private val chattingFragment by lazy { ChattingFragment() }
     private var activeFragment = homeFragment as Fragment
-
-    override fun onStart() {
-        super.onStart()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,6 +80,13 @@ class MainActivity : AppCompatActivity() {
         } else if (activeFragment != currentFragment) {
             fm.show(currentFragment).commit()
         }
+
+        keyboardDown()
         activeFragment = currentFragment
+    }
+
+    private fun keyboardDown() {
+        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(window.decorView.rootView.windowToken, 0)
     }
 }
