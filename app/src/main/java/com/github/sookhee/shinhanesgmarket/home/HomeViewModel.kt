@@ -12,6 +12,7 @@ import com.github.sookhee.domain.entity.Product
 import com.github.sookhee.domain.usecase.GetBannerListUseCase
 import com.github.sookhee.domain.usecase.GetCategoryListUseCase
 import com.github.sookhee.domain.usecase.GetProductListUseCase
+import com.github.sookhee.domain.usecase.GetProductListWithQueryUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -19,6 +20,7 @@ class HomeViewModel @ViewModelInject constructor(
     private val getCategoryListUseCase: GetCategoryListUseCase,
     private val getProductListUseCase: GetProductListUseCase,
     private val getBannerListUseCase: GetBannerListUseCase,
+    private val getProductListWithQueryUseCase: GetProductListWithQueryUseCase
 ) : ViewModel() {
     private val _categoryList = MutableLiveData<List<Category>>()
     val categoryList: LiveData<List<Category>> = _categoryList
@@ -41,10 +43,25 @@ class HomeViewModel @ViewModelInject constructor(
         }
     }
 
-    fun getProductList() {
+    fun getProductList(distance: DISTANCE, communityCode: String = "") {
         viewModelScope.launch {
             try {
-                val result = getProductListUseCase()
+                val result = when (distance) {
+                    DISTANCE.ALL -> {
+                        getProductListUseCase()
+                    }
+                    DISTANCE.COMMUNITY -> {
+                        getProductListWithQueryUseCase(key = "community_code", value = communityCode)
+                    }
+                    DISTANCE.FIVE_KM -> {
+                        val tempList = getProductListUseCase()
+                        tempList
+                    }
+                    DISTANCE.TEN_KM -> {
+                        val tempList = getProductListUseCase()
+                        tempList
+                    }
+                }
                 _productList.postValue(result)
 
                 Log.i(TAG, "getProductList SUCCESS: $result")

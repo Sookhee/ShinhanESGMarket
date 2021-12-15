@@ -31,6 +31,7 @@ class HomeFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel
 
     private var loginInfo: User = User()
+    private var distance: DISTANCE = DISTANCE.ALL
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +42,7 @@ class HomeFragment : Fragment() {
 
         viewModel.getBannerList()
         viewModel.getCategoryList()
-        viewModel.getProductList()
+        viewModel.getProductList(distance, loginInfo.community_code)
 
         setOnClickListener()
         observeFlow()
@@ -223,7 +224,7 @@ class HomeFragment : Fragment() {
 
     private fun initRefreshLayout() {
         binding.refreshLayout.setOnRefreshListener {
-            viewModel.getProductList()
+            viewModel.getProductList(distance, loginInfo.community_code)
         }
     }
 
@@ -246,19 +247,14 @@ class HomeFragment : Fragment() {
             adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, distanceList.map { it.first })
             onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                    Toast.makeText(context, "CLICK ${distanceList[position].second}", Toast.LENGTH_SHORT).show()
+                    distance = distanceList[position].second
+                    viewModel.getProductList(distance, loginInfo.community_code)
+                    binding.refreshLayout.isRefreshing = true
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
-                    Toast.makeText(context, "NOTHING", Toast.LENGTH_SHORT).show()
                 }
             }
-        }
-    }
-
-    companion object {
-        enum class DISTANCE {
-            FIVE_KM, TEN_KM, COMMUNITY, ALL
         }
     }
 }
