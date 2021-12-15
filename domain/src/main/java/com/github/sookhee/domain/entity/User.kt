@@ -8,8 +8,8 @@ data class User(
     var user_pw: String = "",
     var branch_no: String = "",
     var branch_nm: String = "",
-    var latitude: Long = 0L,
-    var longitude: Long = 0L,
+    var latitude: Double = 0.0,
+    var longitude: Double = 0.0,
     var community_code: String = "",
     var community_name: String = "",
 )

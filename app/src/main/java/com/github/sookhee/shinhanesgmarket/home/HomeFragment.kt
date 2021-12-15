@@ -229,11 +229,11 @@ class HomeFragment : Fragment() {
 
     private fun initDistanceSpinner() {
         val distanceList = arrayListOf<Pair<String, DISTANCE>>()
-        if (false) { // 커뮤니티 없으면
+        if (loginInfo.community_code == "0" || loginInfo.community_code.isBlank()) { // 커뮤니티 없으면
             distanceList.add(Pair("5km", DISTANCE.FIVE_KM))
             distanceList.add(Pair("10km", DISTANCE.TEN_KM))
             distanceList.add(Pair("전체", DISTANCE.ALL))
-        } else if (false) { // 주소 없으면
+        } else if (loginInfo.latitude == 0.0 || loginInfo.longitude == 0.0) { // 주소 없으면
             distanceList.add(Pair("전체", DISTANCE.ALL))
         } else { // 일반적
             distanceList.add(Pair("5km", DISTANCE.FIVE_KM))

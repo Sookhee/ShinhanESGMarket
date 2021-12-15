@@ -25,8 +25,8 @@ class UserDataSourceImpl @Inject constructor() : UserDataSource {
             user_pw = user.getString(KEY_USER_PW)?.trim() ?: "",
             branch_no = user.getString(KEY_BRANCH_NO)?.trim() ?: "",
             branch_nm = user.getString(KEY_BRANCH_NM)?.trim() ?: "",
-            latitude = user.getLong(KEY_LATITUDE) ?: 0L,
-            longitude = user.getLong(KEY_LONGITUDE) ?: 0L,
+            latitude = user.getDouble(KEY_LATITUDE) ?: 0.0,
+            longitude = user.getDouble(KEY_LONGITUDE) ?: 0.0,
             community_code =  user.getString(KEY_COMMUNITY_CODE) ?: "",
             community_name = user.getString(KEY_COMMUNITY_NAME) ?: ""
         )
