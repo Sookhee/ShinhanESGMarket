@@ -53,7 +53,9 @@ class UserViewModel @ViewModelInject constructor(
                 }
             } catch (e: Exception) {
                 Log.i(TAG, "registerUser exception : $e")
-                _registerUserState.value = UserState.FAIL
+                if (!(e is IllegalArgumentException)) {
+                    _registerUserState.value = UserState.FAIL
+                }
             }
         }
     }

@@ -44,9 +44,9 @@ class UserDataSourceImpl @Inject constructor() : UserDataSource {
             }
             .await()
 
-        val updateResult = updateUserData(user)
+//        val updateResult = updateUserData(user)
 
-        return firebaseUser != null && updateResult
+        return firebaseUser != null
     }
 
     private suspend fun updateUserData(user: User): Boolean {

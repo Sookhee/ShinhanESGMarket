@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.Window
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -35,6 +36,7 @@ class UserLoginActivity : AppCompatActivity() {
 
         setOnClickListener()
         setObserver()
+        initView()
 
         setContentView(binding.root)
     }
@@ -112,7 +114,7 @@ class UserLoginActivity : AppCompatActivity() {
         viewModel.registerUserState.observe(this) {
             when(it){
                 UserState.SUCCESS -> {
-                    loginSuccess(binding.textEmployeeNo.text.toString())
+                    loginSuccess(binding.inputEmployeeNo.text.toString())
                 }
 
                 UserState.FAIL -> {
@@ -146,6 +148,14 @@ class UserLoginActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun initView() {
+        binding.inputEmployeeNo.setOnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER) return@setOnKeyListener true
+            return@setOnKeyListener false
+        }
+    }
+
     companion object {
         private val TAG = UserLoginActivity::class.simpleName
     }
