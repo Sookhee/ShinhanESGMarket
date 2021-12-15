@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ShinhanESGMarket">
         <activity
+            android:name=".category.CategoryActivity"
+            android:exported="true" />
+        <activity
             android:name=".splash.SplashActivity"
             android:exported="true">
             <intent-filter>

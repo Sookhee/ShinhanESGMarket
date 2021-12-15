@@ -17,6 +17,7 @@ import com.github.sookhee.domain.entity.User
 import com.github.sookhee.shinhanesgmarket.AppApplication
 import com.github.sookhee.shinhanesgmarket.R
 import com.github.sookhee.shinhanesgmarket.alarm.AlarmActivity
+import com.github.sookhee.shinhanesgmarket.category.CategoryActivity
 import com.github.sookhee.shinhanesgmarket.databinding.FragmentHomeBinding
 import com.github.sookhee.shinhanesgmarket.product.ProductActivity
 import com.github.sookhee.shinhanesgmarket.search.SearchActivity
@@ -215,7 +216,11 @@ class HomeFragment : Fragment() {
         binding.categoryRecyclerView.apply {
             adapter = CategoryAdapter().apply {
                 onItemClick = {
-                    Toast.makeText(context, "category: ${it.name}", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(context, CategoryActivity::class.java)
+                    intent.putExtra("category_id", it.id)
+                    intent.putExtra("category_name", it.name)
+
+                    startActivity(intent)
                 }
             }
         }
