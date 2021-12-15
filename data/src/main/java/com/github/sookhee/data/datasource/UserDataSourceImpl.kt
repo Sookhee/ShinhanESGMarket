@@ -24,7 +24,11 @@ class UserDataSourceImpl @Inject constructor() : UserDataSource {
             user_id = user.id,
             user_pw = user.getString(KEY_USER_PW)?.trim() ?: "",
             branch_no = user.getString(KEY_BRANCH_NO)?.trim() ?: "",
-            branch_nm = user.getString(KEY_BRANCH_NM)?.trim() ?: ""
+            branch_nm = user.getString(KEY_BRANCH_NM)?.trim() ?: "",
+            latitude = user.getLong(KEY_LATITUDE) ?: 0L,
+            longitude = user.getLong(KEY_LONGITUDE) ?: 0L,
+            community_code =  user.getString(KEY_COMMUNITY_CODE) ?: "",
+            community_name = user.getString(KEY_COMMUNITY_NAME) ?: ""
         )
     }
 
@@ -72,5 +76,9 @@ class UserDataSourceImpl @Inject constructor() : UserDataSource {
         private const val KEY_NICKNAME = "nickname"
         private const val KEY_USER_ID = "user_id"
         private const val KEY_USER_PW = "user_pw"
+        private const val KEY_LATITUDE = "latitude"
+        private const val KEY_LONGITUDE = "longitude"
+        private const val KEY_COMMUNITY_CODE = "community_code"
+        private const val KEY_COMMUNITY_NAME = "community_name"
     }
 }

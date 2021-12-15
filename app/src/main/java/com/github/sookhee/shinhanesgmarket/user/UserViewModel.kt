@@ -33,7 +33,6 @@ class UserViewModel @ViewModelInject constructor(
                 val userInfo = getUserInfoUseCase(employeeNo)
 
                 _searchUserState.value = UserState.SUCCESS
-                delay(500)
                 _userInfo.value = userInfo
             } catch (e: Exception) {
                 Log.i(TAG, "getUserInfo exception : $e")
