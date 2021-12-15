@@ -37,65 +37,90 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/profileImage"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_margin="16dp"
-        android:src="@color/gray300"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbarGuideLine" />
+    <!--    <ImageView-->
+    <!--        android:id="@+id/profileImage"-->
+    <!--        android:layout_width="60dp"-->
+    <!--        android:layout_height="60dp"-->
+    <!--        android:layout_margin="16dp"-->
+    <!--        android:src="@color/gray300"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/toolbarGuideLine" />-->
 
-    <TextView
-        android:id="@+id/profileName"
-        style="@style/Gray900.16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        app:layout_constraintStart_toEndOf="@id/profileImage"
-        app:layout_constraintTop_toTopOf="@id/profileImage"
-        tools:text="인사하는 몰리" />
+    <!--    <TextView-->
+    <!--        android:id="@+id/profileName"-->
+    <!--        style="@style/Gray900.16"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="16dp"-->
+    <!--        app:layout_constraintStart_toEndOf="@id/profileImage"-->
+    <!--        app:layout_constraintTop_toTopOf="@id/profileImage"-->
+    <!--        tools:text="인사하는 몰리" />-->
 
-    <TextView
-        android:id="@+id/profileArea"
-        style="@style/Gray600.13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintStart_toEndOf="@id/profileImage"
-        app:layout_constraintTop_toBottomOf="@id/profileName"
-        tools:text="부영태평빌딩 17층" />
+    <!--    <TextView-->
+    <!--        android:id="@+id/profileArea"-->
+    <!--        style="@style/Gray600.13"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="16dp"-->
+    <!--        android:layout_marginTop="4dp"-->
+    <!--        app:layout_constraintStart_toEndOf="@id/profileImage"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/profileName"-->
+    <!--        tools:text="부영태평빌딩 17층" />-->
 
-    <TextView
-        android:id="@+id/btnProfileSetting"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/gray_border_background"
+    <!--    <TextView-->
+    <!--        android:id="@+id/btnProfileSetting"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginHorizontal="16dp"-->
+    <!--        android:layout_marginTop="24dp"-->
+    <!--        android:background="@drawable/gray_border_background"-->
+    <!--        android:gravity="center"-->
+    <!--        android:paddingVertical="8dp"-->
+    <!--        android:text="프로필 수정"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/profileImage" />-->
+
+    <!--    <com.google.android.material.tabs.TabLayout-->
+    <!--        android:id="@+id/tabLayout"-->
+    <!--        style="@style/CustomTab"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="16dp"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/btnProfileSetting" />-->
+
+    <!--    <FrameLayout-->
+    <!--        android:id="@+id/frameLayout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/tabLayout" />-->
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:gravity="center"
-        android:paddingVertical="8dp"
-        android:text="프로필 수정"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profileImage" />
+        app:layout_constraintTop_toBottomOf="@id/toolbarGuideLine">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        style="@style/CustomTab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnProfileSetting" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:src="@drawable/dialog_coming_soon" />
 
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
+        <TextView
+            style="@style/Gray900.16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="32dp"
+            android:gravity="center"
+            android:lineSpacingExtra="3dp"
+            android:text="아직 준비 중인 페이지 입니다!\n빠른 시일내로 찾아뵙겠습니다." />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

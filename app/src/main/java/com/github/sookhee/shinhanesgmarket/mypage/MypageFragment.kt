@@ -51,37 +51,32 @@ class MypageFragment : Fragment() {
 
     private fun setOnClickListener() {
         binding.btnSetting.setOnClickListener {
-            Toast.makeText(
-                context,
-                "SETTING",
-                Toast.LENGTH_SHORT
-            ).show()
         }
     }
 
     private fun initTabLayout() {
-        binding.tabLayout.apply {
-            addTab(this.newTab().setText("판매내역"))
-            addTab(this.newTab().setText("관심목록"))
-
-            addOnTabSelectedListener(
-                object : TabLayout.OnTabSelectedListener {
-                    override fun onTabSelected(tab: TabLayout.Tab) {
-                        when (tab.position) {
-                            0 -> changeFragment(myProductFragment)
-                            else -> changeFragment(likeProductFragment)
-                        }
-                    }
-
-                    override fun onTabReselected(tab: TabLayout.Tab?) {
-                    }
-
-                    override fun onTabUnselected(tab: TabLayout.Tab?) {
-                    }
-                })
-
-            changeFragment(activeFragment)
-        }
+//        binding.tabLayout.apply {
+//            addTab(this.newTab().setText("판매내역"))
+//            addTab(this.newTab().setText("관심목록"))
+//
+//            addOnTabSelectedListener(
+//                object : TabLayout.OnTabSelectedListener {
+//                    override fun onTabSelected(tab: TabLayout.Tab) {
+//                        when (tab.position) {
+//                            0 -> changeFragment(myProductFragment)
+//                            else -> changeFragment(likeProductFragment)
+//                        }
+//                    }
+//
+//                    override fun onTabReselected(tab: TabLayout.Tab?) {
+//                    }
+//
+//                    override fun onTabUnselected(tab: TabLayout.Tab?) {
+//                    }
+//                })
+//
+//            changeFragment(activeFragment)
+//        }
     }
 
     private fun changeFragment(currentFragment: Fragment) {
@@ -101,7 +96,7 @@ class MypageFragment : Fragment() {
     private fun initView() {
         val loginInfo = AppApplication.getInstance().getLoginInfo()
 
-        binding.profileName.text = loginInfo.nickname
-        binding.profileArea.text = loginInfo.branch_nm
+//        binding.profileName.text = loginInfo.name
+//        binding.profileArea.text = loginInfo.branch_nm
     }
 }
