@@ -19,6 +19,7 @@ class ProductRepositoryImpl @Inject constructor(
         result.forEach {
             productList.add(
                 Product(
+                    id = it.id,
                     area_community_code = it.area_community_code,
                     area_id = it.area_id,
                     area_latitude = it.area_latitude,
@@ -94,6 +95,7 @@ class ProductRepositoryImpl @Inject constructor(
         result.forEach {
             productList.add(
                 Product(
+                    id = it.id,
                     area_community_code = it.area_community_code,
                     area_id = it.area_id,
                     area_latitude = it.area_latitude,

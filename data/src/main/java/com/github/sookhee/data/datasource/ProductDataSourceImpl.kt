@@ -20,6 +20,7 @@ class ProductDataSourceImpl @Inject constructor(
             .get().await()
 
         for (document in resultList) {
+            val id = document.id
             val areaCommunityCode = document.getString(KEY_COMMUNITY_CODE) ?: ""
             val areaId = document.getString(KEY_AREA_ID) ?: ""
             val areaLatitude: Double = document.getDouble(KEY_AREA_LATITUDE) ?: 0.0
@@ -38,6 +39,7 @@ class ProductDataSourceImpl @Inject constructor(
 
             productList.add(
                 ProductResponse(
+                    id = id,
                     area_community_code = areaCommunityCode,
                     area_id = areaId,
                     area_latitude = areaLatitude,
@@ -70,24 +72,25 @@ class ProductDataSourceImpl @Inject constructor(
         val result = FirebaseFirestore.getInstance()
             .collection(COLLECTION)
             .document(productId)
-            .get().await()
+            .get()
+            .await()
 
         return ProductResponse(
-            area_community_code = result.getString(KEY_TITLE) ?: "",
-            area_id = result.getString(KEY_TITLE) ?: "",
-            area_latitude = result.getDouble(KEY_TITLE) ?: 0.0,
-            area_longitude = result.getDouble(KEY_TITLE) ?: 0.0,
-            area_name = result.getString(KEY_TITLE) ?: "",
-            category_id = result.getString(KEY_TITLE) ?: "",
-            content = result.getString(KEY_TITLE) ?: "",
-            created_at = result.getString(KEY_TITLE) ?: "",
-            owner_id = result.getString(KEY_TITLE) ?: "",
-            owner_name = result.getString(KEY_TITLE) ?: "",
+            area_community_code = result.getString(KEY_COMMUNITY_CODE) ?: "",
+            area_id = result.getString(KEY_AREA_ID) ?: "",
+            area_latitude = result.getDouble(KEY_AREA_LATITUDE) ?: 0.0,
+            area_longitude = result.getDouble(KEY_AREA_LONGITUDE) ?: 0.0,
+            area_name = result.getString(KEY_AREA_NAME) ?: "",
+            category_id = result.getString(KEY_CATEGORY_ID) ?: "",
+            content = result.getString(KEY_CONTENT) ?: "",
+            created_at = result.getString(KEY_CREATED_AT) ?: "",
+            owner_id = result.getString(KEY_OWNER_ID) ?: "",
+            owner_name = result.getString(KEY_OWNER_NAME) ?: "",
             photoList = result.data?.get(KEY_PHOTO_LIST) as? List<String> ?: emptyList(),
-            price = result.getLong(KEY_TITLE)?.toInt() ?: 0,
-            status = result.getLong(KEY_TITLE)?.toInt() ?: 0,
+            price = result.getLong(KEY_PRICE)?.toInt() ?: 0,
+            status = result.getLong(KEY_STATUS)?.toInt() ?: 0,
             title = result.getString(KEY_TITLE) ?: "",
-            updated_at = result.getString(KEY_TITLE) ?: ""
+            updated_at = result.getString(KEY_UPDATED_AT) ?: ""
         )
     }
 
@@ -102,6 +105,7 @@ class ProductDataSourceImpl @Inject constructor(
             .get().await()
 
         for (document in resultList) {
+            val id = document.id
             val areaCommunityCode = document.getString(KEY_COMMUNITY_CODE) ?: ""
             val areaId = document.getString(KEY_AREA_ID) ?: ""
             val areaLatitude: Double = document.getDouble(KEY_AREA_LATITUDE) ?: 0.0
@@ -120,6 +124,7 @@ class ProductDataSourceImpl @Inject constructor(
 
             productList.add(
                 ProductResponse(
+                    id = id,
                     area_community_code = areaCommunityCode,
                     area_id = areaId,
                     area_latitude = areaLatitude,

@@ -19,8 +19,7 @@ class ProductViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
     private val _product = MutableLiveData<Product>()
-    val product: LiveData<Product>
-        get() = _product
+    val product: LiveData<Product> = _product
 
     private val _isLikeProduct = MutableLiveData<String>()
     val isLikeProduct: LiveData<String>

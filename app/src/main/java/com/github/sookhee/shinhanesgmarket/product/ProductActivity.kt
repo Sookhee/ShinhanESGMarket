@@ -15,6 +15,7 @@ import com.github.sookhee.shinhanesgmarket.utils.calcTime
 import com.github.sookhee.shinhanesgmarket.utils.parseCategory
 import com.github.sookhee.shinhanesgmarket.utils.withComma
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.Exception
 
 @AndroidEntryPoint
 class ProductActivity : AppCompatActivity() {
@@ -29,7 +30,6 @@ class ProductActivity : AppCompatActivity() {
         binding = ActivityProductBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this).get(ProductViewModel::class.java)
 
-        val intent = getIntent()
         val productId = intent.getStringExtra("PRODUCT_ID")
 
         productId?.let {
@@ -44,19 +44,24 @@ class ProductActivity : AppCompatActivity() {
     }
 
     private fun observeFlow() {
-        viewModel.product.observe(this) {
-            binding.sellerName.text = it.owner_name
-            binding.sellerArea.text = it.area_name
-            binding.productTitle.text = it.title
-            binding.productPrice.text = if (it.price == 0) "무료나눔" else "${it.price.withComma()}원"
-            binding.productCategory.text = it.category_id
-            binding.productTime.text = it.updated_at.calcTime()
-            binding.productDescription.text = it.content
+        viewModel.product.observe(this) { product ->
+            binding.sellerName.text = product.owner_name
+            binding.sellerArea.text = product.area_name
+            binding.productTitle.text = product.title
+            binding.productPrice.text = if (product.price == 0) "무료나눔" else "${product.price.withComma()}원"
+            binding.productTime.text = product.updated_at.calcTime()
+            binding.productDescription.text = product.content
+
+            try {
+                binding.productCategory.text = AppApplication.getInstance().getCategoryList().filter { it.id == product.category_id }[0].name
+            } catch (e: Exception) {
+                binding.productCategory.text = ""
+            }
 
             binding.photoRecyclerView.apply {
                 adapter = PhotoAdapter().apply {
                     viewType = PhotoAdapter.Companion.PhotoViewType.MATCH_PARENT
-                    items = it.photoList.values.toList()
+                    items = product.photoList.values.toList()
                     onItemClick = {
                         Toast.makeText(context, "click: $it", Toast.LENGTH_SHORT).show()
                     }

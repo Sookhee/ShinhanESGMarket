@@ -1,6 +1,7 @@
 package com.github.sookhee.data.spec
 
 data class ProductResponse(
+    val id: String = "",
     val area_community_code: String = "",
     val area_id: String = "",
     val area_latitude: Double = 0.0,
