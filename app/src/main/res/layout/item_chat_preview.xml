@@ -29,7 +29,9 @@
             android:id="@+id/traderImage"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@color/gray100"
+            android:scaleType="centerCrop"
+            android:src="@drawable/default_profile"
+            android:background="@drawable/background_circle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -37,7 +39,6 @@
         <TextView
             android:id="@+id/traderName"
             style="@style/Gray900.16"
-            android:text="@{item.seller_name}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"

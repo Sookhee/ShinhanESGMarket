@@ -11,7 +11,7 @@ data class ProductRequest(
     val created_at: String = "",
     val owner_id: String = "",
     val owner_name: String = "",
-    val photoList: List<String> = emptyList(),
+    val photo_list: List<String> = emptyList(),
     val price: Int = 0,
     val status: Int = 0,
     val title: String = "",

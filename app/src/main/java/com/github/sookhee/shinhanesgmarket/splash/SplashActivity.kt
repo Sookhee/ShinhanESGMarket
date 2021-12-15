@@ -8,9 +8,12 @@ import android.view.ViewPropertyAnimator
 import android.widget.ImageView
 import androidx.lifecycle.ViewModelProvider
 import com.github.sookhee.shinhanesgmarket.AppApplication
+import com.github.sookhee.shinhanesgmarket.MainActivity
 import com.github.sookhee.shinhanesgmarket.R
 import com.github.sookhee.shinhanesgmarket.user.UserLoginActivity
 import com.github.sookhee.shinhanesgmarket.user.UserViewModel
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,22 +42,22 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun checkLoginState() {
-//        val currentUser = Firebase.auth.currentUser
-//        if (false) {
-//            val employeeNo = currentUser?.email.toString().replace("@doremi.com", "")
-//
-//            loginIntent = Intent(this, MainActivity::class.java)
-//
-//            viewModel.getUserInfo(employeeNo)
-//        } else {
-//            loginIntent = Intent(this, UserLoginActivity::class.java)
-//            startActivity(loginIntent)
-//        }
+        val currentUser = Firebase.auth.currentUser
+        if (false) {
+            val employeeNo = currentUser?.email.toString().replace("@doremi.com", "")
 
-        Handler().postDelayed({
+            loginIntent = Intent(this, MainActivity::class.java)
+
+            viewModel.getUserInfo(employeeNo)
+        } else {
             loginIntent = Intent(this, UserLoginActivity::class.java)
             startActivity(loginIntent)
-        }, 1500)
+        }
+
+//        Handler().postDelayed({
+//            loginIntent = Intent(this, UserLoginActivity::class.java)
+//            startActivity(loginIntent)
+//        }, 1500)
     }
 
     private fun setObserver() {

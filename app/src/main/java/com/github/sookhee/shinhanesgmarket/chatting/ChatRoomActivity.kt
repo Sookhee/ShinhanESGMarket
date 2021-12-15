@@ -55,7 +55,7 @@ class ChatRoomActivity : AppCompatActivity() {
         val owner = intent.getStringExtra("product_owner")
         val photo = intent.getStringExtra("product_image")
 
-        binding.productPrice.text = "${price?.withComma()}원"
+        binding.productPrice.text = if(price > 0) "${price.withComma()}원" else "무료나눔"
         binding.productName.text = title
         binding.traderName.text = owner
         binding.productImage.setImageWithUrl(photo ?: "")
@@ -69,6 +69,7 @@ class ChatRoomActivity : AppCompatActivity() {
             } else {
                 val roomKey = viewModel.createRoom(
                     Product(
+                        id = intent.getStringExtra("product_id") ?: "",
                         area_community_code = userLoginInfo.community_code,
                         area_id = userLoginInfo.branch_no,
                         area_latitude = userLoginInfo.latitude,

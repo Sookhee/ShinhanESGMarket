@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.140625" />
+        <entry key="app/src/main/res/drawable/background_circle.xml" value="0.15260416666666668" />
         <entry key="app/src/main/res/drawable/bubble_blue.xml" value="0.26197916666666665" />
         <entry key="app/src/main/res/drawable/bubble_white.xml" value="0.2326924496128678" />
         <entry key="app/src/main/res/drawable/gray_border_background.xml" value="0.18728512733991573" />

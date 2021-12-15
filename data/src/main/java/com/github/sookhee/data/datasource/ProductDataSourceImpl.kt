@@ -76,6 +76,7 @@ class ProductDataSourceImpl @Inject constructor(
             .await()
 
         return ProductResponse(
+            id = result.id,
             area_community_code = result.getString(KEY_COMMUNITY_CODE) ?: "",
             area_id = result.getString(KEY_AREA_ID) ?: "",
             area_latitude = result.getDouble(KEY_AREA_LATITUDE) ?: 0.0,

@@ -3,7 +3,6 @@ package com.github.sookhee.shinhanesgmarket.product
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.github.sookhee.shinhanesgmarket.AppApplication
@@ -12,7 +11,6 @@ import com.github.sookhee.shinhanesgmarket.adapter.PhotoAdapter
 import com.github.sookhee.shinhanesgmarket.chatting.ChatRoomActivity
 import com.github.sookhee.shinhanesgmarket.databinding.ActivityProductBinding
 import com.github.sookhee.shinhanesgmarket.utils.calcTime
-import com.github.sookhee.shinhanesgmarket.utils.parseCategory
 import com.github.sookhee.shinhanesgmarket.utils.withComma
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.Exception
@@ -51,6 +49,7 @@ class ProductActivity : AppCompatActivity() {
             binding.productPrice.text = if (product.price == 0) "무료나눔" else "${product.price.withComma()}원"
             binding.productTime.text = product.updated_at.calcTime()
             binding.productDescription.text = product.content
+            binding.sellerImage.clipToOutline = true
 
             try {
                 binding.productCategory.text = AppApplication.getInstance().getCategoryList().filter { it.id == product.category_id }[0].name

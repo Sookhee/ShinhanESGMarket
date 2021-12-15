@@ -56,7 +56,7 @@ class ProductRepositoryImpl @Inject constructor(
             created_at = product.created_at,
             owner_id = product.owner_id,
             owner_name = product.owner_name,
-            photoList = photoList,
+            photo_list = photoList,
             price = product.price,
             status = product.status,
             title = product.title,
@@ -70,6 +70,7 @@ class ProductRepositoryImpl @Inject constructor(
         val result = dataSource.getProductDetail(productId)
 
         return Product(
+            id = result.id,
             area_community_code = result.area_community_code,
             area_id = result.area_id,
             area_latitude = result.area_latitude,

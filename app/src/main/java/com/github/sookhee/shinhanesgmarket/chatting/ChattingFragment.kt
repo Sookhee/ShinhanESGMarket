@@ -44,6 +44,7 @@ class ChattingFragment : Fragment() {
 
     private fun initRecyclerView() {
         binding.chatPreviewRecyclerView.adapter = ChatPreviewAdapter().apply {
+            employeeId = loginInfo.employee_no
             onItemClick = {
                 val intent = Intent(context, ChatRoomActivity::class.java)
                 intent.putExtra("room_id", it.id)
@@ -51,6 +52,7 @@ class ChattingFragment : Fragment() {
                 intent.putExtra("product_image", it.product_image)
                 intent.putExtra("product_title", it.product_title)
                 intent.putExtra("product_price", it.product_price.toInt())
+                intent.putExtra("product_owner", if (loginInfo.employee_no == it.seller_id) it.buyer_name else it.seller_name)
                 startActivity(intent)
             }
         }

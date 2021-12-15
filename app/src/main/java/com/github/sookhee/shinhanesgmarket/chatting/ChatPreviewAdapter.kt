@@ -14,6 +14,7 @@ import java.util.*
 class ChatPreviewAdapter :
     RecyclerView.Adapter<ChatPreviewAdapter.ViewHolder>() {
 
+    var employeeId: String = ""
     var items: List<ChatPreview> = emptyList()
     var onItemClick: ((selectedItem: ChatPreview) -> Unit)? = null
 
@@ -29,7 +30,7 @@ class ChatPreviewAdapter :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(items[position], employeeId)
     }
 
     override fun getItemCount(): Int {
@@ -48,6 +49,7 @@ class ChatPreviewAdapter :
 
         fun bind(
             item: ChatPreview,
+            employeeId: String
         ) {
             binding.item = item
             binding.traderProduct.setImageWithUrl(item.product_image)
@@ -55,7 +57,8 @@ class ChatPreviewAdapter :
             val simpleDate = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault())
             val lastTime = simpleDate.format(Date(item.last_time.toLong()))
             binding.lastChatTime.text = lastTime.calcTime()
-            binding.traderName.text = item.seller_name
+            binding.traderName.text = if (employeeId == item.seller_id) item.buyer_name else item.seller_name
+            binding.traderImage.clipToOutline = true
         }
     }
 }

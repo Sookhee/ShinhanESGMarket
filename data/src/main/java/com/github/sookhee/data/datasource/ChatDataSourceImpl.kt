@@ -64,7 +64,7 @@ class ChatDataSourceImpl @Inject constructor() : ChatDataSource {
             }
         }
 
-        chatPreviewList.sortBy { it.last_time }
+        chatPreviewList.sortByDescending { it.last_time }
 
         return chatPreviewList.distinct()
     }
