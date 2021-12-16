@@ -87,7 +87,6 @@ class HomeFragment : Fragment() {
         viewModel.bannerList.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
                 initBanner(it)
-                initBannerIndicator(it.size)
             }
         }
 
@@ -155,42 +154,6 @@ class HomeFragment : Fragment() {
                 }
             })
         }
-    }
-
-    private fun initBannerIndicator(bannerSize: Int) {
-        binding.bannerIndicatorBackground.post {
-            val width = binding.bannerIndicatorBackground.measuredWidth
-            val barWidth = if (bannerSize != 0) {
-                width / bannerSize
-            } else {
-                width
-            }
-
-            val indicatorBarLayoutParams = binding.bannerIndicator.layoutParams
-            indicatorBarLayoutParams.width = barWidth
-
-            val subIndicatorBarLayoutParams = binding.bannerSubIndicator.layoutParams
-            subIndicatorBarLayoutParams.width = barWidth
-
-            binding.bannerIndicator.layoutParams = indicatorBarLayoutParams
-            binding.bannerSubIndicator.layoutParams = subIndicatorBarLayoutParams
-        }
-
-        binding.banner.registerOnPageChangeCallback(object :
-            ViewPager2.OnPageChangeCallback() {
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int,
-            ) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-                binding.bannerIndicator.translationX =
-                    ((position % bannerSize) + positionOffset) * binding.bannerIndicator.width
-
-                binding.bannerSubIndicator.translationX =
-                    ((position % bannerSize) + positionOffset) * binding.bannerIndicator.width - binding.bannerIndicatorBackground.width
-            }
-        })
     }
 
     private fun showBannerDialog(dialog: Dialog) {
