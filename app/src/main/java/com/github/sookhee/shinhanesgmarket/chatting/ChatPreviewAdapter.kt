@@ -54,7 +54,7 @@ class ChatPreviewAdapter :
             binding.item = item
             binding.traderProduct.setImageWithUrl(item.product_image)
 
-            val simpleDate = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault())
+            val simpleDate = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
             val lastTime = simpleDate.format(Date(item.last_time.toLong()))
             binding.lastChatTime.text = lastTime.calcTime()
             binding.traderName.text = if (employeeId == item.seller_id) item.buyer_name else item.seller_name

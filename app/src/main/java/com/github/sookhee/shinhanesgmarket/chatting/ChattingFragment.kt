@@ -1,17 +1,24 @@
 package com.github.sookhee.shinhanesgmarket.chatting
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.LinearLayout.VERTICAL
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.github.sookhee.shinhanesgmarket.AppApplication
+import com.github.sookhee.shinhanesgmarket.R
 import com.github.sookhee.shinhanesgmarket.databinding.FragmentChattingBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.Exception
 
 @AndroidEntryPoint
 class ChattingFragment : Fragment() {
@@ -68,9 +75,36 @@ class ChattingFragment : Fragment() {
 
     private fun setObserver() {
         viewModel.chatPreviewList.observe(viewLifecycleOwner) {
+            binding.swipeRefreshLayout.isRefreshing = false
             if (it.isNotEmpty()) {
-                binding.swipeRefreshLayout.isRefreshing = false
-                (binding.chatPreviewRecyclerView.adapter as ChatPreviewAdapter).setItem(it)
+                try {
+                    (binding.chatPreviewRecyclerView.adapter as ChatPreviewAdapter).setItem(it)
+                } catch (e: Exception) {
+                    val dialog = Dialog(requireContext()).apply {
+                        requestWindowFeature(Window.FEATURE_NO_TITLE)
+                        setContentView(R.layout.layout_custom_dialog)
+                    }
+
+                    showErrorDialog(dialog)
+                }
+            }
+        }
+    }
+
+    private fun showErrorDialog(dialog: Dialog) {
+        dialog.show()
+
+        dialog.findViewById<ImageView>(R.id.dialogImage).apply {
+            setImageResource(R.drawable.dialog_exception)
+            (layoutParams as LinearLayout.LayoutParams).setMargins(200, 0, 200, 0)
+        }
+
+        dialog.findViewById<TextView>(R.id.dialogText).text = getString(R.string.dialog_exception)
+
+        dialog.findViewById<TextView>(R.id.dialogButton).apply {
+            text = getString(R.string.dialog_close)
+            setOnClickListener {
+                dialog.dismiss()
             }
         }
     }

@@ -24,7 +24,7 @@ class RegisterViewModel @ViewModelInject constructor(
     private val _stateSuccess = MutableLiveData<Boolean>()
     val stateSuccess: LiveData<Boolean> = _stateSuccess
 
-    private val simpleDate = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault())
+    private val simpleDate = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
 
     val title = MutableLiveData<String>()
     val price = MutableLiveData<String>()

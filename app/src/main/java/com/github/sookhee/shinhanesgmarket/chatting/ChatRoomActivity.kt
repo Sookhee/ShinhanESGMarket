@@ -1,12 +1,18 @@
 package com.github.sookhee.shinhanesgmarket.chatting
 
+import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Window
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.github.sookhee.domain.entity.ChatLog
 import com.github.sookhee.domain.entity.Product
 import com.github.sookhee.shinhanesgmarket.AppApplication
+import com.github.sookhee.shinhanesgmarket.R
 import com.github.sookhee.shinhanesgmarket.databinding.ActivityChatRoomBinding
 import com.github.sookhee.shinhanesgmarket.utils.setImageWithUrl
 import com.github.sookhee.shinhanesgmarket.utils.withComma
@@ -131,6 +137,35 @@ class ChatRoomActivity : AppCompatActivity() {
         viewModel.isHaveRoom.observe(this) { isHaveRoom ->
             roomId = isHaveRoom.second
             setChatListener()
+        }
+
+        viewModel.stateError.observe(this) { isError ->
+            if (isError) {
+                val dialog = Dialog(this).apply {
+                    requestWindowFeature(Window.FEATURE_NO_TITLE)
+                    setContentView(R.layout.layout_custom_dialog)
+                }
+
+                showErrorDialog(dialog)
+            }
+        }
+    }
+
+    private fun showErrorDialog(dialog: Dialog) {
+        dialog.show()
+
+        dialog.findViewById<ImageView>(R.id.dialogImage).apply {
+            setImageResource(R.drawable.dialog_exception)
+            (layoutParams as LinearLayout.LayoutParams).setMargins(200, 0, 200, 0)
+        }
+
+        dialog.findViewById<TextView>(R.id.dialogText).text = getString(R.string.dialog_exception)
+
+        dialog.findViewById<TextView>(R.id.dialogButton).apply {
+            text = getString(R.string.dialog_close)
+            setOnClickListener {
+                dialog.dismiss()
+            }
         }
     }
 

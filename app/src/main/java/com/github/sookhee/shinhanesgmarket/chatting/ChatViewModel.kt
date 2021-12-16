@@ -25,6 +25,9 @@ class ChatViewModel @ViewModelInject constructor(
     private val _isHaveRoom = MutableLiveData<Pair<Boolean, String>>()
     val isHaveRoom: LiveData<Pair<Boolean, String>> = _isHaveRoom
 
+    private val _stateError = MutableLiveData<Boolean>()
+    val stateError: LiveData<Boolean> = _stateError
+
     fun getChatRoomPreviewList(employeeId: String) {
         viewModelScope.launch {
             try {
@@ -32,6 +35,7 @@ class ChatViewModel @ViewModelInject constructor(
                 _chatPreviewList.postValue(result)
             } catch (e: Exception) {
                 Log.i("민지", "getChatRoomPreviewList EXCEPTION: $e")
+                _stateError.postValue(true)
             }
         }
     }
@@ -81,6 +85,7 @@ class ChatViewModel @ViewModelInject constructor(
                         }
                     }.addOnFailureListener {
                         Log.i("민지", "checkIsHaveRoom addOnFailureListener: $it")
+                        _stateError.postValue(true)
                     }
             } catch (e: Exception) {
             }

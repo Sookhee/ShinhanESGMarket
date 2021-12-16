@@ -23,7 +23,7 @@ fun String.fromHtml(): Spanned {
 
 @SuppressLint("NewApi")
 fun String.calcTime(): String {
-    val dateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault())
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
     val postDate = dateFormat.parse(this) as Date
     val diff = (Date().time - postDate.time) / 1000
 
