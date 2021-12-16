@@ -28,6 +28,16 @@ class ChattingFragment : Fragment() {
     private lateinit var viewModel: ChatViewModel
     private val loginInfo = AppApplication.getInstance().getLoginInfo()
 
+    override fun onResume() {
+        super.onResume()
+
+        try {
+            viewModel.getChatRoomPreviewList(loginInfo.employee_no)
+        } catch (e: Exception) {
+
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
